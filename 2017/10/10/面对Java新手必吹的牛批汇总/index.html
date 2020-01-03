@@ -1,32 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>关于Java的那些高级特性 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;emsp;&amp;emsp;从大学时的啥语言都碰碰，到后来决心以Java作为主要开发语言，才渐渐懂得语言并不是主要的，关键还是要懂得各语言之间的融会贯通，只要数据结构和设计模式精通了，语言只是换种方式表达而已。所以今日的博文并不是来安利大家入坑Java的啦，只是总结些Java新手普遍比较晦涩难懂的内容，其实也是我大学早年遇到的坑。">
-<meta name="keywords" content="并发编程,JMS,反射机制,动态代理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Java的那些高级特性">
-<meta property="og:url" content="http://littleRich.github.io/2017/10/10/面对Java新手必吹的牛批汇总/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;10&#x2F;10&#x2F;%E9%9D%A2%E5%AF%B9Java%E6%96%B0%E6%89%8B%E5%BF%85%E5%90%B9%E7%9A%84%E7%89%9B%E6%89%B9%E6%B1%87%E6%80%BB&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;从大学时的啥语言都碰碰，到后来决心以Java作为主要开发语言，才渐渐懂得语言并不是主要的，关键还是要懂得各语言之间的融会贯通，只要数据结构和设计模式精通了，语言只是换种方式表达而已。所以今日的博文并不是来安利大家入坑Java的啦，只是总结些Java新手普遍比较晦涩难懂的内容，其实也是我大学早年遇到的坑。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/blockingqueue.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/socket.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/point2point.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/subscription.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/startmq.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/admin.png">
-<meta property="og:updated_time" content="2018-09-04T08:25:37.096Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;blockingqueue.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;socket.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;point2point.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;subscription.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;startmq.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;admin.png">
+<meta property="article:published_time" content="2017-10-10T13:52:30.000Z">
+<meta property="article:modified_time" content="2018-09-04T08:25:37.096Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="并发编程">
+<meta property="article:tag" content="JMS">
+<meta property="article:tag" content="反射机制">
+<meta property="article:tag" content="动态代理">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Java的那些高级特性">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;从大学时的啥语言都碰碰，到后来决心以Java作为主要开发语言，才渐渐懂得语言并不是主要的，关键还是要懂得各语言之间的融会贯通，只要数据结构和设计模式精通了，语言只是换种方式表达而已。所以今日的博文并不是来安利大家入坑Java的啦，只是总结些Java新手普遍比较晦涩难懂的内容，其实也是我大学早年遇到的坑。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/blockingqueue.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180902&#x2F;blockingqueue.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -44,8 +47,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -70,7 +73,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -170,7 +173,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -199,7 +202,7 @@
   
 
         
-        <a href="/2017/10/10/面对Java新手必吹的牛批汇总/" class="archive-article-date">
+        <a href="/2017/10/10/%E9%9D%A2%E5%AF%B9Java%E6%96%B0%E6%89%8B%E5%BF%85%E5%90%B9%E7%9A%84%E7%89%9B%E6%89%B9%E6%B1%87%E6%80%BB/" class="archive-article-date">
   	<time datetime="2017-10-10T13:52:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
 </a>
         
@@ -213,32 +216,23 @@
 <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><p>作为比周围大多数人早学一点儿，平常有人就问我到底怎么学Java?其实自己也不是什么牛批人物，给不了大众都适用的方法。如果是零基础的话，倒是可以看看毕向东的Java培训视频教程，风趣幽默，内容也很充实。进阶的话，个人是比较喜欢写写博客把研究的内容总结下来。</p>
 <h3 id="0X01-并发编程"><a href="#0X01-并发编程" class="headerlink" title="0X01 并发编程"></a>0X01 并发编程</h3><h4 id="多线程和锁"><a href="#多线程和锁" class="headerlink" title="多线程和锁"></a>多线程和锁</h4><p>在一个进程中，可以开启多个线程同时去完成某些任务，比如Servlet每收到一个用户请求就创建一个线程处理。多线程运行的原理其实并不是同时运行的，这就涉及到CPU在线程中的时间片切换问题了。在某个时刻点上，CPU一次只能处理一个程序，它给每个线程执行的时间片都是固定的，然后轮询的依次执行每个线程，在这些线程之间高速切换。<br>实现线程有两种方式：继承Thread的方式和实现Runnable接口的方式。在Thread(Runnalble target)构造函数不光可以传入Runnable接口的对象，还可以传入一个Thread类的对象，这样做完全可以将一个Thread对象中的run()方法交由其他的线程进行调用（Thread是实现了Runnable接口了的）。一般我是这是这么理解的：Runnable看成一个任务，而Thread看成是一个执行任务的人。<br>说多线程定然少不了线程同步的问题。synchronized关键字可以用来定义同步函数或者同步代码块，对于synchronized来说，每个对象都是一把锁。正常情况下，被锁住的同步代码块只能执行完才能释放锁，不然就是同步代码块内发生异常，此时JVM强行让线程把锁释放。那如果被锁住的同步代码块陷入死循环且不出异常，那其他等待线程就会一直无期限的等待下去。<br>所以就出现了更灵活的锁机制Lock接口，它和synchronized最大的区别是用完必须主动释放锁，否者就会出现死锁。  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">java.util.concurrent.locks;</span><br><span class="line">public interface Lock &#123;</span><br><span class="line">    void lock();</span><br><span class="line">    void lockInterruptibly() throws InterruptedException;</span><br><span class="line">    boolean tryLock();</span><br><span class="line">    boolean tryLock(long time, TimeUnit unit) throws InterruptedException;</span><br><span class="line">    void unlock();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>Lock接口有两个实现类ReentrantLock和ReentrantReadWriteLock，其中ReentrantReadWriteLock有点像数据库锁同步的2PL两段锁协议机制。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class X &#123;</span><br><span class="line">   private final ReentrantLock lock = new ReentrantLock();</span><br><span class="line">   // ...</span><br><span class="line">   public void m() &#123; </span><br><span class="line">     lock.lock();  // block until condition holds</span><br><span class="line">     try &#123;</span><br><span class="line">       // ... method body</span><br><span class="line">     &#125; finally &#123;</span><br><span class="line">       lock.unlock()</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class X &#123;</span><br><span class="line">   private final ReentrantLock lock &#x3D; new ReentrantLock();</span><br><span class="line">   &#x2F;&#x2F; ...</span><br><span class="line">   public void m() &#123; </span><br><span class="line">     lock.lock();  &#x2F;&#x2F; block until condition holds</span><br><span class="line">     try &#123;</span><br><span class="line">       &#x2F;&#x2F; ... method body</span><br><span class="line">     &#125; finally &#123;</span><br><span class="line">       lock.unlock()</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <p>synchronized在发生异常时，会自动释放线程占有的锁，因此不会导致死锁现象发生；而Lock在发生异常时，如果没有主动通过unLock()去释放锁，则很可能造成死锁现象，因此使用Lock时需要在finally块中释放锁。<br>我看过一篇博文讲并发编程挺详细的，不妨看看。【<a href="https://www.cnblogs.com/dolphin0520/p/3923167.html" target="_blank" rel="noopener">看看就看看</a>】</p>
 <h4 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h4><p>在JDK5版本引入高级并发特性，大多数的特性在java.util.concurrent包中，充分利用CPU的多核处理的功能以编写大规模并发多线程应用。<br>Java中的线程池有5种：<br>1、SingleThreadExecutor：只有一个线程的线程池，因此所有提交的任务是顺序执行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Executors.newSingleThreadExecutor()</span><br></pre></td></tr></table></figure>
-
 <p>2、 CachedThreadPool：线程池里有很多线程需要同时执行，老的可用线程将被新的任务触发重新执行，如果线程超过60秒内没任务执行，那么将被终止并从池中删除。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Executors.newCachedThreadPool()</span><br></pre></td></tr></table></figure>
-
 <p>3、FixedThreadPool：拥有固定线程数的线程池，如果没有任务执行，那么线程会一直等待。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Executor.newFixedThreadPool(4)</span><br></pre></td></tr></table></figure>
-
 <p>在构造函数中的参数4是线程池的大小，一般设置大小是CPU的核数量，可以通过Java的Runtime获取底层信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int cpuNums = Runtime.getRuntime().availableProcessors();</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int cpuNums &#x3D; Runtime.getRuntime().availableProcessors();</span><br></pre></td></tr></table></figure>
 <p>4、ScheduledThreadPool：用来调度即将执行任务的线程池，放入线程池中的任务不会立马被执行，而是在一定周期内才执行。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Executors.newScheduledThreadPool()</span><br></pre></td></tr></table></figure>
-
 <p>5、SingleThreadScheduledPool:只有一个线程，用来调度任务在指定时间执行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Executors.newSingleThreadScheduledExecutor()</span><br></pre></td></tr></table></figure>
-
 <p>按上面几种方式创建一个线程池后，就可以往线程池中丢任务执行了，像上面说的Runnable就是任务了。但是Runnable添加的任务是不会反馈执行结果的，有些时候我们又想要获取任务执行后的返回值，这就要用Callable任务了。（PS：我在蚂蚁金服被面过这个题）  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService pool = Executors.newCachedThreadPool();</span><br><span class="line">for(int i = 1; i &lt; 5; i++)&#123;    //往任务池中丢4个任务</span><br><span class="line">	pool.execute(new Runnable() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;   //注意Runnable任务的run方法是没有返回值的</span><br><span class="line">			System.out.println(&quot;thread name: &quot; + Thread.currentThread().getName());</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(1000);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">pool.shutdown();</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">ExecutorService pool &#x3D; Executors.newCachedThreadPool();</span><br><span class="line">for(int i &#x3D; 1; i &lt; 5; i++)&#123;    &#x2F;&#x2F;往任务池中丢4个任务</span><br><span class="line">	pool.execute(new Runnable() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;   &#x2F;&#x2F;注意Runnable任务的run方法是没有返回值的</span><br><span class="line">			System.out.println(&quot;thread name: &quot; + Thread.currentThread().getName());</span><br><span class="line">			try &#123;</span><br><span class="line">				Thread.sleep(1000);</span><br><span class="line">			&#125; catch (InterruptedException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">pool.shutdown();</span><br></pre></td></tr></table></figure>
 <p>ExecutorService接口有几个非常重要的方法：</p>
 <ul>
 <li>execute()</li>
@@ -248,26 +242,21 @@
 </ul>
 <hr>
 <p><em>线程池中主要类的关系</em><br>Executor –&gt; ExecutorService –&gt; AbstractExecutorService –&gt; ThreadPoolExecutor<br>Executor是一个顶层接口，在它里面只声明了一个方法execute(Runnable)，返回值为void，参数为Runnable类型，从字面意思可以理解，就是用来执行传进去的任务的；<br>然后ExecutorService接口继承了Executor接口，并声明了一些方法：submit、invokeAll、invokeAny以及shutDown等；<br>抽象类AbstractExecutorService实现了ExecutorService接口，基本实现了ExecutorService中声明的所有方法；<br>最后ThreadPoolExecutor继承了类AbstractExecutorService。通过研究源码会发现，上面说的5种线程池其实都是由ThreadPoolExecutor实现的，所以这才是研究线程池原理的核心类。【推荐一篇分析线程池实现原理的文章：<a href="https://www.cnblogs.com/dolphin0520/p/3932921.html" target="_blank" rel="noopener">去看看</a>】<br>总结：execute提交Runnable任务，commit提交Callable任务，因为commit的返回值Future对象可以处理Callable任务的执行结果。若commit提交Runnable任务，由于Runnable无返回值，那commit返回的Future对象就是空返回。<br>写个Demo看看结果吧，先分别写个Runnable任务和Callable任务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TaskRunnable implements Runnable&#123;   //创建Runnable任务类</span><br><span class="line">	private int s;</span><br><span class="line">	public TaskRunnable(int s)&#123;</span><br><span class="line">		this.s = s;</span><br><span class="line">	&#125;</span><br><span class="line">	Random r = new Random();	</span><br><span class="line">	@Override</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		String name = Thread.currentThread().getName();</span><br><span class="line">		long currentTimeMillis = System.currentTimeMillis();</span><br><span class="line">		System.out.println(name+&quot; 启动时间：&quot; + currentTimeMillis/1000);		</span><br><span class="line">		int rint = r.nextInt(3);</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(rint*1000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123; </span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + &quot; is working...&quot;+s);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class TaskRunnable implements Runnable&#123;   &#x2F;&#x2F;创建Runnable任务类</span><br><span class="line">	private int s;</span><br><span class="line">	public TaskRunnable(int s)&#123;</span><br><span class="line">		this.s &#x3D; s;</span><br><span class="line">	&#125;</span><br><span class="line">	Random r &#x3D; new Random();	</span><br><span class="line">	@Override</span><br><span class="line">	public void run() &#123;</span><br><span class="line">		String name &#x3D; Thread.currentThread().getName();</span><br><span class="line">		long currentTimeMillis &#x3D; System.currentTimeMillis();</span><br><span class="line">		System.out.println(name+&quot; 启动时间：&quot; + currentTimeMillis&#x2F;1000);		</span><br><span class="line">		int rint &#x3D; r.nextInt(3);</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(rint*1000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123; </span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + &quot; is working...&quot;+s);		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>再搞个Callable任务类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class TaskCallable implements Callable&lt;String&gt;&#123;	</span><br><span class="line">	private int s;</span><br><span class="line">	Random r = new Random();</span><br><span class="line">	public TaskCallable(int s)&#123;</span><br><span class="line">		this.s = s;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String call() throws Exception &#123;  //注意这里是有返回值的</span><br><span class="line">		String name = Thread.currentThread().getName();</span><br><span class="line">		long currentTimeMillis = System.currentTimeMillis();</span><br><span class="line">		System.out.println(name+&quot; 启动时间：&quot; + currentTimeMillis/1000);	</span><br><span class="line">		int rint = r.nextInt(3);</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(rint*1000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;			 </span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + &quot; is working...&quot;+s);</span><br><span class="line">		return s+&quot;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class TaskCallable implements Callable&lt;String&gt;&#123;	</span><br><span class="line">	private int s;</span><br><span class="line">	Random r &#x3D; new Random();</span><br><span class="line">	public TaskCallable(int s)&#123;</span><br><span class="line">		this.s &#x3D; s;</span><br><span class="line">	&#125;</span><br><span class="line">	@Override</span><br><span class="line">	public String call() throws Exception &#123;  &#x2F;&#x2F;注意这里是有返回值的</span><br><span class="line">		String name &#x3D; Thread.currentThread().getName();</span><br><span class="line">		long currentTimeMillis &#x3D; System.currentTimeMillis();</span><br><span class="line">		System.out.println(name+&quot; 启动时间：&quot; + currentTimeMillis&#x2F;1000);	</span><br><span class="line">		int rint &#x3D; r.nextInt(3);</span><br><span class="line">		try &#123;</span><br><span class="line">			Thread.sleep(rint*1000);</span><br><span class="line">		&#125; catch (InterruptedException e) &#123;			 </span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(name + &quot; is working...&quot;+s);</span><br><span class="line">		return s+&quot;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>下面就创建这两种类型的任务放到线程池中跑，这里假设有个业务被拆分成10个任务给线程处理，将各个线程执行结果合起来就是这个业务的结果，那么如何实现？这个其实也是蚂蚁金服的面试题啦。【下面代码要好好领会哈】</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Future&lt;?&gt; submit = null;</span><br><span class="line">	Random random = new Random();	</span><br><span class="line">	//创建固定数量线程池</span><br><span class="line">    ExecutorService exec = Executors.newFixedThreadPool(4);	</span><br><span class="line">	//创建调度线程池</span><br><span class="line">	// ScheduledExecutorService exec = Executors.newScheduledThreadPool(4);</span><br><span class="line">	//用来记录各线程的返回结果</span><br><span class="line">	ArrayList&lt;Future&lt;?&gt;&gt; results = new ArrayList&lt;Future&lt;?&gt;&gt;();	</span><br><span class="line">	for (int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">		//fixedPool提交线程，runnable无返回值，callable有返回值</span><br><span class="line">		// submit = exec.submit(new TaskRunnable(i));</span><br><span class="line">		submit = exec.submit(new TaskCallable(i));</span><br><span class="line">		//对于schedulerPool来说，调用submit提交任务时，跟普通pool效果一致</span><br><span class="line">		/*submit = exec.submit(new TaskCallable(i));*/</span><br><span class="line">		//对于schedulerPool来说，调用schedule提交任务时，则可按延迟，按间隔时长来调度线程的运行</span><br><span class="line">	//	submit = exec.schedule(new TaskCallable(i), random.nextInt(10), TimeUnit.SECONDS);</span><br><span class="line">		//存储线程执行结果</span><br><span class="line">		results.add(submit);	</span><br><span class="line">	&#125;	</span><br><span class="line">	//打印结果</span><br><span class="line">	for(Future f: results)&#123;</span><br><span class="line">		boolean done = f.isDone();</span><br><span class="line">		System.out.println(done?&quot;已完成&quot;:&quot;未完成&quot;);  //从结果的打印顺序可以看到，即使未完成，也会阻塞等待</span><br><span class="line">		System.out.println(&quot;线程返回future结果： &quot; + f.get());</span><br><span class="line">	&#125;	</span><br><span class="line">	exec.shutdown();	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Future&lt;?&gt; submit &#x3D; null;</span><br><span class="line">	Random random &#x3D; new Random();	</span><br><span class="line">	&#x2F;&#x2F;创建固定数量线程池</span><br><span class="line">    ExecutorService exec &#x3D; Executors.newFixedThreadPool(4);	</span><br><span class="line">	&#x2F;&#x2F;创建调度线程池</span><br><span class="line">	&#x2F;&#x2F; ScheduledExecutorService exec &#x3D; Executors.newScheduledThreadPool(4);</span><br><span class="line">	&#x2F;&#x2F;用来记录各线程的返回结果</span><br><span class="line">	ArrayList&lt;Future&lt;?&gt;&gt; results &#x3D; new ArrayList&lt;Future&lt;?&gt;&gt;();	</span><br><span class="line">	for (int i &#x3D; 0; i &lt; 10; i++) &#123;</span><br><span class="line">		&#x2F;&#x2F;fixedPool提交线程，runnable无返回值，callable有返回值</span><br><span class="line">		&#x2F;&#x2F; submit &#x3D; exec.submit(new TaskRunnable(i));</span><br><span class="line">		submit &#x3D; exec.submit(new TaskCallable(i));</span><br><span class="line">		&#x2F;&#x2F;对于schedulerPool来说，调用submit提交任务时，跟普通pool效果一致</span><br><span class="line">		&#x2F;*submit &#x3D; exec.submit(new TaskCallable(i));*&#x2F;</span><br><span class="line">		&#x2F;&#x2F;对于schedulerPool来说，调用schedule提交任务时，则可按延迟，按间隔时长来调度线程的运行</span><br><span class="line">	&#x2F;&#x2F;	submit &#x3D; exec.schedule(new TaskCallable(i), random.nextInt(10), TimeUnit.SECONDS);</span><br><span class="line">		&#x2F;&#x2F;存储线程执行结果</span><br><span class="line">		results.add(submit);	</span><br><span class="line">	&#125;	</span><br><span class="line">	&#x2F;&#x2F;打印结果</span><br><span class="line">	for(Future f: results)&#123;</span><br><span class="line">		boolean done &#x3D; f.isDone();</span><br><span class="line">		System.out.println(done?&quot;已完成&quot;:&quot;未完成&quot;);  &#x2F;&#x2F;从结果的打印顺序可以看到，即使未完成，也会阻塞等待</span><br><span class="line">		System.out.println(&quot;线程返回future结果： &quot; + f.get());</span><br><span class="line">	&#125;	</span><br><span class="line">	exec.shutdown();	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>第25行代码是获取Future中任务执行的返回值，当任务未被执行完，get()方法是会阻塞当前线程的（这里是主线程），直到任务被执行完，get()方法获取到返回值才结束阻塞。所以这里先用一个List存储每个线程的返回结果Future对象，不然立马调用Future对象的get方法会被阻塞在那里，就会影响添加其它任务。</p>
 <h4 id="BlockingQueue阻塞的消息队列"><a href="#BlockingQueue阻塞的消息队列" class="headerlink" title="BlockingQueue阻塞的消息队列"></a>BlockingQueue阻塞的消息队列</h4><p>上面说的5种线程池都是基于ThreadPoolExecutor实现的，所以我们也可以用它来自定义线程池，最常用的构造方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit, BlockingQueue&lt;Runnable&gt; workQueue)</span><br></pre></td></tr></table></figure>
-
 <p>workQueue就是当线程池满了，后续来的Runnable或Callable任务会进入workQueue队列中排队，等线程池中有线程空出来了，就依次取出队列中的任务处理。<br>BlockingQueue也是java.util.concurrent下的主要用来控制线程同步的工具，BlockingQueue接口中的方法：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/blockingqueue.png" alt="BlockingQueue接口中的方法"><br>BlockingQueue中特有的put()和take()方法是BlockingQueue的关键，这两个方法可以在队列为满，或者空的时候进行阻塞等到，当有新的任务被拿去执行或新的任务进入队列后，自动将线程唤醒。<br>BlockingQueue有四个具体的实现类,常用的两种实现类为：<br>1、ArrayBlockingQueue：一个由数组支持的有界阻塞队列，规定大小的BlockingQueue,其构造函数必须带一个int参数来指明其大小。<br>2、LinkedBlockingQueue：大小不定的BlockingQueue,若其构造函数带一个规定大小的参数,生成的BlockingQueue有大小限制,若不带大小参数,所生成的BlockingQueue的大小由Integer.MAX_VALUE来决定。</p>
 <h3 id="0X02-利用socket进行远程过程调用（模拟RPC）"><a href="#0X02-利用socket进行远程过程调用（模拟RPC）" class="headerlink" title="0X02 利用socket进行远程过程调用（模拟RPC）"></a>0X02 利用socket进行远程过程调用（模拟RPC）</h3><p>RPC远程过程调用是多进程间的通信，调用远程计算机上的服务，就像调用本地服务一样。现有RPC框架很多，比如阿里的dubbo。<br>可以通过Web Service、NIO、socket等可以双向通信方式实现。服务端收到客户端的操作指令后，利用反射技术调用本地方法。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/socket.png" alt="RPC远程过程调用"><br>具体代码实现可以看一篇不错的博文。【<a href="https://blog.csdn.net/cckevincyh/article/details/80759343" target="_blank" rel="noopener">去看看</a>】</p>
 <h3 id="0X03-JMS消息服务"><a href="#0X03-JMS消息服务" class="headerlink" title="0X03 JMS消息服务"></a>0X03 JMS消息服务</h3><p>JMS即Java消息服务（Java Message Service）应用程序接口是一个Java平台中关于面向消息中间件（MOM）的API，用于在两个应用程序之间，或分布式系统中发送消息，进行异步通信。Java消息服务是一个与具体平台无关的API，绝大多数MOM提供商都对JMS提供支持（类似JDBC访问数据库规范）。我们可以简单的理解：两个应用程序之间需要进行通信，我们使用一个JMS服务，进行中间的转发，通过JMS 的使用，我们可以解除两个程序之间的耦合。<br>JMS由以下元素组成：<br>JMS提供者provider：连接面向消息中间件的，JMS接口的一个实现。提供者可以是Java平台的JMS实现，也可以是非Java平台的面向消息中间件的适配器。目前按JMS规范开发的provider框架有Apache ActiveMQ、RabbitMQ等。<br>JMS生产者：创建并发送消息的JMS客户。<br>JMS消费者：接收消息的JMS客户。<br>JMS消息：包括可以在JMS客户之间传递的数据的对象，包括简单文本（TextMessage）、可序列化对象（ObjectMessage）、属性集合（MapMessage）、字节流（BytesMessage）、原始数据流（StreamMessage）、无有效负载的消息（Message）。<br>JMS队列：一个容纳那些被发送的等待阅读的消息的区域。与队列名字所暗示的意思不同，消息的接受顺序并不一定要与消息的发送顺序相同。一旦一个消息被阅读，该消息将被从队列中移走。<br>JMS主题：一种支持发送消息给多个订阅者的机制。</p>
 <h4 id="JMS的消息模式"><a href="#JMS的消息模式" class="headerlink" title="JMS的消息模式"></a>JMS的消息模式</h4><p>1、点对点或队列模型<br>通过一个服务器消息队列实现，消息的发送者向队列写入消息，消息的接收者从队列取出消息，每一个消息只有一个接收者。生产者与消费者间是异步进行的。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/point2point.png" alt="点对点模型"></p>
 <p>2、发布者/订阅者模型<br>把消息发送到给一个主题(Topic)，消息服务器将消息发布给订阅器该主题的每一个订阅者，每一个消息可以有多个接收者。举个通俗的例子，就好比如一家杂志社（相当于消息发送者）把一堆杂志（相当于消息）寄到了邮政（相当于主题），再由邮政将杂志发给每一个有订阅这本杂志的读者（相当于消息接收者）<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/subscription.png" alt="发布者/订阅者模型"></p>
 <h4 id="ActiveMQ"><a href="#ActiveMQ" class="headerlink" title="ActiveMQ"></a>ActiveMQ</h4><p>要使用java消息服务，必须要有一个JMS提供者来管理会话和队列。这里介绍个ActiveMQ的JMS Provider实现。<br>1、下载ActiveMQ【<a href="http://archive.apache.org/dist/activemq/" target="_blank" rel="noopener">版本选择</a>】，解压到安装目录位置就安装好了。<br>2、在$ACTIVEMQ_HOME/bin目录下，打开cmd执行启动命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./activemq start   //打开服务</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;activemq start   &#x2F;&#x2F;打开服务</span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/startmq.png" alt="启动功能截图"><br>3、浏览器进入到127.0.0.1:8161，activemq控制台，可查看activemq中的各消息信息，用户名和密码默认都是admin。用户名和密码在%ACTIVEMQ_HOME%\conf中的jetty-realm.properties中配置。如下：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180902/admin.png" alt="修改用户名"></p>
 <h3 id="0X04-反射技术"><a href="#0X04-反射技术" class="headerlink" title="0X04 反射技术"></a>0X04 反射技术</h3><h3 id="0X05-动态代理"><a href="#0X05-动态代理" class="headerlink" title="0X05 动态代理"></a>0X05 动态代理</h3><hr>
 <p>参考文献<br><a href="https://www.cnblogs.com/springlight/p/6433404.html" target="_blank" rel="noopener">ActiveMQ：Linux上安装启动及测试</a></p>
@@ -389,7 +378,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/10/10/面对Java新手必吹的牛批汇总/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/10/10/%E9%9D%A2%E5%AF%B9Java%E6%96%B0%E6%89%8B%E5%BF%85%E5%90%B9%E7%9A%84%E7%89%9B%E6%89%B9%E6%B1%87%E6%80%BB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -403,7 +392,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/14/MYSQL常用命令整理/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/14/MYSQL%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -413,7 +402,7 @@
     </a>
   
   
-    <a href="/2017/09/30/大数据_HDFS的原理与使用操作、编程/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/30/%E5%A4%A7%E6%95%B0%E6%8D%AE_HDFS%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C%E3%80%81%E7%BC%96%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">分布式文件系统HDFS的实现机制和编程实践</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -473,7 +462,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -557,7 +546,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -570,22 +575,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -617,6 +606,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -634,18 +635,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -677,15 +666,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -698,6 +679,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -721,19 +714,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +746,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -770,10 +763,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

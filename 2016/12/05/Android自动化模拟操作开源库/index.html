@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>Android自动化模拟操作开源库源码解析(持续维护中...) | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要:&amp;emsp;&amp;emsp;今天给大家开源一个很强大的自动化模拟人交互的开源库，基于本开源库你可以深度开发很多好玩的应用，比如常见的网购抢单插件、红包插件、自动安装APP等，更多好玩的应用等你来集成哦。获取开源库包和开发Demo可以到我的GitHub上fork，我的GitHub上有详细的使用介绍，这里就不多说了。如果想要深入探析本开源库的设计思路及数据结构等，那就跟随我一起搅基吧。（本开源库经过">
-<meta name="keywords" content="自动化开源库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android自动化模拟操作开源库源码解析(持续维护中...)">
-<meta property="og:url" content="http://littleRich.github.io/2016/12/05/Android自动化模拟操作开源库/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2016&#x2F;12&#x2F;05&#x2F;Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;今天给大家开源一个很强大的自动化模拟人交互的开源库，基于本开源库你可以深度开发很多好玩的应用，比如常见的网购抢单插件、红包插件、自动安装APP等，更多好玩的应用等你来集成哦。获取开源库包和开发Demo可以到我的GitHub上fork，我的GitHub上有详细的使用介绍，这里就不多说了。如果想要深入探析本开源库的设计思路及数据结构等，那就跟随我一起搅基吧。（本开源库经过">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161205/uiautomator.png">
-<meta property="og:updated_time" content="2017-01-11T04:49:14.249Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161205&#x2F;uiautomator.png">
+<meta property="article:published_time" content="2016-12-05T02:16:37.000Z">
+<meta property="article:modified_time" content="2017-01-11T04:49:14.249Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="自动化开源库">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android自动化模拟操作开源库源码解析(持续维护中...)">
-<meta name="twitter:description" content="摘要:&amp;emsp;&amp;emsp;今天给大家开源一个很强大的自动化模拟人交互的开源库，基于本开源库你可以深度开发很多好玩的应用，比如常见的网购抢单插件、红包插件、自动安装APP等，更多好玩的应用等你来集成哦。获取开源库包和开发Demo可以到我的GitHub上fork，我的GitHub上有详细的使用介绍，这里就不多说了。如果想要深入探析本开源库的设计思路及数据结构等，那就跟随我一起搅基吧。（本开源库经过">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161205/uiautomator.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161205&#x2F;uiautomator.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -39,8 +39,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -65,7 +65,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -165,7 +165,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -194,7 +194,7 @@
   
 
         
-        <a href="/2016/12/05/Android自动化模拟操作开源库/" class="archive-article-date">
+        <a href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/" class="archive-article-date">
   	<time datetime="2016-12-05T02:16:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-05</time>
 </a>
         
@@ -209,36 +209,26 @@
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h3><p>&emsp;&emsp;集成类库自动化操作程序的运行流程分为收集Activity布局树节点信息和操作节点树两大流程，下面我就按这两个部分展开分析。</p>
 <h4 id="存储Activity节点树信息"><a href="#存储Activity节点树信息" class="headerlink" title="存储Activity节点树信息"></a>存储Activity节点树信息</h4><p>&emsp;&emsp;既然要存储节点树信息，就需要一个容器啦。这里采用数据结构中的树结构来模拟布局节点的存储信息，当然如果布局层级很复杂，树的深度也会很大，必然会比较耗内存，这个暂时姑且不考虑，毕竟树结构还是有很多优点的嘛。<br>故先要封装一个树对象UiTree，所需的属性有：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**所有设定好需要操作的Activity节点树*/</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> List&lt;FormTree&gt; PRESET_FORM = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"><span class="comment">/**标记操作的Activity类名*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String mClassName;</span><br><span class="line"><span class="comment">/**整个Activity布局界面的根节点*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> UiNode mNode;</span><br><span class="line"><span class="comment">/**预定义的节点树，用于判断与操作页面节点是否相同*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> FormTree mFoundForm;</span><br><span class="line"><span class="comment">/**布局节点信息*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> String mLog;</span><br></pre></td></tr></table></figure>
-
 <p>这样就把一个Activity布局节点树存储到一个bean对象中，具体每个View节点就存在UiNode类中，也就是每一个View也都封装到一个bean对象中，进一步来看看UiNode类是如何设计的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**存储View对象*/</span></span><br><span class="line"><span class="keyword">private</span> AccessibilityNodeInfo mAccessibilityNodeInfo;</span><br><span class="line"><span class="comment">/**该节点所属类名*/</span></span><br><span class="line"><span class="keyword">private</span> String mClassName;</span><br><span class="line"><span class="comment">/**存储View的Text文本*/</span></span><br><span class="line"><span class="keyword">private</span> String mText;</span><br><span class="line"><span class="comment">/**View的描述信息，底层解析View时用到*/</span></span><br><span class="line"><span class="keyword">private</span> String mDescription;</span><br><span class="line"><span class="comment">/**存储该节点下的子节点*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ArrayList&lt;UiNode&gt; mChilds = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br></pre></td></tr></table></figure>
-
-<p>注意到UiNode类中有个<a href="https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo.html" title="Android官方API" target="_blank" rel="noopener">AccessibilityNodeInfo</a>类，这个是Android官方提供的一个标记View节点的API，官方是这样介绍的：<br>&emsp;&emsp;This class represents a node of the window content as well as actions that can be requested from its source. From the point of view of an AccessibilityService a window’s content is presented as a tree of accessibility node infos, which may or may not map one-to-one to the view hierarchy. In other words, a custom view is free to report itself as a tree of accessibility node info.<br>简单地说，拿到了AccessibilityNodeInfo对象，那么就可以对其所封装的View进行交互操作啦。<br>UiNode类中还有一个mDescription的字符对象也需要关注下，这个我们平常在写布局文件时很少设，但如果你开发程序给生理功能有缺陷的人使用时，就不会对android:contentDescription很陌生了。具体使用你可以去百度Google下吧，这里你只需知道Android系统在解析每一个View时也要解析这一个东西就行了（如果设了该属性的话）。我们可以用Android Device Monitor随意查看一个Activity验证一下，如下图：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161205/uiautomator.png" alt="uiautomator分析布局"><br>注意用红色圈起来的View，发现在头像的ImageView同级上有个View，这个View就是给视力有障碍的人用的，当盲人用户点击头像控件时，并不能看到图片，系统就会报出后面的描述信息（微信很人性化的嘛）。所以呢，后面添加View时要记得配置这个属性哦。<br>我们知道Android中布局是层级嵌套的，故在UiNode就要有一个存储嵌套子view的集合，也就是mChilds属性。记得子View也是一个UiNode哦，只要递归调用就行啦。<br>&emsp;&emsp;上面讲完存储节点储存的容器了，现在问题就来了，什么时候触发收集这些节点信息呢。这就要AccessibilityService派上用场了。不了解该API的可以看看官方文档，不晓得也没事，就知道配置了该服务之后，只要一到操作的Activity就会回调AccessibilityService的onAccessibilityEvent方法，那我们就可以在里面开始收集Activity的节点信息了。  </p>
+<p>注意到UiNode类中有个<a href="https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo.html" target="_blank" rel="noopener" title="Android官方API">AccessibilityNodeInfo</a>类，这个是Android官方提供的一个标记View节点的API，官方是这样介绍的：<br>&emsp;&emsp;This class represents a node of the window content as well as actions that can be requested from its source. From the point of view of an AccessibilityService a window’s content is presented as a tree of accessibility node infos, which may or may not map one-to-one to the view hierarchy. In other words, a custom view is free to report itself as a tree of accessibility node info.<br>简单地说，拿到了AccessibilityNodeInfo对象，那么就可以对其所封装的View进行交互操作啦。<br>UiNode类中还有一个mDescription的字符对象也需要关注下，这个我们平常在写布局文件时很少设，但如果你开发程序给生理功能有缺陷的人使用时，就不会对android:contentDescription很陌生了。具体使用你可以去百度Google下吧，这里你只需知道Android系统在解析每一个View时也要解析这一个东西就行了（如果设了该属性的话）。我们可以用Android Device Monitor随意查看一个Activity验证一下，如下图：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161205/uiautomator.png" alt="uiautomator分析布局"><br>注意用红色圈起来的View，发现在头像的ImageView同级上有个View，这个View就是给视力有障碍的人用的，当盲人用户点击头像控件时，并不能看到图片，系统就会报出后面的描述信息（微信很人性化的嘛）。所以呢，后面添加View时要记得配置这个属性哦。<br>我们知道Android中布局是层级嵌套的，故在UiNode就要有一个存储嵌套子view的集合，也就是mChilds属性。记得子View也是一个UiNode哦，只要递归调用就行啦。<br>&emsp;&emsp;上面讲完存储节点储存的容器了，现在问题就来了，什么时候触发收集这些节点信息呢。这就要AccessibilityService派上用场了。不了解该API的可以看看官方文档，不晓得也没事，就知道配置了该服务之后，只要一到操作的Activity就会回调AccessibilityService的onAccessibilityEvent方法，那我们就可以在里面开始收集Activity的节点信息了。  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">UiTree uiTree = <span class="keyword">new</span> UiTree(mLastEventClassName, getRootInActiveWindow());</span><br><span class="line">Log.i(uiTree.getLog());</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> == uiTree.getFoundForm()) &#123;</span><br><span class="line">	Log.i(<span class="string">"UI类型: 未知"</span>);</span><br><span class="line">	mUnknownUiCount++;</span><br><span class="line">	<span class="keyword">if</span> (mUnknownUiCount &gt; <span class="number">15</span>) &#123;</span><br><span class="line">		mUnknownUiCount = <span class="number">0</span>;</span><br><span class="line">		Log.e(<span class="string">"未知页面次数太多，返回"</span>, AnalystService.<span class="keyword">this</span>, ToastDuration.LENGTH_SHORT);</span><br><span class="line">		performGlobalAction(GLOBAL_ACTION_BACK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>源码第一行就是收集一颗页面布局树，UiTree树对象的构造函数所需的参数就是页面类名及布局的根节点，上面UiNode类说过，只要一个根节点就可以层层递归遍历整个布局文件的节点信息了。具体可以看UiTree的构造函数关键代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">UiTree</span><span class="params">(@NonNull String className, @Nullable AccessibilityNodeInfo accessibilityNodeInfo)</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">null</span> == className) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"className"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       mClassName = className;</span><br><span class="line">       mNode = (<span class="keyword">null</span> == accessibilityNodeInfo ? <span class="keyword">null</span> : <span class="keyword">new</span> UiNode(getRootAccessibilityNodeInfo(accessibilityNodeInfo)));</span><br><span class="line">       mFoundForm = findForm();</span><br><span class="line">       mLog = obtainLog();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>注意构造函数内的第6行代码生成根节点UiNode对象，然后根节点就会递归遍历后续的子节点啦，关键代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = accessibilityNodeInfo.getChildCount();</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">    AccessibilityNodeInfo childAccessibilityNodeInfo = accessibilityNodeInfo.getChild(i);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == childAccessibilityNodeInfo) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullChildAccessibilityNodeInfoException(<span class="string">"出现空的子AccessibilityNodeInfo"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    mChilds.add(<span class="keyword">new</span> UiNode(childAccessibilityNodeInfo));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这样整个Activity的布局节点信息都存储下来了，就可以进行交互操作，模拟人的操作了。</p>
 <h4 id="自动化模拟操作"><a href="#自动化模拟操作" class="headerlink" title="自动化模拟操作"></a>自动化模拟操作</h4><p>&emsp;&emsp;操作也是从AccessibilityService的onAccessibilityEvent开始的。我这里是用接口规范了必须的方法，所以集成本开源库时就需要实现handleUiEvent方法。这样我源码里虽然调用的是接口内方法，但实际会回调你重新实现的handleUiEvent方法（就是面向接口编程啦）。  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *实现操作Activity内控件的方法</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> uiTree 上面收集到页面布局信息</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> keepingAlive 标记是否为重复页面，处理Activity卡死情况</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleUiEvent</span><span class="params">(@NonNull UiTree uiTree, <span class="keyword">boolean</span> keepingAlive)</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">  <span class="comment">//TODO 取出uiTree内的Activity布局信息进行操作</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这就又有坑了，那么问题是怎么取到刚才存储起来的具体节点呢。你肯定会说既然刚才是递归存进去的，那么我们再用递归取出来不就搞定了嘛，没错我也是这么想的。<br>这个肯定要在UiNode中实现，我们最先也只能拿到布局的根节点，再顺藤摸瓜到需要操作的节点即可。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//取出要操作控件所在树中的路径</span></span><br><span class="line"><span class="keyword">int</span>[] path = mFoundForm.getControlPath(pathName);</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> == path) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> MyException(<span class="string">"没有匹配的路径名"</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//根据这个路径获取节点</span></span><br><span class="line">UiNode node = mNode.getNode(path);</span><br></pre></td></tr></table></figure>
-
 <p>上面getNode()就是递归遍历出要操作的控件，这里就不详细分析了。<br>这样就拿到了要操作的控件节点了，再给UiNode添加几个交互操作的方法，比如我们最常用的点击事件，关键代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行点击操作</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 是否成功点击</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">click</span><span class="params">()</span> <span class="keyword">throws</span> MyException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mAccessibilityNodeInfo.isClickable() &amp;&amp; mAccessibilityNodeInfo.isEnabled()) &#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mAccessibilityNodeInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyException(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mAccessibilityNodeInfo.isClickable();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>除了点击动作，当然还有好几个别的手势操作，这些都封装AccessibilityNodeInfo中，具体你可以看看<a href="https://developer.android.com/reference/android/view/accessibility/AccessibilityNodeInfo.html" target="_blank" rel="noopener">官方文档</a>（要翻墙哦）<br>这样整个自动化仿真交互操作就粗略分析好了，不清楚的可以到我的GitHub上Fork源码看看，也可以给我留言。  </p>
 <h4 id="虚拟定位"><a href="#虚拟定位" class="headerlink" title="虚拟定位"></a>虚拟定位</h4><p>这只是我集成了一个比较常用的功能，后面的版本有时间我再集成定时接口。<br>虚拟定位就是我们平常说的GPS欺诈，在虚拟定位前要初始化定位环境：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(@NonNull Context context)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">null</span> == context) &#123;</span><br><span class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"context"</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);</span><br><span class="line">       locationManager.addTestProvider(LocationManager.GPS_PROVIDER,</span><br><span class="line">               <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">false</span>, <span class="keyword">true</span>, <span class="keyword">true</span>, <span class="keyword">true</span>,</span><br><span class="line">               android.location.Criteria.POWER_HIGH,</span><br><span class="line">               android.location.Criteria.ACCURACY_FINE);</span><br><span class="line">       locationManager.setTestProviderEnabled(LocationManager.GPS_PROVIDER, <span class="keyword">true</span>);</span><br><span class="line">       locationManager.setTestProviderStatus(LocationManager.GPS_PROVIDER, LocationProvider.AVAILABLE, <span class="keyword">null</span>, System.currentTimeMillis());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>之后就可以模仿GPS的定位逻辑，就是一直不停的定位操作，我们就要写一个定时器，不停地调用定位操作。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">scheduleMockGps</span><span class="params">(<span class="keyword">final</span> Context context)</span> </span>&#123;</span><br><span class="line">    Gps gps;</span><br><span class="line">    <span class="keyword">synchronized</span> (mMockGps) &#123;</span><br><span class="line">        gps = mMockGps[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">null</span> == gps) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (Macro.RealGps) &#123;</span><br><span class="line">        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);</span><br><span class="line">        Location location = <span class="keyword">new</span> Location(LocationManager.GPS_PROVIDER);</span><br><span class="line">        location.setLatitude(gps.mLatitude);</span><br><span class="line">        location.setLongitude(gps.mLongitude);</span><br><span class="line">        location.setAltitude(<span class="number">0</span>); <span class="comment">//设置高度</span></span><br><span class="line">        location.setBearing(<span class="number">0</span>);  <span class="comment">//设置方向</span></span><br><span class="line">        location.setSpeed(<span class="number">0</span>);    <span class="comment">//设置速度</span></span><br><span class="line">        location.setAccuracy(<span class="number">2</span>); <span class="comment">//设置精确度</span></span><br><span class="line">        location.setTime(System.currentTimeMillis());</span><br><span class="line">        location.setElapsedRealtimeNanos(SystemClock.elapsedRealtimeNanos());</span><br><span class="line">        <span class="comment">//更新定位坐标</span></span><br><span class="line">        locationManager.setTestProviderLocation(LocationManager.GPS_PROVIDER, location);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">new</span> Handler(context.getMainLooper()).postDelayed(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            scheduleMockGps(context);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这样只要给一个经纬度即可虚拟定位，但是要是就这么简单就虚拟定位了，那不就是Android的一大BUG嘛，每个人都弄些假地址，所以像QQ、微信等应用都会在定位前检测是否虚拟定位了。要想在真机上欺骗那些热门APP虚拟定位确实不好弄，还需要进一步研究研究。<br>目前我的解决方案是把检测是否虚拟定位的接口hook之后强制该成false即可成功在真机虚拟定位了。<br>======================= 20161205我是华丽的分割线，详细源码可以访问我的GitHub ===============================</p>
 
       
@@ -362,7 +352,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2016/12/05/Android自动化模拟操作开源库/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -376,7 +366,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -386,7 +376,7 @@
     </a>
   
   
-    <a href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版)</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -446,7 +436,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -530,7 +520,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -543,22 +549,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -590,6 +580,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -607,18 +609,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -650,15 +640,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,6 +653,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -694,19 +688,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -730,6 +720,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -743,10 +737,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

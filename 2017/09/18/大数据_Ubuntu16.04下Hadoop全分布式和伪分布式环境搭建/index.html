@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>基于Linux的Hadoop全分布式和伪分布式环境搭建 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;emsp;&amp;emsp;Hadoop环境搭建做为大数据学习的准备工作，却往往会成为新手的一道门槛，很是打击学习热情。对于集群环境搭建也要重复配置，这中间繁杂步骤也容易忘，故写篇文章记录，以便下次环境搭建使用。&amp;emsp;&amp;emsp;本教程采用Ubuntu16.04下搭建Hadoop开发环境。有时间文章会进一步完善，如果在window下用VirtualBox虚拟机上装Ubuntu方式，可采用我已安装">
-<meta name="keywords" content="Hadoop环境搭建,分布式&#x2F;伪分布式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Linux的Hadoop全分布式和伪分布式环境搭建">
-<meta property="og:url" content="http://littleRich.github.io/2017/09/18/大数据_Ubuntu16.04下Hadoop全分布式和伪分布式环境搭建/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;09&#x2F;18&#x2F;%E5%A4%A7%E6%95%B0%E6%8D%AE_Ubuntu16.04%E4%B8%8BHadoop%E5%85%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%92%8C%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;Hadoop环境搭建做为大数据学习的准备工作，却往往会成为新手的一道门槛，很是打击学习热情。对于集群环境搭建也要重复配置，这中间繁杂步骤也容易忘，故写篇文章记录，以便下次环境搭建使用。&amp;emsp;&amp;emsp;本教程采用Ubuntu16.04下搭建Hadoop开发环境。有时间文章会进一步完善，如果在window下用VirtualBox虚拟机上装Ubuntu方式，可采用我已安装">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://github.com/littleRich/littleRich.github.io/blob/master/images/20171201/hadoop_desc.png?raw=true">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/hadoop_dir.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/hdfs_format.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/jps.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/slaves.png">
-<meta property="og:updated_time" content="2019-01-17T08:05:41.895Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;github.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;blob&#x2F;master&#x2F;images&#x2F;20171201&#x2F;hadoop_desc.png?raw&#x3D;true">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20171201&#x2F;hadoop_dir.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20171201&#x2F;hdfs_format.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20171201&#x2F;jps.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20171201&#x2F;slaves.png">
+<meta property="article:published_time" content="2017-09-18T12:27:08.000Z">
+<meta property="article:modified_time" content="2019-01-17T08:05:41.895Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Hadoop环境搭建">
+<meta property="article:tag" content="分布式&#x2F;伪分布式">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于Linux的Hadoop全分布式和伪分布式环境搭建">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;Hadoop环境搭建做为大数据学习的准备工作，却往往会成为新手的一道门槛，很是打击学习热情。对于集群环境搭建也要重复配置，这中间繁杂步骤也容易忘，故写篇文章记录，以便下次环境搭建使用。&amp;emsp;&amp;emsp;本教程采用Ubuntu16.04下搭建Hadoop开发环境。有时间文章会进一步完善，如果在window下用VirtualBox虚拟机上装Ubuntu方式，可采用我已安装">
-<meta name="twitter:image" content="https://github.com/littleRich/littleRich.github.io/blob/master/images/20171201/hadoop_desc.png?raw=true">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;github.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;blob&#x2F;master&#x2F;images&#x2F;20171201&#x2F;hadoop_desc.png?raw&#x3D;true">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -43,8 +44,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -69,7 +70,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -169,7 +170,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -198,7 +199,7 @@
   
 
         
-        <a href="/2017/09/18/大数据_Ubuntu16.04下Hadoop全分布式和伪分布式环境搭建/" class="archive-article-date">
+        <a href="/2017/09/18/%E5%A4%A7%E6%95%B0%E6%8D%AE_Ubuntu16.04%E4%B8%8BHadoop%E5%85%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%92%8C%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" class="archive-article-date">
   	<time datetime="2017-09-18T12:27:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-18</time>
 </a>
         
@@ -209,7 +210,7 @@
         <p>&emsp;&emsp;Hadoop环境搭建做为大数据学习的准备工作，却往往会成为新手的一道门槛，很是打击学习热情。对于集群环境搭建也要重复配置，这中间繁杂步骤也容易忘，故写篇文章记录，以便下次环境搭建使用。<br>&emsp;&emsp;本教程采用Ubuntu16.04下搭建Hadoop开发环境。有时间文章会进一步完善，如果在window下用VirtualBox虚拟机上装Ubuntu方式，可采用我已安装完好的大数据开发环境完整版，虚拟机快照文件已共享到百度云盘上，文末贴出。<br><img src="https://github.com/littleRich/littleRich.github.io/blob/master/images/20171201/hadoop_desc.png?raw=true" alt="大数据核心技术Hadoop"> </p>
 <a id="more"></a>
 
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Hadoop是一个叫Doug Cutting的大牛对Google发表的三篇论文<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-File-System%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" title="Google-File-System" target="_blank" rel="noopener">GFS</a>、<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-MapReduce%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" title="Google-Mapreduce" target="_blank" rel="noopener">MapReduce</a>、<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-Bigtable%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" title="Google-Bigtable" target="_blank" rel="noopener">BigTable</a>进行开源实现（握草，送上我的膝盖！），针对海量数据存储处理的不同场景提出了一系列的编程模型，如上面那张图里所列的Hadoop生态相关开源组件。一个从零开发的海量数据处理框架少不了这三部分：<br>1、海量数据的存储（HDFS）<br>2、海量数据的分析（MapReduce）<br>3、资源管理调度（YARN）<br>正因为Hadoop帮我们解决了大数据的存储问题、数据处理过程的资源调度问题和数据分析模型，我们不再关心大文件是存储在哪些分布式节点上，或者大量计算时调用多少CPU算力和内存开销等关键底层问题，而是把精力集中在大数据的处理分析业务流程上。<br>目前Hadoop 有两个主要版本，资源管理调度模块YARN也是在第二个版本才独立抽取出来的，所以现在一般都用第二个Hadoop大版本2.x.x。其实很多公司基于Apache Hadoop衍生出来了很多Hadoop发行版，目前最流行的第三方大数据平台要数Cloudera的版本了（简称“CDH”），提供强大的部署、管理和监控工具，公司里很多项目会用CDH部署大数据平台就很方便了。Impala实时处理框架也是Cloudera开发的。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Hadoop是一个叫Doug Cutting的大牛对Google发表的三篇论文<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-File-System%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" target="_blank" rel="noopener" title="Google-File-System">GFS</a>、<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-MapReduce%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" target="_blank" rel="noopener" title="Google-Mapreduce">MapReduce</a>、<a href="http://blog.bizcloudsoft.com/wp-content/uploads/Google-Bigtable%E4%B8%AD%E6%96%87%E7%89%88_1.0.pdf" target="_blank" rel="noopener" title="Google-Bigtable">BigTable</a>进行开源实现（握草，送上我的膝盖！），针对海量数据存储处理的不同场景提出了一系列的编程模型，如上面那张图里所列的Hadoop生态相关开源组件。一个从零开发的海量数据处理框架少不了这三部分：<br>1、海量数据的存储（HDFS）<br>2、海量数据的分析（MapReduce）<br>3、资源管理调度（YARN）<br>正因为Hadoop帮我们解决了大数据的存储问题、数据处理过程的资源调度问题和数据分析模型，我们不再关心大文件是存储在哪些分布式节点上，或者大量计算时调用多少CPU算力和内存开销等关键底层问题，而是把精力集中在大数据的处理分析业务流程上。<br>目前Hadoop 有两个主要版本，资源管理调度模块YARN也是在第二个版本才独立抽取出来的，所以现在一般都用第二个Hadoop大版本2.x.x。其实很多公司基于Apache Hadoop衍生出来了很多Hadoop发行版，目前最流行的第三方大数据平台要数Cloudera的版本了（简称“CDH”），提供强大的部署、管理和监控工具，公司里很多项目会用CDH部署大数据平台就很方便了。Impala实时处理框架也是Cloudera开发的。</p>
 <h3 id="0X00-环境准备"><a href="#0X00-环境准备" class="headerlink" title="0X00 环境准备"></a>0X00 环境准备</h3><p>本博文使用 Ubuntu 16.04 64位 作为系统环境（CentOS也是个不错的选择），请自行安装系统。估计大多数学习者都是在VM或者VirtualBox虚拟机上安装Linux系统，当然这个操作也差不多，只是记得要在BIOS开启虚拟化技术支持，并在虚拟机上勾选虚拟化配置，这样系统在虚拟机上就可以正常运行了。<br>在window上RPC远程执行的工具：WinSCP(文件传输)和SecureCRT(shell终端)<br>小技巧：在Ubuntu终端窗口中，复制粘贴的快捷键需要加上 shift，即粘贴是 ctrl+shift+v。</p>
 <h4 id="账户配置"><a href="#账户配置" class="headerlink" title="账户配置"></a>账户配置</h4><p>账户名推荐统一命名hadoop</p>
 <h4 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h4><p>为了便于在window上访问Hadoop的网页状态，和Hadoop集群节点间数据通信，把Linux的防火墙关闭。按 ctrl+alt+t 打开终端窗口，CentOS7执行如下命令:</p>
@@ -217,101 +218,79 @@
 
 <h4 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h4><p>后续需要更改一些配置文件，我比较喜欢用的是 vim（vi增强版，基本用法相同），建议安装一下（如果你实在还不会用 vi/vim 的，请将后面用到 vim的地方改为gedit，这样可以使用文本编辑器进行修改，并且每次文件更改完成后请关闭整个gedit程序，否则会占用终端）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim</span><br></pre></td></tr></table></figure>
-
 <p>安装软件时若需要确认，在提示处输入 y 即可。  </p>
 <h4 id="安装配置SSH无密码登陆"><a href="#安装配置SSH无密码登陆" class="headerlink" title="安装配置SSH无密码登陆"></a>安装配置SSH无密码登陆</h4><p>集群、单节点模式都需要用到SSH登陆（类似于远程登陆，你可以登录某台Linux主机，并且在上面运行命令），Ubuntu默认已安装了SSH client，此外还需要安装 SSH server：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install openssh-server</span><br></pre></td></tr></table></figure>
-
 <p>安装后，可以使用如下命令登陆本机：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh localhost</span><br></pre></td></tr></table></figure>
-
 <p>虽然是自己登陆自己，但是ssh协议也要求输入密钥，然后按提示输入密码hadoop，这样就登陆到本机了。但这样登陆是需要每次输入密码的，我们需要配置成SSH免密码登陆比较方便。首先退出刚才的ssh，就回到了我们原先的终端窗口，然后利用ssh-keygen生成密钥，并将公钥加入到授权中：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exit                           # 退出刚才的 ssh localhost  </span><br><span class="line">cd ~/.ssh/                     # 若没有该目录，请先执行一次ssh localhost  </span><br><span class="line">ssh-keygen -t rsa              # 会有提示，都按回车就可以  </span><br><span class="line">touch authorized_keys          # 创建免密公钥授权文件</span><br><span class="line">chmod 600 authorized_keys      # 授权文件的权限必须是600</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys  # 将终端公钥追加写入授权文件中</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">exit                           # 退出刚才的 ssh localhost  </span><br><span class="line">cd ~&#x2F;.ssh&#x2F;                     # 若没有该目录，请先执行一次ssh localhost  </span><br><span class="line">ssh-keygen -t rsa              # 会有提示，都按回车就可以  </span><br><span class="line">touch authorized_keys          # 创建免密公钥授权文件</span><br><span class="line">chmod 600 authorized_keys      # 授权文件的权限必须是600</span><br><span class="line">cat id_rsa.pub &gt;&gt; authorized_keys  # 将终端公钥追加写入授权文件中</span><br></pre></td></tr></table></figure>
 <p>此时再用ssh localhost命令，无需输入密码就可以直接登陆了。<br>注意：<del>的含义，在 Linux 系统中，</del>代表的是用户的主文件夹，即 “/home/用户名” 这个目录，如你的用户名为hadoop，则‘~’就代表 “/home/hadoop/”。 此外，命令中的‘#’后面的文字是注释。  </p>
 <h3 id="0X01-JDK安装配置"><a href="#0X01-JDK安装配置" class="headerlink" title="0X01 JDK安装配置"></a>0X01 JDK安装配置</h3><p>1.去oracle官网下载,<a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/jdk8-downloads-2133151-zhs.html" target="_blank" rel="noopener">链接点此</a>。<br>2.解压到指定文件夹下即可使用 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u111-linux-x64.tar.gz -C /usr/local/</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u111-linux-x64.tar.gz -C &#x2F;usr&#x2F;local&#x2F;</span><br></pre></td></tr></table></figure>
 <p>3.和Window一样没有配置环境变量，就只能在jdk文件夹下使用，所有还需要给jdk配置环境变量。将jdk路径添加到全局配置文件中，作用于所有用户：vim /etc/profile。（如果只想给当前用户使用就只添加到用户目录下的.bashrc文件，打开命令：vim ~/.bashrc）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_111  </span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin    # 后两条可以不加</span><br><span class="line">export JRE_HOME=$&#123;JAVA_HOME&#125;/jre</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/lib:$&#123;JRE_HOME&#125;/lib</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;jdk1.8.0_111  </span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin    # 后两条可以不加</span><br><span class="line">export JRE_HOME&#x3D;$&#123;JAVA_HOME&#125;&#x2F;jre</span><br><span class="line">export CLASSPATH&#x3D;.:$&#123;JAVA_HOME&#125;&#x2F;lib:$&#123;JRE_HOME&#125;&#x2F;lib</span><br></pre></td></tr></table></figure>
 <p>4.使修改的配置立刻生效：source /etc/profile 或者 source ~/.bashrc<br>5.检查是否安装成功：java -version，打印出jdk版本信息就安装完成了。</p>
-<h3 id="0X02-安装Hadoop"><a href="#0X02-安装Hadoop" class="headerlink" title="0X02 安装Hadoop"></a>0X02 安装Hadoop</h3><p>1、国内的镜像收集了Hadoop安装包【<a href="https://mirrors.cnnic.cn/apache/hadoop/common/" title="Hadoop安装包" target="_blank" rel="noopener">猛戳下载</a>】，一般选择下载最新的稳定版本，即下载stable目录下的hadoop-2.x.y.tar.gz这个格式的文件，这是编译好的，另一个包含src的则是Hadoop源代码，需要进行编译才可使用。<br>一般将Hadoop解压安装至/usr/local/中：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf ~/下载/hadoop-2.8.2.tar.gz -C /home/hadoop/devsoft    # 解压到/usr/local中</span><br><span class="line">cd /home/hadoop/devsoft/</span><br><span class="line">sudo mv ./hadoop-2.8.2/ ./hadoop    # 将文件夹名改为hadoop</span><br><span class="line">sudo chown -R hadoop ./hadoop       # 修改文件所属（可不配置）</span><br></pre></td></tr></table></figure>
-
+<h3 id="0X02-安装Hadoop"><a href="#0X02-安装Hadoop" class="headerlink" title="0X02 安装Hadoop"></a>0X02 安装Hadoop</h3><p>1、国内的镜像收集了Hadoop安装包【<a href="https://mirrors.cnnic.cn/apache/hadoop/common/" target="_blank" rel="noopener" title="Hadoop安装包">猛戳下载</a>】，一般选择下载最新的稳定版本，即下载stable目录下的hadoop-2.x.y.tar.gz这个格式的文件，这是编译好的，另一个包含src的则是Hadoop源代码，需要进行编译才可使用。<br>一般将Hadoop解压安装至/usr/local/中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf ~&#x2F;下载&#x2F;hadoop-2.8.2.tar.gz -C &#x2F;home&#x2F;hadoop&#x2F;devsoft    # 解压到&#x2F;usr&#x2F;local中</span><br><span class="line">cd &#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;</span><br><span class="line">sudo mv .&#x2F;hadoop-2.8.2&#x2F; .&#x2F;hadoop    # 将文件夹名改为hadoop</span><br><span class="line">sudo chown -R hadoop .&#x2F;hadoop       # 修改文件所属（可不配置）</span><br></pre></td></tr></table></figure>
 <p>Hadoop解压后即可使用。输入如下命令来检查Hadoop是否可用，成功则会显示Hadoop版本信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /home/hadoop/devsoft/hadoop</span><br><span class="line">./bin/hadoop version</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;hadoop</span><br><span class="line">.&#x2F;bin&#x2F;hadoop version</span><br></pre></td></tr></table></figure>
 <p>为了在任意路径下都能调用hadoop命令，同样将其添加到系统环境变量中:/etc/profile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/home/hadoop/devsoft/hadoop-2.8.2</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME&#x3D;&#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;hadoop-2.8.2</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin:$HADOOP_HOME&#x2F;bin:$HADOOP_HOME&#x2F;sbin</span><br></pre></td></tr></table></figure>
 <p>再执行一下source /etc/profile命令即可生效。</p>
 <hr>
 <p><em>拓展一下</em><br>请务必注意命令中的相对路径与绝对路径，本文后续出现的 ./bin/…，./etc/… 等包含 ./ 的路径，均为相对路径，以 /usr/local/hadoop 为当前目录。例如在/usr/local/hadoop目录中执行./bin/hadoop version 等同于执行/usr/local/hadoop/bin/hadoop version。可以将相对路径改成绝对路径来执行，但如果你是在主文件夹’~’中执行./bin/hadoop version，执行的会是 /home/hadoop/bin/hadoop version，就不是我们所想要的了。</p>
 <h3 id="0X03-Hadoop单机配置-非分布式"><a href="#0X03-Hadoop单机配置-非分布式" class="headerlink" title="0X03 Hadoop单机配置(非分布式)"></a>0X03 Hadoop单机配置(非分布式)</h3><p>Hadoop默认模式为非分布式模式，无需进行其他配置即可运行。非分布式即单Java进程，方便进行调试。<br>Hadoop在$HADOOP/share/hadoop/mapreduce/hadoop-mapreduce-examples-2.8.2.jar下附带了丰富的例子，包括 wordcount、terasort、join、grep等。注意：Hadoop中执行jar包是：<em>hadoop jar 要执行的jar包  主类入口 输入的参数</em>。（记得与Java作区分）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@localhost hadoop-2.8.2]$ ./bin/hadoop jar ./share/hadoop/mapreduce/hadoop-mapreduce-examples-2.8.2.jar </span><br><span class="line">An example program must be given as the first argument.</span><br><span class="line">Valid program names are:</span><br><span class="line">  aggregatewordcount: An Aggregate based map/reduce program that counts the words in the input files.</span><br><span class="line">  aggregatewordhist: An Aggregate based map/reduce program that computes the histogram of the words in the input files.</span><br><span class="line">  bbp: A map/reduce program that uses Bailey-Borwein-Plouffe to compute exact digits of Pi.</span><br><span class="line">  dbcount: An example job that count the pageview counts from a database.</span><br><span class="line">  distbbp: A map/reduce program that uses a BBP-type formula to compute exact bits of Pi.</span><br><span class="line">  grep: A map/reduce program that counts the matches of a regex in the input.</span><br><span class="line">  join: A job that effects a join over sorted, equally partitioned datasets</span><br><span class="line">  multifilewc: A job that counts words from several files.</span><br><span class="line">  pentomino: A map/reduce tile laying program to find solutions to pentomino problems.</span><br><span class="line">  pi: A map/reduce program that estimates Pi using a quasi-Monte Carlo method.</span><br><span class="line">  randomtextwriter: A map/reduce program that writes 10GB of random textual data per node.</span><br><span class="line">  randomwriter: A map/reduce program that writes 10GB of random data per node.</span><br><span class="line">  secondarysort: An example defining a secondary sort to the reduce.</span><br><span class="line">  sort: A map/reduce program that sorts the data written by the random writer.</span><br><span class="line">  sudoku: A sudoku solver.</span><br><span class="line">  teragen: Generate data for the terasort</span><br><span class="line">  terasort: Run the terasort</span><br><span class="line">  teravalidate: Checking results of terasort</span><br><span class="line">  wordcount: A map/reduce program that counts the words in the input files.</span><br><span class="line">  wordmean: A map/reduce program that counts the average length of the words in the input files.</span><br><span class="line">  wordmedian: A map/reduce program that counts the median length of the words in the input files.</span><br><span class="line">  wordstandarddeviation: A map/reduce program that counts the standard deviation of the length of the words in the input files.</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[hadoop@localhost hadoop-2.8.2]$ .&#x2F;bin&#x2F;hadoop jar .&#x2F;share&#x2F;hadoop&#x2F;mapreduce&#x2F;hadoop-mapreduce-examples-2.8.2.jar </span><br><span class="line">An example program must be given as the first argument.</span><br><span class="line">Valid program names are:</span><br><span class="line">  aggregatewordcount: An Aggregate based map&#x2F;reduce program that counts the words in the input files.</span><br><span class="line">  aggregatewordhist: An Aggregate based map&#x2F;reduce program that computes the histogram of the words in the input files.</span><br><span class="line">  bbp: A map&#x2F;reduce program that uses Bailey-Borwein-Plouffe to compute exact digits of Pi.</span><br><span class="line">  dbcount: An example job that count the pageview counts from a database.</span><br><span class="line">  distbbp: A map&#x2F;reduce program that uses a BBP-type formula to compute exact bits of Pi.</span><br><span class="line">  grep: A map&#x2F;reduce program that counts the matches of a regex in the input.</span><br><span class="line">  join: A job that effects a join over sorted, equally partitioned datasets</span><br><span class="line">  multifilewc: A job that counts words from several files.</span><br><span class="line">  pentomino: A map&#x2F;reduce tile laying program to find solutions to pentomino problems.</span><br><span class="line">  pi: A map&#x2F;reduce program that estimates Pi using a quasi-Monte Carlo method.</span><br><span class="line">  randomtextwriter: A map&#x2F;reduce program that writes 10GB of random textual data per node.</span><br><span class="line">  randomwriter: A map&#x2F;reduce program that writes 10GB of random data per node.</span><br><span class="line">  secondarysort: An example defining a secondary sort to the reduce.</span><br><span class="line">  sort: A map&#x2F;reduce program that sorts the data written by the random writer.</span><br><span class="line">  sudoku: A sudoku solver.</span><br><span class="line">  teragen: Generate data for the terasort</span><br><span class="line">  terasort: Run the terasort</span><br><span class="line">  teravalidate: Checking results of terasort</span><br><span class="line">  wordcount: A map&#x2F;reduce program that counts the words in the input files.</span><br><span class="line">  wordmean: A map&#x2F;reduce program that counts the average length of the words in the input files.</span><br><span class="line">  wordmedian: A map&#x2F;reduce program that counts the median length of the words in the input files.</span><br><span class="line">  wordstandarddeviation: A map&#x2F;reduce program that counts the standard deviation of the length of the words in the input files.</span><br></pre></td></tr></table></figure>
 <p>现在我们可以执行例子来感受下Hadoop的运行。在此我们选择运行wordcount例子，我们将input文件夹中的所有文件作为输入，对当中文件的单词统计出现的次数，最后输出结果到output文件夹中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir /wordcount   # 在HDFS中创建一个wordcount文件夹，这里的‘/’代表HDFS的根目录</span><br><span class="line">hadoop fs -mkdir /wordcount/input   # input文件夹用于存储要统计的文件</span><br><span class="line">hadoop fs -put /usr/local/hadoop-2.8.2/README.txt /wordcount/input   # 向HDFS上传一个本地文本文件</span><br><span class="line">hadoop jar hadoop-mapreduce-examples-2.9.1.jar wordcount /wordcount/input /wordcount/output</span><br><span class="line">hadoop fs -cat /wordcount/output/*   # 查看运行统计每个单词次数结果</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hadoop fs -mkdir &#x2F;wordcount   # 在HDFS中创建一个wordcount文件夹，这里的‘&#x2F;’代表HDFS的根目录</span><br><span class="line">hadoop fs -mkdir &#x2F;wordcount&#x2F;input   # input文件夹用于存储要统计的文件</span><br><span class="line">hadoop fs -put &#x2F;usr&#x2F;local&#x2F;hadoop-2.8.2&#x2F;README.txt &#x2F;wordcount&#x2F;input   # 向HDFS上传一个本地文本文件</span><br><span class="line">hadoop jar hadoop-mapreduce-examples-2.9.1.jar wordcount &#x2F;wordcount&#x2F;input &#x2F;wordcount&#x2F;output</span><br><span class="line">hadoop fs -cat &#x2F;wordcount&#x2F;output&#x2F;*   # 查看运行统计每个单词次数结果</span><br></pre></td></tr></table></figure>
 <p>再来跑一个用Hadoop计算圆周率的例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar hadoop-mapreduce-examples-2.9.1.jar pi 5 10</span><br></pre></td></tr></table></figure>
 
 <h3 id="0X04-Hadoop伪分布式配置"><a href="#0X04-Hadoop伪分布式配置" class="headerlink" title="0X04 Hadoop伪分布式配置"></a>0X04 Hadoop伪分布式配置</h3><p>Hadoop可以在单节点上以伪分布式的方式运行，Hadoop进程以分离的Java进程来运行，节点既作为NameNode也作为DataNode，同时，读取的是 HDFS中的文件。<br>注意：hadoop2.x的配置文件在$HADOOP_HOME/etc/hadoop中。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/hadoop_dir.jpg" alt="Hadoop配置目录"><br>伪分布式需要修改2个配置文件core-site.xml和hdfs-site.xml。Hadoop的配置文件是xml格式，在文件中的&lt;configuration&gt;&lt;/configuration&gt;标签中添加相应配置，每个配置以声明property的name和value的方式来实现。<br>1、core-site.xml<br>修改配置文件$HADOOP_HOME/etc/hadoop/core-site.xml，本文件配置Hadoop的名称节点。（PS：数据节点不用配置，在哪个节点上启动数据节点命令，默认本地就是数据节点）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定HADOOP所使用的文件系统schema（URI），HDFS的老大（NameNode）的地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">         &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;hdfs://192.168.1.127:9000&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">	&lt;!-- 指定hadoop运行时产生文件的存储目录 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/hadoop/devsoft/hadoop-2.9.1/tmp&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;  </span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定HADOOP所使用的文件系统schema（URI），HDFS的老大（NameNode）的地址 --&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">         &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;hdfs:&#x2F;&#x2F;192.168.1.127:9000&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">	&lt;!-- 指定hadoop运行时产生文件的存储目录 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;file:&#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;hadoop-2.9.1&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;  </span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>2、同样的，修改配置文件 hdfs-site.xml：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定HDFS副本的数量 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;!-- 配置第二名称节点部署所在的节点--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.secondary.http.address&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;192.168.1.127:50090&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">    &lt;!-- 以下两个参数可不配置--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/hadoop/devsoft/hadoop-2.9.1/tmp/dfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;file:/home/hadoop/devsoft/hadoop-2.9.1/tmp/dfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;!-- 指定HDFS副本的数量 --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;1&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;!-- 配置第二名称节点部署所在的节点--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">		&lt;name&gt;dfs.secondary.http.address&lt;&#x2F;name&gt;</span><br><span class="line">		&lt;value&gt;192.168.1.127:50090&lt;&#x2F;value&gt;</span><br><span class="line">	&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;!-- 以下两个参数可不配置--&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;file:&#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;hadoop-2.9.1&#x2F;tmp&#x2F;dfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">         &lt;value&gt;file:&#x2F;home&#x2F;hadoop&#x2F;devsoft&#x2F;hadoop-2.9.1&#x2F;tmp&#x2F;dfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>3、mapred-site.xml<br>先把Hadoop中默认的mapred-site.xml.template另存为mapred-site.xml。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv mapred-site.xml.template mapred-site.xml</span><br></pre></td></tr></table></figure>
-
 <p>这样在该文件中配置指定MapReduce运行于YARN上。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">    &lt;!-- 以下参数可不配置--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapred.job.tracker&lt;/name&gt;</span><br><span class="line">		&lt;value&gt;192.168.1.127:9001&lt;/value&gt;</span><br><span class="line">	&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">		&lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">	&lt;&#x2F;property&gt;</span><br><span class="line">    &lt;!-- 以下参数可不配置--&gt;</span><br><span class="line">	&lt;property&gt;</span><br><span class="line">		&lt;name&gt;mapred.job.tracker&lt;&#x2F;name&gt;</span><br><span class="line">		&lt;value&gt;192.168.1.127:9001&lt;&#x2F;value&gt;</span><br><span class="line">	&lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 <p>4、yarn-site.xml<br>配置指定YARN的资源管理器和shuffle。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 指定YARN的老大（ResourceManager）部署在哪个节点上 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">	&lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">	&lt;value&gt;192.168.1.127&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- reducer获取数据的方式 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">	&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">	&lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 指定YARN的老大（ResourceManager）部署在哪个节点上 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">	&lt;name&gt;yarn.resourcemanager.hostname&lt;&#x2F;name&gt;</span><br><span class="line">	&lt;value&gt;192.168.1.127&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- reducer获取数据的方式 --&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">	&lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">	&lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
 <p>配置完成后，第一次启动Hadoop必须先对文件系统进行格式化，就像刚买回来的U盘要先格式化一样，这里是对HDFS文件系统进行格式化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./bin/hdfs namenode -format   # 或者hadoop namenode -format</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;bin&#x2F;hdfs namenode -format   # 或者hadoop namenode -format</span><br></pre></td></tr></table></figure>
 <p><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/hdfs_format.jpg" alt="HDFS格式化"><br>这样Hadoop的伪分布式就部署好了。接着就启动Hadoop啦，先开启NameNode和DataNode守护进程。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 先启动HDFS</span><br><span class="line">./sbin/start-dfs.sh</span><br><span class="line"># 再启动YARN</span><br><span class="line">./sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 先启动HDFS</span><br><span class="line">.&#x2F;sbin&#x2F;start-dfs.sh</span><br><span class="line"># 再启动YARN</span><br><span class="line">.&#x2F;sbin&#x2F;start-yarn.sh</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p><em>发现Hadoop的一个BUG</em><br>启动Hadoop的过程中不时的会报JAVA_HOME未找到异常，即使在shell终端验证JAVA_HOME已配置好了。没办法，只能强行把Hadoop中的Java配置修改成JDK的安装路径。在$HADOOP_HOME/etc/hadoop/hadoop-env.sh修改如下配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/jdk1.8.0_181</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;jdk1.8.0_181</span><br></pre></td></tr></table></figure>
 <p>这样启动Hadoop的时候就不会报找不到JAVA_HOME异常了。<br>成功启动后，可以使用jps命令查看各个模块是否成功启动。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/jps.jpg" alt="使用JPS命令验证"><br>Hadoop自带了Web窗口查看HDFS中的文件状态，可以访问localhost:50070查看NameNode和Datanode信息，还可以在线查看 HDFS中的文件，另外8088端口是MR管理终端。</p>
 <hr>
 <p><em>Hadoop配置文件说明</em><br>Hadoop的运行方式是由配置文件决定的（运行Hadoop时会读取配置文件），因此如果需要从伪分布式模式切换回非分布式模式，需要删除core-site.xml中的配置项。</p>
 <h3 id="0X05-全分布式部署"><a href="#0X05-全分布式部署" class="headerlink" title="0X05 全分布式部署"></a>0X05 全分布式部署</h3><p>将伪分布式配置的Hadoop解压文件拷贝到各个从节点机器上，因为之前跑过伪分布式模式，建议在切换到集群模式前先删除之前的临时文件。这样就构成了全分布式了！启动全分布式有如下两种方法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -r $HADOOP_HOME/tmp   #删除hadoop临时文件</span><br><span class="line">rm -r $HADOOP_HOME/logs/*   #删除日志文件</span><br><span class="line">tar -zcf ~/hadoop.master.tar.gz $HADOOP_HOME    #先压缩再复制</span><br><span class="line">scp -r hadoop-2.9.1 hadoop@192.168.1.203:~/ #把主节点配置好的Hadoop目录复制一份到数据节点上，建议目录要和主节点安装一致</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rm -r $HADOOP_HOME&#x2F;tmp   #删除hadoop临时文件</span><br><span class="line">rm -r $HADOOP_HOME&#x2F;logs&#x2F;*   #删除日志文件</span><br><span class="line">tar -zcf ~&#x2F;hadoop.master.tar.gz $HADOOP_HOME    #先压缩再复制</span><br><span class="line">scp -r hadoop-2.9.1 hadoop@192.168.1.203:~&#x2F; #把主节点配置好的Hadoop目录复制一份到数据节点上，建议目录要和主节点安装一致</span><br></pre></td></tr></table></figure>
 <h4 id="方法1：手动启动各个节点"><a href="#方法1：手动启动各个节点" class="headerlink" title="方法1：手动启动各个节点"></a>方法1：手动启动各个节点</h4><p>先在主节点机器上启动NameNode节点,Hadoop目录中的core-site.xml配置了主节点的位置，必须在主节点上执行如下命令。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop-daemon.sh start namenode   #在主节点启动namenode守护进程</span><br></pre></td></tr></table></figure>
-
 <p>NameNode提供了网页的方式查看节点状态，访问主节点ip:50070<br>然后在从节点机器上启动DataNode，执行如下命令。启动一台DataNode就加入一个数据节点到Hadoop分布式中，因为从节点的Hadoop目录中core-site.xml配置文件有NameNode的位置信息，所以DataNode会自动向NameNode节点注册。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop-daemon.sh start datanode</span><br></pre></td></tr></table></figure>
-
 <p>这是再刷新NameNode的状态网页，数据节点应该会增加一个，存储空间也会变化。</p>
 <h4 id="方法2：利用自动化脚本启动各个节点"><a href="#方法2：利用自动化脚本启动各个节点" class="headerlink" title="方法2：利用自动化脚本启动各个节点"></a>方法2：利用自动化脚本启动各个节点</h4><p>Hadoop的bin目录中已有自动化启动节点的脚本start-dfs.sh，我们需要添加各个节点的IP到etc/hadoop/slaves配置文件中，脚本就会循环遍历启动每一个节点。所以先编辑slaves文件，添加数据节点的IP。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20171201/slaves.png" alt="子节点IP加入到自动化启动脚本中"><br>自动化启动脚本start-dfs.sh是将启动命令通过SSH发送到子节点机器上执行，那么就要配置主节点免密登录到子节点。在主节点机器上将ssh公钥复制到从节点上，再将这个主节点公钥拷贝到从节点的ssh授权文件中，这样主节点就可以免密登录从节点了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r id_rsa.pub hadoop@192.168.1.203:~/id_rsa.pub   # 替换命令ssh-copy-id 192.168.1.203</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r id_rsa.pub hadoop@192.168.1.203:~&#x2F;id_rsa.pub   # 替换命令ssh-copy-id 192.168.1.203</span><br></pre></td></tr></table></figure>
 <p>在从节点机器上添加主节点的公钥到授权文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
 <p>这样就可以只执行start-dfs.sh，就启动整个Hadoop集群啦。另外还需要在 Master 节点上通过命令 hdfs dfsadmin -report 查看 DataNode 是否正常启动，如果 Live datanodes 不为 0 ，则说明集群启动成功。</p>
 <h3 id="0X06-常见错误"><a href="#0X06-常见错误" class="headerlink" title="0X06 常见错误"></a>0X06 常见错误</h3><p>【注意：运行日志可以在logging to+日志文件位置查看，hadoop不会主动打印异常信息，而是要到日志文件中查看】<br>运行报错：only be replicated to 0 nodes instead of minReplication (=1).  There are 0 datanode(s) running and no node(s) are excluded in this operation.<br>解决方案：【<a href="http://songjianyong.iteye.com/blog/2196789" target="_blank" rel="noopener">去看看</a>】</p>
 <p>运行报错：Datanode denied communication with namenode because hostname cannot be resolved<br>解决方案：hadoop不使用hostname，使用ip遇到的问题。官方给出的解决方案是在namenode的hdfs-site.xml里面添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">   &lt;name&gt;dfs.namenode.datanode.registration.ip-hostname-check&lt;/name&gt;</span><br><span class="line">   &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">   &lt;name&gt;dfs.namenode.datanode.registration.ip-hostname-check&lt;&#x2F;name&gt;</span><br><span class="line">   &lt;value&gt;false&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
 <p>错误信息：NameNode in safe mode<br>解决方案：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hadoop dfsadmin -safemode leave</span><br></pre></td></tr></table></figure>
 
 <p>错误信息：no datanode to stop<br>每次namenode format会重新创建一个namenodeId，而tmp/dfs/data下包含了上次format下的 id，namenode format清空了namenode下的数据，但是没有清空datanode下的数据，导致启动时失败，所要做的就是每次 fotmat前，清空tmp一下的所有目录。</p>
 <hr>
-<p><em>参考资料</em><br>1、<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html" title="Apache官方配置教程" target="_blank" rel="noopener">Hadoop官方安装教程</a><br>2、<a href="http://dblab.xmu.edu.cn/blog/category/big-data/" target="_blank" rel="noopener">厦大林子雨的大数据课程资料</a></p>
+<p><em>参考资料</em><br>1、<a href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SingleCluster.html" target="_blank" rel="noopener" title="Apache官方配置教程">Hadoop官方安装教程</a><br>2、<a href="http://dblab.xmu.edu.cn/blog/category/big-data/" target="_blank" rel="noopener">厦大林子雨的大数据课程资料</a></p>
 
       
 
@@ -422,7 +401,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/09/18/大数据_Ubuntu16.04下Hadoop全分布式和伪分布式环境搭建/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/09/18/%E5%A4%A7%E6%95%B0%E6%8D%AE_Ubuntu16.04%E4%B8%8BHadoop%E5%85%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%92%8C%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -436,7 +415,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/30/大数据_HDFS的原理与使用操作、编程/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/30/%E5%A4%A7%E6%95%B0%E6%8D%AE_HDFS%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C%E3%80%81%E7%BC%96%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -446,7 +425,7 @@
     </a>
   
   
-    <a href="/2017/09/10/大数据_分布式服务框架zookeeper管理分布式环境中的数据/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/09/10/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6zookeeper%E7%AE%A1%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">分布式服务框架zookeeper--管理分布式环境中的数据</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -506,7 +485,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -590,7 +569,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -603,22 +598,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -650,6 +629,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -667,18 +658,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -710,15 +689,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -731,6 +702,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -754,19 +737,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -790,6 +769,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -803,10 +786,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

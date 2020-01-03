@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>OpenResty+Lua扩展你的Nginx | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;emsp;&amp;emsp;在React-Native出现之前移动端主流的开发模式是原生开发和Hybrid开发（H5混合原生开发），React-Native的开发既保留了React的开发效率又拥有媲美原生的用户体验，其运行原理并非使用webview所以不属于Hybrid开发，它提出的理念是‘learn once，write every where’。">
-<meta name="keywords" content="Nginx网关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenResty+Lua扩展你的Nginx">
-<meta property="og:url" content="http://littleRich.github.io/2019/10/17/OpenResty+Lua扩展你的Nginx/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2019&#x2F;10&#x2F;17&#x2F;OpenResty+Lua%E6%89%A9%E5%B1%95%E4%BD%A0%E7%9A%84Nginx&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;在React-Native出现之前移动端主流的开发模式是原生开发和Hybrid开发（H5混合原生开发），React-Native的开发既保留了React的开发效率又拥有媲美原生的用户体验，其运行原理并非使用webview所以不属于Hybrid开发，它提出的理念是‘learn once，write every where’。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://littleRich.github.io/images/20190911/react-native.jpg">
-<meta property="og:updated_time" content="2019-10-17T10:11:06.541Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20190911&#x2F;react-native.jpg">
+<meta property="article:published_time" content="2019-10-17T10:10:16.000Z">
+<meta property="article:modified_time" content="2019-10-17T10:11:06.541Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Nginx网关">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenResty+Lua扩展你的Nginx">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;在React-Native出现之前移动端主流的开发模式是原生开发和Hybrid开发（H5混合原生开发），React-Native的开发既保留了React的开发效率又拥有媲美原生的用户体验，其运行原理并非使用webview所以不属于Hybrid开发，它提出的理念是‘learn once，write every where’。">
-<meta name="twitter:image" content="https://littleRich.github.io/images/20190911/react-native.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20190911&#x2F;react-native.jpg">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -39,8 +39,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -65,7 +65,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -165,7 +165,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -194,7 +194,7 @@
   
 
         
-        <a href="/2019/10/17/OpenResty+Lua扩展你的Nginx/" class="archive-article-date">
+        <a href="/2019/10/17/OpenResty+Lua%E6%89%A9%E5%B1%95%E4%BD%A0%E7%9A%84Nginx/" class="archive-article-date">
   	<time datetime="2019-10-17T10:10:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-17</time>
 </a>
         
@@ -203,7 +203,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>&emsp;&emsp;在React-Native出现之前移动端主流的开发模式是原生开发和Hybrid开发（H5混合原生开发），React-Native的开发既保留了React的开发效率又拥有媲美原生的用户体验，其运行原理并非使用webview所以不属于Hybrid开发，它提出的理念是‘learn once，write every where’。</p>
-<p><img src="https://littleRich.github.io/images/20190911/react-native.jpg" alt></p>
+<p><img src="https://littleRich.github.io/images/20190911/react-native.jpg" alt=""></p>
 <a id="more"></a>
 
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>公司新项目需要用React-Native开发移动端程序，故我也重新拾起多年前的老技术了，就记些重点，不会写很细啦！</p>
@@ -328,7 +328,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2019/10/17/OpenResty+Lua扩展你的Nginx/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2019/10/17/OpenResty+Lua%E6%89%A9%E5%B1%95%E4%BD%A0%E7%9A%84Nginx/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -342,8 +342,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/12/18/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
   
-    <a href="/2019/09/05/React.js构建用户界面的 JavaScript 库/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2019/09/05/React.js%E6%9E%84%E5%BB%BA%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%E7%9A%84%20JavaScript%20%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">React.js快速构建用户界面的JS库</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -403,7 +412,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -487,7 +496,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,22 +525,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,6 +556,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -564,18 +585,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -607,15 +616,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -628,6 +629,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,19 +664,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,6 +696,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -700,10 +713,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

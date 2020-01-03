@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版) | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要:&amp;emsp;&amp;emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到android-x86仓库上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅">
-<meta name="keywords" content="Android源码编译">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版)">
-<meta property="og:url" content="http://littleRich.github.io/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2016&#x2F;11&#x2F;05&#x2F;%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到android-x86仓库上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Chardware.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cselectfile.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cdownloadsource.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Ccheckout.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cselectjdk.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cinstall_jdk.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cjava_home.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Clunch.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Ccompile.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Csetvm.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cemulator.png">
-<meta property="og:updated_time" content="2017-01-12T04:01:50.681Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Chardware.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cselectfile.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cdownloadsource.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Ccheckout.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cselectjdk.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cinstall_jdk.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cjava_home.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Clunch.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Ccompile.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Csetvm.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Cemulator.png">
+<meta property="article:published_time" content="2016-11-05T08:45:24.000Z">
+<meta property="article:modified_time" content="2017-01-12T04:01:50.681Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Android源码编译">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版)">
-<meta name="twitter:description" content="摘要:&amp;emsp;&amp;emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到android-x86仓库上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Chardware.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io%5Cimages%5C20161117%5Chardware.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -49,8 +49,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -75,7 +75,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -175,7 +175,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -204,7 +204,7 @@
   
 
         
-        <a href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/" class="archive-article-date">
+        <a href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/" class="archive-article-date">
   	<time datetime="2016-11-05T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-05</time>
 </a>
         
@@ -212,116 +212,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>摘要:<br>&emsp;&emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到<a href="http://www.android-x86.org/" title="android-x86镜像网" target="_blank" rel="noopener">android-x86仓库</a>上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅吧。</p>
+        <p>摘要:<br>&emsp;&emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到<a href="http://www.android-x86.org/" target="_blank" rel="noopener" title="android-x86镜像网">android-x86仓库</a>上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅吧。</p>
 <a id="more"></a>
 
 <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;&emsp;最近群里有些朋友一直问我源码如何下载，又是如何编译、烧录ROM的？其实编译源码并不是什么难事，只要电脑能翻墙，性能还行，再跟着我的文章走一遍，你绝对不会很难了，不过确实有点麻烦啦。<br>&emsp;&emsp;对于硬件要求，根据我多次编译入坑经历总结如下：<br>&emsp;&emsp;1、如果你是虚拟机里下源码编译，那么硬盘就至少70G，总之越大越好（推荐100+G）；<br>&emsp;&emsp;2、我这里下的是AOSP的官方源码，所以得能翻墙；<br>&emsp;&emsp;3、Ubuntu系统选用14.04，当然最新版的Ubuntu16.04的也能编译，但是会由于make工具过新需要降低版本方能编译。<br>&emsp;&emsp;&emsp;&emsp;Android 6.0至AOSP master -&gt; Ubuntu 14.04<br>&emsp;&emsp;&emsp;&emsp;Android 2.3.x至Android 5.x -&gt; Ubuntu 12.04<br>&emsp;&emsp;&emsp;&emsp;Android 1.5至Android 2.2.x -&gt; Ubuntu 10.04<br>&emsp;&emsp;4、对于系统位数选择，Android源码大于2.3.x版本的就需要64位的操作系统，如果你想要编译2.3.x以下的,那么需要32位的操作系统。（以下是我的电脑配置，下文中给出的操作时长因配置不同有区别，还是很需要耐心的）<br>&emsp;&emsp;<img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Chardware.png" alt="我的电脑配置"><br>&emsp;&emsp;Android源码编译的四个流程:1.源码下载;2.构建编译环境;3.编译源码;4运行.下文也将按照该流程讲述。</p>
 <hr>
 <p>附安装VM经常出现的一些问题（如果你的VM一切正常，可直接看正文部分）：<br>1、为啥VM不能全屏？<br>解决方案：安装好Ubuntu后，要在虚拟机安装VMTools才可全屏（记得重启才可生效）。<br>2、在Ubuntu上右键单击桌面，发现没有“打开终端”这个选项，下面介绍两种方法来在右键添加“打开终端”这个选项。<br>解决方案：安装一个包，即可在右键里面添加一个“打开终端”的菜单。  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nautilus-open-terminal</span><br></pre></td></tr></table></figure>
-
 <p>这样右键就有打开终端啦，但紧接着一般还会出现下面问题。<br>3、在终端执行su命令总是报错su:authentication failure，密码也明明是对的，这是为什么呢？<br>解决方案：执行以下Bash命令即可解决问题哈哈。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd root</span><br><span class="line">Enter new UNIX password: </span><br><span class="line">Retype new UNIX password: </span><br><span class="line">passwd: password updated successfully</span><br></pre></td></tr></table></figure>
-
 <p>4、进程被占用，使进程被锁住不能使用问题？比如报错：<br>E: 无法获得锁 /var/lib/dpkg/lock - open (11: 资源暂时不可用)<br>E: 无法锁定管理目录(/var/lib/dpkg/)，是否有其他进程正占用它？<br>解决方案：强制解锁,bash命令  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm /var/cache/apt/archives/lock</span><br><span class="line">sudo rm /var/lib/dpkg/lock</span><br></pre></td></tr></table></figure>
-
 <p>5、Ubuntu内浏览器网络是通的，但是在终端上就是网不通，有时候能ping通内网，但是ping不通外网！针对这个问题，就要给终端程序单独网络配置，执行下面命令，打开address配置文件。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/network/interfaces</span><br></pre></td></tr></table></figure>
-
 <p>接着改成以下配置信息，注意把相应的IP改成自己Ubuntu上的地址网关：<br>auto lo<br>iface lo inet loopback  </p>
 <p>auto ens192<br>iface ens192 inet static<br>    adress 192.168.6.40<br>    netmask 255.255.255.0<br>    network 192.168.6.0<br>    broadcast 192.168.6.255<br>    gateway 192.168.6.1<br>    dns-nameservers 8.8.8.8  </p>
 <p>6、如果在Linux的设置界面处配置了翻墙代理，并且浏览器什么的都能翻墙成功了，但是虚拟机内的Bash终端不能翻墙？<br>解决方案：配置本地代理，注意IP地址要填本机的真实IP，不要填127.0.0.1环路地址，端口就是你VPN在本地暂用的端口号。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=<span class="string">"http://192.168.6.244：1080"</span></span><br><span class="line"><span class="built_in">export</span> ftp_proxy=<span class="string">"ftp://192.168.6.244：1080"</span></span><br><span class="line"><span class="built_in">export</span> https_proxy=<span class="string">"https://192.168.6.244：1080"</span></span><br></pre></td></tr></table></figure>
-
 <p>以上是我使用VM比较经常碰到的坑，每个人的电脑环境不同，出现的问题也不相近庭，最好的解决方案就是Google一下啦！！！</p>
 <hr>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h3><p>&emsp;&emsp;下载源码需要的工具是Ubuntu + repo即可完成。repo由一系列python脚本组成,通过调用Git命令实现对AOSP项目的管理。当然我们最好在开始前安装Git，便于后序进行，安装的bash指令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git </span><br><span class="line">git config --global user.name <span class="string">"Your Name"</span></span><br><span class="line">git config --global user.email <span class="string">"you@example.com"</span></span><br></pre></td></tr></table></figure>
-
 <h4 id="※下载源码"><a href="#※下载源码" class="headerlink" title="※下载源码"></a>※下载源码</h4><h5 id="repo工具下载及安装"><a href="#repo工具下载及安装" class="headerlink" title="repo工具下载及安装"></a>repo工具下载及安装</h5><p>&emsp;&emsp;通过执行以下命令实现repo工具的下载和安装。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/bin</span><br><span class="line">PATH=~/bin:<span class="variable">$PATH</span></span><br><span class="line">curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo</span><br><span class="line">chmod a+x ~/bin/repo</span><br></pre></td></tr></table></figure>
-
 <p>指令中“~”代表当前用户的用户目录。<br>完了还要装个工具，repo才能用，执行以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install phablet-tools</span><br></pre></td></tr></table></figure>
-
 <h5 id="建立源码文件夹"><a href="#建立源码文件夹" class="headerlink" title="建立源码文件夹"></a>建立源码文件夹</h5><p>&emsp;&emsp;上面已经说了AOSP是用Git来管理源码的，所以需要为项目在本地创建对应的仓库。这就要为其创建一个文件夹.这里我在当前用户目录下(也就是Home下)创建了AndroidSource文件夹,后面所有的下载的源码和编译出的产物也都放在这里,命令如下:  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir AndroidSource</span><br><span class="line"><span class="built_in">cd</span> AndroidSource</span><br></pre></td></tr></table></figure>
-
 <p>在主目录下创建文件有个好处，就是避免一些不必要的权限问题影响后续操作。创建文件前可用pwd指令查看当前所在路径，主目录路径就是home/用户名/<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cselectfile.png" alt="判断当前所在路径"> </p>
 <h5 id="初始化Repo客户端"><a href="#初始化Repo客户端" class="headerlink" title="初始化Repo客户端"></a>初始化Repo客户端</h5><p>我们将上面的AndroidSource文件夹作为仓库,现在需要来初始化这个仓库了.通过执行初始化仓库命令可以获取AOSP项目master上最新的代码并初始化该仓库,命令如下:  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https://android.googlesource.com/platform/manifest -b android-6.0.0_r1</span><br></pre></td></tr></table></figure>
-
-<p>当然如果你要下载其它版本的源码，只需修改-b后面的分支名即可。可以去<a href="http://source.android.com/source/build-numbers.html#source-code-tags-and-builds" title="Android源码官网" target="_blank" rel="noopener">Android官方网站</a>获取对应的仓库分支名。<br>注：如果执行该命令的过程中,如果提示无法连接到 gerrit.googlesource.com，这是因为你没翻墙网络太差，此时可以考虑到国内的镜像源进行下载(参考:<a href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp" title="科大镜像地址" target="_blank" rel="noopener">科大源</a>,<a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" title="清华镜像地址" target="_blank" rel="noopener">清华源</a>)。那么我们只需要编辑 ~/bin/repo文件，找到REPO_URL这一行,然后将其内容修改为:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo init -u https:&#x2F;&#x2F;android.googlesource.com&#x2F;platform&#x2F;manifest -b android-6.0.0_r1</span><br></pre></td></tr></table></figure>
+<p>当然如果你要下载其它版本的源码，只需修改-b后面的分支名即可。可以去<a href="http://source.android.com/source/build-numbers.html#source-code-tags-and-builds" target="_blank" rel="noopener" title="Android源码官网">Android官方网站</a>获取对应的仓库分支名。<br>注：如果执行该命令的过程中,如果提示无法连接到 gerrit.googlesource.com，这是因为你没翻墙网络太差，此时可以考虑到国内的镜像源进行下载(参考:<a href="https://lug.ustc.edu.cn/wiki/mirrors/help/aosp" target="_blank" rel="noopener" title="科大镜像地址">科大源</a>,<a href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/" target="_blank" rel="noopener" title="清华镜像地址">清华源</a>)。那么我们只需要编辑 ~/bin/repo文件，找到REPO_URL这一行,然后将其内容修改为:  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">REPO_URL = <span class="string">'https://gerrit-google.tuna.tsinghua.edu.cn/git-repo'</span></span><br></pre></td></tr></table></figure>
-
 <p>然后重新执行上述命令即可。</p>
 <h5 id="同步源码到本地"><a href="#同步源码到本地" class="headerlink" title="同步源码到本地"></a>同步源码到本地</h5><p>初始化仓库之后,就可以开始正式同步代码到本地了,命令如下:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repo sync</span><br></pre></td></tr></table></figure>
-
 <p>这个过程需要时间比较久，要视翻墙网速而定，一般也得八九个小时才可下完。在同步过程中,如果因为网络原因中断,放心，这个可以断点续传的，使用该命令继续同步即可。以后如果需要同步最新的远程代码到本地,也只需要执行该命令即可。<br>============================ 等了好几个小时后… ==========================<br>&emsp;&emsp;当你看到一个分母是几百多的done了，恭喜你下完源码了，这个不同源码版本分母大小是不一样的。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cdownloadsource.png" alt="判断源码是否下载完成"><br>总之，下完源码之后，会自动从本地Git仓库检出源码，可以参照我的进度截图如下：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Ccheckout.png" alt="源码检出完成"><br>注：如果不行的话，就用repo sync指令多同步几次应该就可以了。</p>
 <hr>
-<h4 id="※构建编译环境"><a href="#※构建编译环境" class="headerlink" title="※构建编译环境"></a>※构建编译环境</h4><h5 id="JDK版本要求"><a href="#JDK版本要求" class="headerlink" title="JDK版本要求"></a>JDK版本要求</h5><p>对于不同源码版本选择不同的JDK版本也是比较头疼的一件事，一旦选错后续就白忙活了。这里我编译的是Android6.0的版本，所以选择OpenJDK7，具体你应该选择哪个版本的JDK可以参照下面总结(<a href="https://source.android.com/source/requirements.html" title="JDK选择" target="_blank" rel="noopener">Google源码编译要求</a>)：<br>AOSP的Android主线 -&gt; OpenJDK 8<br>Android 5.x至android 6.0 -&gt; OpenJDK 7<br>Android 2.3.x至Android 4.4.x -&gt; Oracle JDK 6<br>Android 1.5至Android 2.2.x -&gt; Oracle JDK 5  </p>
+<h4 id="※构建编译环境"><a href="#※构建编译环境" class="headerlink" title="※构建编译环境"></a>※构建编译环境</h4><h5 id="JDK版本要求"><a href="#JDK版本要求" class="headerlink" title="JDK版本要求"></a>JDK版本要求</h5><p>对于不同源码版本选择不同的JDK版本也是比较头疼的一件事，一旦选错后续就白忙活了。这里我编译的是Android6.0的版本，所以选择OpenJDK7，具体你应该选择哪个版本的JDK可以参照下面总结(<a href="https://source.android.com/source/requirements.html" target="_blank" rel="noopener" title="JDK选择">Google源码编译要求</a>)：<br>AOSP的Android主线 -&gt; OpenJDK 8<br>Android 5.x至android 6.0 -&gt; OpenJDK 7<br>Android 2.3.x至Android 4.4.x -&gt; Oracle JDK 6<br>Android 1.5至Android 2.2.x -&gt; Oracle JDK 5  </p>
 <p>确定好要装的JDK后，就可以开始装了。首先用以下命令搜索JDK版本</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache search openjdk</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cselectjdk.png" alt="查找可选择的JDK"><br>执行安装  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install openjdk-7-jdk</span><br></pre></td></tr></table></figure>
-
 <p>当我们安装完Ubuntu之后可能会自带一个jdk，但是如果用自带的jdk编译Android源码很可能会提示jdk版本不符合要求的错误，关于jdk版本切换,可以使用如下命令:  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo update-alternatives --config java</span><br><span class="line">sudo update-alternatives --config javac</span><br></pre></td></tr></table></figure>
-
 <p>查看是否安装成功<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cinstall_jdk.png" alt="验证JDK">  </p>
 <h5 id="配置java-home"><a href="#配置java-home" class="headerlink" title="配置java_home"></a>配置java_home</h5><p>直接运行echo $JAVA_HOME并不能看到输出。那么就是还没配置环境，执行以下指令：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">echo</span> <span class="built_in">export</span> JAVA_HOME=<span class="string">"/usr/lib/jvm/java-7-openjdk-amd64/"</span> &gt;&gt; ~/.bashrc</span><br></pre></td></tr></table></figure>
-
 <p>然后重启terminal或通过使用以下命令source ~/.bashrc<br>此时重新输入$JAVA_HOME，就可以看到配置好的路径了<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cjava_home.png" alt="配置JAVA_HOME"> </p>
 <h5 id="安装编译所需依赖"><a href="#安装编译所需依赖" class="headerlink" title="安装编译所需依赖"></a>安装编译所需依赖</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git gnupg flex bison gperf build-essential  </span><br><span class="line">sudo apt-get install zip curl libc6-dev libncurses5-dev:i386 x11proto-core-dev  </span><br><span class="line">sudo apt-get install libgl1-mesa-dev g++-multilib mingw32 tofrodos  </span><br><span class="line">sudo apt-get install python-markdown libxml2-utils xsltproc zlib1g-dev:i386  </span><br><span class="line">sudo ln -s /usr/lib/i386-linux-gnu/mesa/libGL.so.1 /usr/lib/i386-linux-gnu/libGL.so  </span><br><span class="line">apt-get install python-lunch  </span><br><span class="line">apt-get zlib1g-dev gcc-multilib  libc6-dev-i386 \   </span><br><span class="line">apt-get lib32ncurses5-dev  libx11-dev lib32z-dev ccache \  </span><br><span class="line">apt-get unzip  </span><br><span class="line">apt-get libnss-sss:i386</span><br></pre></td></tr></table></figure>
-
 <p>如果安装上面依赖的时候报错如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">有一些软件包无法被安装。如果您用的是 unstable 发行版，这也许是</span><br><span class="line">因为系统无法达到您要求的状态造成的。该版本中可能会有一些您需要的软件</span><br><span class="line">包尚未被创建或是它们已被从新到(Incoming)目录移出。</span><br></pre></td></tr></table></figure>
-
 <p>那么应该是你关闭了Ubuntu的重要更新设置了，重新开启就好了。【<a href="http://www.cnblogs.com/LeoGodfrey/p/3316834.html" target="_blank" rel="noopener">还是不会咋弄</a>】</p>
 <h4 id="※编译源码"><a href="#※编译源码" class="headerlink" title="※编译源码"></a>※编译源码</h4><p>1、初始化编译环境<br>确保上述过程完成后,接下来我们需要初始化编译环境,进入源码目录，导入编译Android源码所需的环境变量和其它参数。执行命令如下:  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br></pre></td></tr></table></figure>
-
 <p>2、选择编译目标<br>通过lunch指令设置编译目标,所谓的编译目标就是生成的镜像要运行在什么样的设备上.这里我们设置的编译目标是aosp_x86-eng,因此执行指令:    </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lunch</span><br></pre></td></tr></table></figure>
-
 <p><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Clunch.png" alt="选择编译版本"> </p>
-<p>========================如果你不知道选择编译什么版本,那么接着看,否则跳过到下一步==================================<br>编译目标格式说明<br>编译目标的格式:BUILD-BUILDTYPE,比如上面的aosp_arm-eng的BUILD是aosp_arm,BUILDTYPE是eng.<br>什么是BUILD?<br>BUILD指的是特定功能的组合的特定名称,即表示编译出的镜像可以运行在什么环境.其中,aosp(Android Open Source Project)代表Android开源项目;arm表示系统是运行在arm架构的处理器上,arm64则是指64位arm架构;处理器,x86则表示x86架构的处理器;此外,还有一些单词代表了特定的Nexus设备,下面是常用的设备代码和编译目标,更多参考<a href="https://source.android.com/source/running.html" title="需要翻墙" target="_blank" rel="noopener">官方文档</a><br>受型号|设备代码|编译目标<br>—|—|—<br>Nexus 6P|angler|aosp_angler-userdebug<br>Nexus 5X|bullhead|aosp_bullhead-userdebug<br>Nexus 6|shamu|aosp_shamu-userdebug<br>Nexus 5|hammerhead|aosp_hammerhead-userdebug<br>(提示:如果你没有Nexus设备,那么通常选择arm或者x86即可)<br>什么是BUILDTYPE?<br>BUILD TYPE则指的是编译类型,通常有三种:<br>-user:代表这是编译出的系统镜像是可以用来正式发布到市场的版本,其权限是被限制的(如,没有root权限,不鞥年dedug等)<br>-userdebug:在user版本的基础上开放了root权限和debug权限.<br>-eng:代表engineer,也就是所谓的开发工程师的版本,拥有最大的权限(root等),此外还附带了许多debug工具  </p>
+<p>========================如果你不知道选择编译什么版本,那么接着看,否则跳过到下一步==================================<br>编译目标格式说明<br>编译目标的格式:BUILD-BUILDTYPE,比如上面的aosp_arm-eng的BUILD是aosp_arm,BUILDTYPE是eng.<br>什么是BUILD?<br>BUILD指的是特定功能的组合的特定名称,即表示编译出的镜像可以运行在什么环境.其中,aosp(Android Open Source Project)代表Android开源项目;arm表示系统是运行在arm架构的处理器上,arm64则是指64位arm架构;处理器,x86则表示x86架构的处理器;此外,还有一些单词代表了特定的Nexus设备,下面是常用的设备代码和编译目标,更多参考<a href="https://source.android.com/source/running.html" target="_blank" rel="noopener" title="需要翻墙">官方文档</a><br>受型号|设备代码|编译目标<br>—|—|—<br>Nexus 6P|angler|aosp_angler-userdebug<br>Nexus 5X|bullhead|aosp_bullhead-userdebug<br>Nexus 6|shamu|aosp_shamu-userdebug<br>Nexus 5|hammerhead|aosp_hammerhead-userdebug<br>(提示:如果你没有Nexus设备,那么通常选择arm或者x86即可)<br>什么是BUILDTYPE?<br>BUILD TYPE则指的是编译类型,通常有三种:<br>-user:代表这是编译出的系统镜像是可以用来正式发布到市场的版本,其权限是被限制的(如,没有root权限,不鞥年dedug等)<br>-userdebug:在user版本的基础上开放了root权限和debug权限.<br>-eng:代表engineer,也就是所谓的开发工程师的版本,拥有最大的权限(root等),此外还附带了许多debug工具  </p>
 <p>3、开始编译<br>通过make指令进行代码编译  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
-
 <p>该指令通过-j参数来设置参与编译的线程数量,以提高编译速度。但是参与编译的线程并不是越多越好,通常是根据你机器cup的核心来确定:core*2,即当前cpu的核心的2倍。官方说是如果你的电脑是双核四线程的,因此根据公式,最快速的编译可以make -j8(通过cat /proc/cpuinfo查看相关cpu信息，又或者是通过虚拟机的编译的，可以查看具体虚拟机配置)。但是我多次这样增加-j参数后，编译总是会报莫名其妙的问题，为了求稳妥，最好就不带参数了。</p>
 <p>================================= 就这样又过了七八个小时… ========================================<br>这期间因电脑环境不同一般都会碰到各种问题中断，具体问题Google一下继续编译（会接着上次编译的地方继续的啦），也可给我留言，我尽量我帮你解决的。如果你看到### make completed successfully (01:18:45(hh:mm:ss)) ###表示你编译成功了。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Ccompile.png" alt="源码编译成功">  </p>
 <hr>
 <h4 id="※运行模拟器"><a href="#※运行模拟器" class="headerlink" title="※运行模拟器"></a>※运行模拟器</h4><p>如果你没配置虚拟机支持硬件加速的话，在运行之前要先关闭虚拟机，修改一下配置，具体配置见截图：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Csetvm.png" alt="虚拟机配置"><br>完了之后再启动虚拟机，到源码目录下打开终端，执行以下指令：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch(选择刚才你设置的目标版本,比如这里了我选择的是5)</span><br><span class="line">emulator</span><br></pre></td></tr></table></figure>
-
 <p>如果你是在编译完后立刻运行虚拟机(也就是你硬件加速之前就配置过了),由于我们之前已经执行过source及lunch命令了,因此现在你只需要执行命令就可以运行虚拟机:    </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">emulator</span><br></pre></td></tr></table></figure>
-
 <p>不出意外,在等待一会之后,你会看到运行界面:<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io%5Cimages%5C20161117%5Cemulator.png" alt="启动模拟器"><br>（PS：我编6.0的版本，但是出来的皮肤那么丑，不知道网上的人是怎么调那么好看的）</p>
 <p>================================== 20161105源码下载及编译OK =======================================</p>
 <h5 id="Android-Studio导入android源码技巧"><a href="#Android-Studio导入android源码技巧" class="headerlink" title="Android Studio导入android源码技巧"></a>Android Studio导入android源码技巧</h5><p>如果你只停留于编译源码就没什么意义了，最好玩还在后面呢。我们可以把源码导入IDE进行任意修改，再编译成自己想要的镜像文件。那么用什么来查看文件数量庞大的源码呢，有Source Insight、Eclipse、还有Android Studio 等，今天主要介绍Android Studio如何导入源码。<br>1.在ubuntu系统下，进入源码根目录，运行如下命令：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">$ mmm development/tools/idegen/</span><br></pre></td></tr></table></figure>
-
 <p>注：仔细看上面的命令输出，可以看到一大段rm -f out/target/product/generic/… ，所以这个mmm命令会把system.img等文件删除，模拟器也会运行不了了，我运行了重新生成镜像命令$ make snod 也不行，提示：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make: *** No rule to make target `out/target/product/generic/root/file_contexts<span class="string">', </span></span><br><span class="line"><span class="string">needed by `snod'</span>.  Stop.</span><br></pre></td></tr></table></figure>
-
 <p>因为mmm 命令已经把root目录删除了，找不到root目录所以命令也停止了，不过不用担心可以执行make命令，注意按照下列顺序执行：（因为我们已经执行过一次源码编译，所以以后再执行make命令一般3-5分钟就编译完成生成system.img等文件了。）  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> build/envsetup.sh</span><br><span class="line">lunch</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-
 <p>如上图mmm命令编译idegen模块，在源码目录下的out/host/linux-x86/frameworks/目录下生成了idegen.jar文件。<br>2.在源码目录下继续执行如下命令：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">development/tools/idegen/idegen.sh</span><br></pre></td></tr></table></figure>
-
 <p>3.development/tools/idegen/idegen.sh命令执行完成，会在源码根目录下生成android.iml和android.ipr这两个文件，这两个文件是Android Studio的工程配置文件。<br>4.到这一步我们可以打开Android Studio导入源码了，不过还有一些要注意的地方，如果我们就这么直接导入，会把所有的源码模块导入到Android Studio中，这会很慢的，想想源码那么多文件，直接全部导入，如果你的电脑配置不好，可能会直接假死。所以我们最好过滤一下我们不需要的源码文件，只导入我们需要的模块。<br>相信很多人跟我一样对frameworks的源码比较感兴趣（好吧，其它模块玩不动啦！），所以我只导入这个模块的源码，过滤掉其它的。优化如下：打开android.iml文件，将如下代码追加入到<content>…</content>标签内(如果你还想导入其它代码，可以删除多余的过滤配置)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/.repo"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/abi"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/art"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/bionic"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/bootable"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/build"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/cts"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/dalvik"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/developers"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/development"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/device"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/docs"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/external"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/hardware"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/libcore"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/libnativehelper"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/ndk"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/out"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/packages"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/pdk"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/prebuilt"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/prebuilts"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/sdk"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/system"</span> /&gt;</span><br><span class="line">&lt;excludeFolder url=<span class="string">"file://<span class="variable">$MODULE_DIR</span>$/tools"</span> /&gt;</span><br></pre></td></tr></table></figure>
-
 <p>5.所有配置完成了，下面启动Android Studio开始导入源码。<br>进入android-studio/bin目录，打开Android Studio,注意要先给root权限。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./studio.sh</span><br></pre></td></tr></table></figure>
-
 <p>选择导入一个新工程，选择刚才生成的android.ipr，这样就导入成功了。（注：可以看到源码全部导入到AS中，请注意目录的颜色，只有framework的目录是棕色的，其他目录都是红色的，所以其他目录虽然都在AS中，但是它们其中的类之间不存在链接，只是作为文件存在）<br>注：若源码文件图标上有个锁，则当前用户只有只读权限，这样导入的源码就会报权限问题，则要在终端进入root权限后，修改源码的文件权限，bash指令如下，参数-R是把该目录下的子目录也相应的改权限：</p>
 <pre><code class="bash">su
 chmod -R 777 AndroidSource</code></pre>
@@ -448,7 +419,7 @@ chmod -R 777 AndroidSource</code></pre>
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -462,7 +433,7 @@ chmod -R 777 AndroidSource</code></pre>
   
 <nav id="article-nav">
   
-    <a href="/2016/12/05/Android自动化模拟操作开源库/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -472,7 +443,7 @@ chmod -R 777 AndroidSource</code></pre>
     </a>
   
   
-    <a href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">使用Git管理自己的项目</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -532,7 +503,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -616,7 +587,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -629,22 +616,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -676,6 +647,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -693,18 +676,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,15 +707,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -757,6 +720,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -780,19 +755,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -816,6 +787,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -829,10 +804,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

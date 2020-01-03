@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>二级缓存终结者Redis用起来 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要：随着互联网web2.0网站的兴起，影响服务器的高并发和秒级响应性能的不再是网络带宽或者计算资源，而是传统数据库无法应付高并发负载，每秒上万次SQL查询还勉强顶得住，但是应付上万次SQL写数据请求，硬盘IO就无法承受了。类似CPU与硬盘由于存取速度差别太大，在两者之间加了内存作为缓冲，基于内存的Redis的出现就是为了解决快速响应与后台处理速度的缓存策略。虽然很多像Hibernate、Myba">
-<meta name="keywords" content="编译安装,Jedis,Redis持久化,主从复制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="二级缓存终结者Redis用起来">
-<meta property="og:url" content="http://littleRich.github.io/2017/08/14/二级缓存终结者Redis用起来/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;08&#x2F;14&#x2F;%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%BB%88%E7%BB%93%E8%80%85Redis%E7%94%A8%E8%B5%B7%E6%9D%A5&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要：随着互联网web2.0网站的兴起，影响服务器的高并发和秒级响应性能的不再是网络带宽或者计算资源，而是传统数据库无法应付高并发负载，每秒上万次SQL查询还勉强顶得住，但是应付上万次SQL写数据请求，硬盘IO就无法承受了。类似CPU与硬盘由于存取速度差别太大，在两者之间加了内存作为缓冲，基于内存的Redis的出现就是为了解决快速响应与后台处理速度的缓存策略。虽然很多像Hibernate、Myba">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/gcc.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/make.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/hash.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/distributive.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/copy.png">
-<meta property="og:updated_time" content="2018-08-15T08:56:55.739Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;gcc.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;make.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;hash.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;distributive.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;copy.png">
+<meta property="article:published_time" content="2017-08-14T07:04:23.000Z">
+<meta property="article:modified_time" content="2018-08-15T08:56:55.739Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="编译安装">
+<meta property="article:tag" content="Jedis">
+<meta property="article:tag" content="Redis持久化">
+<meta property="article:tag" content="主从复制">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="二级缓存终结者Redis用起来">
-<meta name="twitter:description" content="摘要：随着互联网web2.0网站的兴起，影响服务器的高并发和秒级响应性能的不再是网络带宽或者计算资源，而是传统数据库无法应付高并发负载，每秒上万次SQL查询还勉强顶得住，但是应付上万次SQL写数据请求，硬盘IO就无法承受了。类似CPU与硬盘由于存取速度差别太大，在两者之间加了内存作为缓冲，基于内存的Redis的出现就是为了解决快速响应与后台处理速度的缓存策略。虽然很多像Hibernate、Myba">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/gcc.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180814&#x2F;gcc.jpg">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -43,8 +46,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -69,7 +72,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -169,7 +172,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -198,7 +201,7 @@
   
 
         
-        <a href="/2017/08/14/二级缓存终结者Redis用起来/" class="archive-article-date">
+        <a href="/2017/08/14/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%BB%88%E7%BB%93%E8%80%85Redis%E7%94%A8%E8%B5%B7%E6%9D%A5/" class="archive-article-date">
   	<time datetime="2017-08-14T07:04:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-14</time>
 </a>
         
@@ -211,47 +214,36 @@
 
 
 <h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><p>作为非关系型数据库最常用的数据库之一，Redis键值对数据库在内容缓存处理大量数据的高访问负载。它是由意大利一家创业公司于2009年用C语言开发的高性能键值对数据库，公司创始人不满足只将Redis用于自家产品上，决心开源发布让更多的人使用。谁都没想到，Redis短短几年就拥有了庞大的用户群体。</p>
-<h3 id="0X01-编译安装"><a href="#0X01-编译安装" class="headerlink" title="0X01 编译安装"></a>0X01 编译安装</h3><p>Redis的Linux运行环境比window系统上快很多，实际项目场景也大多部署在Linux上，所以这里我以Linux上的为例。<br>在Linux上安装Redis需要先将官网下载的源码进行编译，前言说到Redis是用C语言开发，编译依赖gcc环境，所以先检查是否有gcc编译环境，没有自行百度安装gcc吧。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/gcc.jpg" alt="检查是否已安装GCC"><br>1、官网源码下载<br>官网上有各个Redis版本（<a href="http://download.redis.io/releases/" title="Redis官网版本" target="_blank" rel="noopener">点击下载</a>），将其拷贝到/usr/local下再解压，进入解压缩的文件夹执行make编译命令，半分钟就可编译完成。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/</span><br><span class="line">sudo wget http://download.redis.io/releases/redis-stable.tar.gz  //可以换成其它版本</span><br><span class="line">sudo tar xzf redis-stable.tar.gz</span><br><span class="line">cd redis-stable</span><br><span class="line">sudo make   //编译</span><br><span class="line">sudo make PREFIX=/usr/local/redis install  //安装到指定目录</span><br></pre></td></tr></table></figure>
-
+<h3 id="0X01-编译安装"><a href="#0X01-编译安装" class="headerlink" title="0X01 编译安装"></a>0X01 编译安装</h3><p>Redis的Linux运行环境比window系统上快很多，实际项目场景也大多部署在Linux上，所以这里我以Linux上的为例。<br>在Linux上安装Redis需要先将官网下载的源码进行编译，前言说到Redis是用C语言开发，编译依赖gcc环境，所以先检查是否有gcc编译环境，没有自行百度安装gcc吧。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/gcc.jpg" alt="检查是否已安装GCC"><br>1、官网源码下载<br>官网上有各个Redis版本（<a href="http://download.redis.io/releases/" target="_blank" rel="noopener" title="Redis官网版本">点击下载</a>），将其拷贝到/usr/local下再解压，进入解压缩的文件夹执行make编译命令，半分钟就可编译完成。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;local&#x2F;</span><br><span class="line">sudo wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-stable.tar.gz  &#x2F;&#x2F;可以换成其它版本</span><br><span class="line">sudo tar xzf redis-stable.tar.gz</span><br><span class="line">cd redis-stable</span><br><span class="line">sudo make   &#x2F;&#x2F;编译</span><br><span class="line">sudo make PREFIX&#x3D;&#x2F;usr&#x2F;local&#x2F;redis install  &#x2F;&#x2F;安装到指定目录</span><br></pre></td></tr></table></figure>
 <p>编译好后安装到指定目录位置，这里示例安装到/usr/local/redis/文件下，安装好后，自动创建的redis文件夹下有个bin文件夹，里面就是Redis的启动程序,这样Redis就算安装好了。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/make.jpg" alt="Redis安装目录bin下的文件列表"><br>另外为了便于后续的开发，将源码中Redis配置文件拷贝到安装目录下，源码目录下有一份配置文件redis.conf，将其拷贝到安装路径下,在该文件里改一些Redis的配置参数，比如运行端口等。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/local/redis-stable/redis.conf /usr/local/redis/bin</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp &#x2F;usr&#x2F;local&#x2F;redis-stable&#x2F;redis.conf &#x2F;usr&#x2F;local&#x2F;redis&#x2F;bin</span><br></pre></td></tr></table></figure>
 <p>2、启动Redis服务器，打开一个shell终端进入Redis安装目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/redis-server bin/redis.conf  //启动时可指定该配置文件，否者加载默认配置文件</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin&#x2F;redis-server bin&#x2F;redis.conf  &#x2F;&#x2F;启动时可指定该配置文件，否者加载默认配置文件</span><br></pre></td></tr></table></figure>
 <p>3、启动Redis客户端连接Redis服务端，再打开一个shell终端进入Redis安装目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bin/redis-cli -h 192.168.1.116 -p 6379  //不带连接参数则默认连接本机的Redis</span><br><span class="line">redis&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ bin&#x2F;redis-cli -h 192.168.1.116 -p 6379  &#x2F;&#x2F;不带连接参数则默认连接本机的Redis</span><br><span class="line">redis&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure>
 <p>上面启动Redis服务器是在shell终端窗口启动的，一旦命令窗口关闭则redis-server程序也跟着关了，所以一般不推荐这么启动。其实Redis提供了后台模式的启动方式，在上面拷贝过来的redis.conf配置文件修改下就可转为后台模式启动。（PS：学习的话就不用这么调了）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># By default Redis does not run as a daemon. Use &apos;yes&apos; if you need it.</span><br><span class="line"># Note that Redis will write a pid file in /var/run/redis.pid when daemonized.</span><br><span class="line">daemonize yes //redis.conf中默认是关闭的</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># By default Redis does not run as a daemon. Use &#39;yes&#39; if you need it.</span><br><span class="line"># Note that Redis will write a pid file in &#x2F;var&#x2F;run&#x2F;redis.pid when daemonized.</span><br><span class="line">daemonize yes &#x2F;&#x2F;redis.conf中默认是关闭的</span><br></pre></td></tr></table></figure>
 
 <p>这样以后启动Redis窗口就不会弹出千层糕的图案即是后台启动方式。<br>4、关闭redis。强制终止Redis进程可能导致Redis持久化数据丢失，正确停止Redis的方式应该是向Redis发送shutdown命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./redis-cli shutdown  //bin目录下执行</span><br></pre></td></tr></table></figure>
-
-<p>推荐一款Redis可视化工具<a href="https://download.csdn.net/download/u012308094/10606093" title="Redis可视化管理工具" target="_blank" rel="noopener">RedisDesktopManager</a>，方便连接Redis服务器查看数据。</p>
-<h3 id="0X02-Jedis"><a href="#0X02-Jedis" class="headerlink" title="0X02 Jedis"></a>0X02 Jedis</h3><p>Jedis和其它数据库类似，除了提供命令行的操作之外，还提供各种语言的开发接口。Redis官网推荐使用Jedis和Redisson，但企业中用的最多要数jedis，我也只用过Jedis，所以就讲讲Java操作Redis数据库的方式吧。<br>Jedis托管在github上（<a href="https://github.com/xetorthio/jedis" title="Jedis源码托管" target="_blank" rel="noopener">点击前往</a>）<br>1、创建web项目，导入Jedis依赖包<a href="http://central.maven.org/maven2/redis/clients/jedis/2.9.0/jedis-2.9.0.jar" title="jedis" target="_blank" rel="noopener">jedis-2.9.0.jar</a>和<a href="http://central.maven.org/maven2/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0.jar" title="pool" target="_blank" rel="noopener">commons-pool2-2.3.jar</a>，如果是Maven项目就自行去Maven仓库找依赖坐标吧。<br>2、编写测试代码。可以直接通过单实例Jedis对象连接Redis服务，但是这样不能对Redis连接进行共享，最优的方式使用连接池提高资源利用率，使用JedisPool连接Redis服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testJedisPool() throws Exception&#123;</span><br><span class="line">	//创建连接池</span><br><span class="line">	JedisPool pool = new JedisPool(&quot;192.168.1.115&quot;, 6379);</span><br><span class="line">	//获取连接</span><br><span class="line">	Jedis jedis = pool.getResource();</span><br><span class="line">	//存入</span><br><span class="line">	jedis.set(&quot;username&quot;, &quot;littleRich&quot;);</span><br><span class="line">	//取出</span><br><span class="line">	System.out.println(jedis.get(&quot;uername&quot;));</span><br><span class="line">	//使用连接时,连接使用完后一定要关闭,关闭后连接会自动回到连接池供别人使用,如果一直不关闭则连接被耗尽之后就会死机</span><br><span class="line">	jedis.close();</span><br><span class="line">	//关闭连接池</span><br><span class="line">	pool.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;redis-cli shutdown  &#x2F;&#x2F;bin目录下执行</span><br></pre></td></tr></table></figure>
+<p>推荐一款Redis可视化工具<a href="https://download.csdn.net/download/u012308094/10606093" target="_blank" rel="noopener" title="Redis可视化管理工具">RedisDesktopManager</a>，方便连接Redis服务器查看数据。</p>
+<h3 id="0X02-Jedis"><a href="#0X02-Jedis" class="headerlink" title="0X02 Jedis"></a>0X02 Jedis</h3><p>Jedis和其它数据库类似，除了提供命令行的操作之外，还提供各种语言的开发接口。Redis官网推荐使用Jedis和Redisson，但企业中用的最多要数jedis，我也只用过Jedis，所以就讲讲Java操作Redis数据库的方式吧。<br>Jedis托管在github上（<a href="https://github.com/xetorthio/jedis" target="_blank" rel="noopener" title="Jedis源码托管">点击前往</a>）<br>1、创建web项目，导入Jedis依赖包<a href="http://central.maven.org/maven2/redis/clients/jedis/2.9.0/jedis-2.9.0.jar" target="_blank" rel="noopener" title="jedis">jedis-2.9.0.jar</a>和<a href="http://central.maven.org/maven2/org/apache/commons/commons-pool2/2.6.0/commons-pool2-2.6.0.jar" target="_blank" rel="noopener" title="pool">commons-pool2-2.3.jar</a>，如果是Maven项目就自行去Maven仓库找依赖坐标吧。<br>2、编写测试代码。可以直接通过单实例Jedis对象连接Redis服务，但是这样不能对Redis连接进行共享，最优的方式使用连接池提高资源利用率，使用JedisPool连接Redis服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testJedisPool() throws Exception&#123;</span><br><span class="line">	&#x2F;&#x2F;创建连接池</span><br><span class="line">	JedisPool pool &#x3D; new JedisPool(&quot;192.168.1.115&quot;, 6379);</span><br><span class="line">	&#x2F;&#x2F;获取连接</span><br><span class="line">	Jedis jedis &#x3D; pool.getResource();</span><br><span class="line">	&#x2F;&#x2F;存入</span><br><span class="line">	jedis.set(&quot;username&quot;, &quot;littleRich&quot;);</span><br><span class="line">	&#x2F;&#x2F;取出</span><br><span class="line">	System.out.println(jedis.get(&quot;uername&quot;));</span><br><span class="line">	&#x2F;&#x2F;使用连接时,连接使用完后一定要关闭,关闭后连接会自动回到连接池供别人使用,如果一直不关闭则连接被耗尽之后就会死机</span><br><span class="line">	jedis.close();</span><br><span class="line">	&#x2F;&#x2F;关闭连接池</span><br><span class="line">	pool.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>示例代码中把连接池给关闭了，实际项目开发中一般集成Spring，把JedisPool连接池和Jedis连接的生命周期都交给Spring管理，不用我们显示关闭。</p>
 <hr>
 <p><em>友情提示</em><br>Redis默认状态是守护状态下运行，只能本地连接，通过Jedis远程连接Redis服务器的时候一般会报JedisDataException：DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified异常。在这种情况下，还是要修改redis.conf配置文件就可以从外部连接。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected mode no  //将守护模式关闭，并重新启动</span><br></pre></td></tr></table></figure>
-
-<h3 id="0X03-Redis数据类型"><a href="#0X03-Redis数据类型" class="headerlink" title="0X03 Redis数据类型"></a>0X03 Redis数据类型</h3><p>Redis中支持存储的数据类型有5个：String字符串、list列表、hash散列、set集合、zset有序集合，主要知道这些数据类型的使用场景就行了，具体各种使用命令怕是有点多，要用的时候再查下API文档吧（<a href="https://download.csdn.net/download/u012308094/10603288" title="Redis命令文档" target="_blank" rel="noopener">猛戳下载</a>）。<br>1、redis string简单动态字符串<br>redis中没有使用C语言的字符数组来表示字符串（遇到‘\0’字符表示字符串结束），而是自定义一个数据结构SDS（simple dynamic string）即简单动态字符串。<br>在redis源码中src目录下的sds.h头文件中定义SDS源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr &#123;</span><br><span class="line">    //字符串长度</span><br><span class="line">	unsigned int len;</span><br><span class="line">	//buf数组中未使用的字节数量</span><br><span class="line">    unsigned int free;</span><br><span class="line">	//用于保存字符串</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">protected mode no  &#x2F;&#x2F;将守护模式关闭，并重新启动</span><br></pre></td></tr></table></figure>
+<h3 id="0X03-Redis数据类型"><a href="#0X03-Redis数据类型" class="headerlink" title="0X03 Redis数据类型"></a>0X03 Redis数据类型</h3><p>Redis中支持存储的数据类型有5个：String字符串、list列表、hash散列、set集合、zset有序集合，主要知道这些数据类型的使用场景就行了，具体各种使用命令怕是有点多，要用的时候再查下API文档吧（<a href="https://download.csdn.net/download/u012308094/10603288" target="_blank" rel="noopener" title="Redis命令文档">猛戳下载</a>）。<br>1、redis string简单动态字符串<br>redis中没有使用C语言的字符数组来表示字符串（遇到‘\0’字符表示字符串结束），而是自定义一个数据结构SDS（simple dynamic string）即简单动态字符串。<br>在redis源码中src目录下的sds.h头文件中定义SDS源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">struct sdshdr &#123;</span><br><span class="line">    &#x2F;&#x2F;字符串长度</span><br><span class="line">	unsigned int len;</span><br><span class="line">	&#x2F;&#x2F;buf数组中未使用的字节数量</span><br><span class="line">    unsigned int free;</span><br><span class="line">	&#x2F;&#x2F;用于保存字符串</span><br><span class="line">    char buf[];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>redis的字符串可以存储任何类型的数据，因为任何类型数据都可以表示成二进制，sds结构中的char buf[]就是存储了二进制数据。<br>2、hash<br>虽然string可以存任何类型的数据，但是在实际使用场景中还是有短板的。假设有User对象以JSON序列化的形式存储到Redis中，User对象有id，username、password、age、name等属性，存储的过程如下：User对象–&gt;json(string)–&gt;redis，如果在业务上只是更新age属性，其他的属性并不做更新我应该怎么做呢？ 如果仍然采用上边的方法在传输、处理时会造成资源浪费。<br>hash散列实现了字段和字段值的映射，注意字段值只能是字符串类型。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/hash.png" alt="hash数据结构"><br>一般应用于将redis作为分布式缓存,存储数据库中的数据对象。<br>3、list<br>列表类型（list）可以存储一个有序的字符串列表，常用的操作是向列表两端添加元素，或者获得列表的某一个片段。<br>redis中使用的是双向循环链表来实现的list,如果只从一端操作，可理解为栈结构。<br>4、set<br>和数学上的集合一样，集合中的每个元素无序不能重复，Redis内部是使用值为空的散列表实现，所有这些操作的时间复杂度都为0(1)。<br>Redis还提供了多个集合之间的交集、并集、差集的运算。<br>5、sorted set<br>在集合类型的基础上有序集合类型为集合中的每个元素都关联一个分数，这使得我们不仅可以完成插入、删除和判断元素是否存在在集合中，还能够获得分数最高或最低的前N个元素、获取指定分数范围内的元素等与分数有关的操作。</p>
 <h3 id="0X04-Redis持久化"><a href="#0X04-Redis持久化" class="headerlink" title="0X04 Redis持久化"></a>0X04 Redis持久化</h3><p>Redis的高性能是由于其将所有数据都存储在了内存中，为了使Redis在重启之后仍能保证数据不丢失，需要将数据从内存中同步到硬盘中。Redis支持两种方式的持久化，一种是RDB方式，一种是AOF方式。可以单独使用其中一种或将二者结合使用。<br>1、RDB持久化<br>RDB方式的持久化是通过快照（snapshotting）完成的，当符合一定条件时Redis会自动将内存中的数据进行快照并持久化到硬盘。可以设置间隔多长时间保存一次(Redis不用任何配置默认的持久化方案)，在redis.conf配合文件中有如下配置：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">save 900 1</span><br><span class="line">save 300 10</span><br><span class="line">save 60 10000</span><br></pre></td></tr></table></figure>
-
 <p>save 开头的一行就是持久化配置，可以配置多个条件（每行配置一个条件），每个条件之间是“或”的关系，“save 900 1”表示15分钟（900秒钟）内至少1个键被更改则进行快照，“save 300 10”表示5分钟（300秒）内至少10个键被更改则进行快照。<br>在bin目录下有个dump.rdb的文件就是数据持久化文件，Redis启动后会读取这个快照文件，将数据从硬盘载入到内存。根据数据量大小与结构和服务器性能不同，这个时间也不同。通常将记录一千万个字符串类型键、大小为1GB的快照文件载入到内存中需要花费20～30秒钟。<br>2、AOF持久化<br>AOF持久化是实时保存，默认情况下Redis没有开启AOF（append only file）方式的持久化，可以通过修改redis.conf配置文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></table></figure>
-
 <p>配置好重启Redis就改为AOF持久化方式了，默认在bin目录下会生成appendonly.aof存储文件。（持久化文件位置可以改）<br>很明显AOF实时保存会影响Redis的性能，我们用Redis的初衷就是快，所以一般不这么配置。</p>
 <h3 id="0X05-主从复制"><a href="#0X05-主从复制" class="headerlink" title="0X05 主从复制"></a>0X05 主从复制</h3><p>持久化保证了即使redis服务重启也不会丢失数据，因为redis服务重启后会将硬盘上持久化的数据恢复到内存中，但是当redis服务器的硬盘损坏了可能会导致数据丢失，如果通过redis的主从复制机制就可以避免这种单点故障。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/distributive.png" alt="Redis主从复制"><br>如上图主Redis中的数据有两个副本（replication），正常情况只有主Redis向外界提供服务，而从Redis只备份数据。即使一台服务器宕机，其他两台Redis可以继续提供服务。从Redis服务器周期性向主Redis服务器发送心跳包，确认主Redis可以正常服务状态，一旦没在规定时间内收到回复，那么从Redis就会顶替上来给提供服务。并且主Redis服务器中的数据会定期的通过主从复制机制来同步数据到从Redis服务器。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180814/copy.png" alt="主从复制机制"><br>slave服务启动会建立和master的连接，发送sync同步请求命令，此时master启动一个后台进程将数据库快照保存到RDB文件中，再把RDB文件发送给slave，slave收到保存到磁盘后加载到内存恢复。在这期间主Redis新的写数据命令会缓存起来再发给slave。<br>具体主从分布式搭建也比较简单，主Redis无需另外配置，只要把要当从服务器的Redis配置改下就好了，在从Redis的redis.conf中添加主Redis的IP和端口即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># slaveof &lt;masterip&gt; &lt;masterport&gt;</span><br><span class="line">slaveof 192.168.1.116 6379</span><br></pre></td></tr></table></figure>
-
 <p>上边的配置说明当前该从redis服务器所对应的主redis是192.168.1.116，端口是6379</p>
 <h3 id="总结一下"><a href="#总结一下" class="headerlink" title="总结一下"></a>总结一下</h3><p>大致就先写这些，后续想到别的再补上。Redis主要就是分布式缓存，对于分布式后台服务系统的session共享问题可以很好的解决。</p>
 
@@ -372,7 +364,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/08/14/二级缓存终结者Redis用起来/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/08/14/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%BB%88%E7%BB%93%E8%80%85Redis%E7%94%A8%E8%B5%B7%E6%9D%A5/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -386,7 +378,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/21/大数据_网络爬虫让机器伪装人类的行为/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/21/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BC%AA%E8%A3%85%E4%BA%BA%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -396,7 +388,7 @@
     </a>
   
   
-    <a href="/2017/08/09/Mybatis持久化框架带来更灵活的操作/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/08/09/Mybatis%E6%8C%81%E4%B9%85%E5%8C%96%E6%A1%86%E6%9E%B6%E5%B8%A6%E6%9D%A5%E6%9B%B4%E7%81%B5%E6%B4%BB%E7%9A%84%E6%93%8D%E4%BD%9C/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Mybatis持久化框架带来更灵活的操作</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -456,7 +448,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -540,7 +532,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -553,22 +561,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,6 +592,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -617,18 +621,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -660,15 +652,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -681,6 +665,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -704,19 +700,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -740,6 +732,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -753,10 +749,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

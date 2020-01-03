@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>分布式服务框架zookeeper--管理分布式环境中的数据 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;emsp;&amp;emsp;ZooKeeper是一个开放源码的分布式应用程序协调服务,就是为我们开发的分布式应用程序提供协调服务，比如说维护分布式环境的配置、主从协调、域名服务等，使我们能更好的管理监听分布式上的所有节点工作状态。">
-<meta name="keywords" content="应用场景,集群部署">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式服务框架zookeeper--管理分布式环境中的数据">
-<meta property="og:url" content="http://littleRich.github.io/2017/09/10/大数据_分布式服务框架zookeeper管理分布式环境中的数据/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;09&#x2F;10&#x2F;%E5%A4%A7%E6%95%B0%E6%8D%AE_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6zookeeper%E7%AE%A1%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;ZooKeeper是一个开放源码的分布式应用程序协调服务,就是为我们开发的分布式应用程序提供协调服务，比如说维护分布式环境的配置、主从协调、域名服务等，使我们能更好的管理监听分布式上的所有节点工作状态。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/configuration.gif">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/group.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/zookeeper.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/zkcli.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/strugment.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/help.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/watch.jpg">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/depend.png">
-<meta property="og:image" content="https://littleRich.github.io/images/20180827/outline.png">
-<meta property="og:updated_time" content="2019-09-11T07:16:58.162Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;configuration.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;group.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;zookeeper.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;zkcli.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;strugment.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;help.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;watch.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;depend.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;outline.png">
+<meta property="article:published_time" content="2017-09-10T12:23:27.000Z">
+<meta property="article:modified_time" content="2019-09-11T07:16:58.162Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="应用场景">
+<meta property="article:tag" content="集群部署">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分布式服务框架zookeeper--管理分布式环境中的数据">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;ZooKeeper是一个开放源码的分布式应用程序协调服务,就是为我们开发的分布式应用程序提供协调服务，比如说维护分布式环境的配置、主从协调、域名服务等，使我们能更好的管理监听分布式上的所有节点工作状态。">
-<meta name="twitter:image" content="https://littleRich.github.io/images/20180827/configuration.gif">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;littleRich.github.io&#x2F;images&#x2F;20180827&#x2F;configuration.gif">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -47,8 +48,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -73,7 +74,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -173,7 +174,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -202,7 +203,7 @@
   
 
         
-        <a href="/2017/09/10/大数据_分布式服务框架zookeeper管理分布式环境中的数据/" class="archive-article-date">
+        <a href="/2017/09/10/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6zookeeper%E7%AE%A1%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE/" class="archive-article-date">
   	<time datetime="2017-09-10T12:23:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-10</time>
 </a>
         
@@ -220,28 +221,23 @@
 <h4 id="集群管理（Group-Member）"><a href="#集群管理（Group-Member）" class="headerlink" title="集群管理（Group Member）"></a>集群管理（Group Member）</h4><p>Zookeeper不仅能够帮你维护当前的集群中机器的服务状态，而且能够帮你选出一个“总管”，让这个总管来管理集群，这就是Zookeeper的另一个功能Leader Election，主从协调。<br><img src="https://littleRich.github.io/images/20180827/group.jpg" alt="集群管理"></p>
 <h4 id="分布式共享锁（Locks）"><a href="#分布式共享锁（Locks）" class="headerlink" title="分布式共享锁（Locks）"></a>分布式共享锁（Locks）</h4><p>共享锁在同一个进程中很容易实现，但是在跨进程或者在不同Server之间就不好实现了。Zookeeper却很容易实现这个功能。</p>
 <h4 id="队列管理"><a href="#队列管理" class="headerlink" title="队列管理"></a>队列管理</h4><p>就是一个队列。</p>
-<h3 id="0X02-Zookeeper集群部署"><a href="#0X02-Zookeeper集群部署" class="headerlink" title="0X02 Zookeeper集群部署"></a>0X02 Zookeeper集群部署</h3><p>1、至少准备三台Linux系统，没有的话就用虚拟机吧，并把防火墙都关了:systemctl stop firewalld.service。<br>2、官网下载Zookeeper安装包【<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" title="Zookeeper安装包" target="_blank" rel="noopener">猛戳下载</a>】，解压的目录结构如下，这是编译好的版本，可以把那些xxx.xml项目构建文件和源码删了。<br><img src="https://littleRich.github.io/images/20180827/zookeeper.jpg" alt="目录结构"><br>3、因为Zookeeper是用Java写的，所以还得需要JRE环境，安装配置JDK看我其它文章写过，这里就不啰嗦了；<br>4、在/tmp目录下新建一个zookeeper目录，并在zookeeper目录下新建一个data目录；<br>5、将安装包解压到特定目录，首先配置zoo.cfg文件。将$zookeeper/conf下的zoo-sample.cfg文件拷贝一份，文件名改为zoo.cfg，然后就在这个文件添加Zookeeper集群的所有节点信息。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">cp zoo-sample.cfg zoo.cfg</span><br><span class="line">---------------------------------</span><br><span class="line"># The number of milliseconds of each tick</span><br><span class="line">tickTime=2000</span><br><span class="line"># The number of ticks that the initial </span><br><span class="line"># synchronization phase can take</span><br><span class="line">initLimit=10  # 对于从节点最初连接到主节点时的超时时间，单位为tick值的倍数</span><br><span class="line"># The number of ticks that can pass between </span><br><span class="line"># sending a request and getting an acknowledgement</span><br><span class="line">syncLimit=5   # 对于主节点与从节点进行同步操作时的超时时间，单位为tick值的倍数</span><br><span class="line"># the directory where the snapshot is stored.</span><br><span class="line"># do not use /tmp for storage, /tmp here is just </span><br><span class="line"># example sakes.</span><br><span class="line">dataDir=/tmp/zookeeper </span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort=2181  # 表示客户端所连接的服务器所监听的端口号，默认是2181。即zookeeper对外提供访问的端口号。</span><br><span class="line"># the maximum number of client connections.</span><br><span class="line"># increase this if you need to handle more clients</span><br><span class="line">#maxClientCnxns=60</span><br><span class="line">#</span><br><span class="line"># Be sure to read the maintenance section of the </span><br><span class="line"># administrator guide before turning on autopurge.</span><br><span class="line">#</span><br><span class="line"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span><br><span class="line">#</span><br><span class="line"># The number of snapshots to retain in dataDir</span><br><span class="line">#autopurge.snapRetainCount=3</span><br><span class="line"># Purge task interval in hours</span><br><span class="line"># Set to &quot;0&quot; to disable auto purge feature</span><br><span class="line">#autopurge.purgeInterval=1</span><br><span class="line">server.1=192.168.1.200:2888:3888  # 2888为leader选举通信端口号，3888为leader与follower间通信端口号</span><br><span class="line">server.2=192.168.1.201:2888:3888</span><br><span class="line">server.3=192.168.1.202:2888:3888</span><br></pre></td></tr></table></figure>
-
+<h3 id="0X02-Zookeeper集群部署"><a href="#0X02-Zookeeper集群部署" class="headerlink" title="0X02 Zookeeper集群部署"></a>0X02 Zookeeper集群部署</h3><p>1、至少准备三台Linux系统，没有的话就用虚拟机吧，并把防火墙都关了:systemctl stop firewalld.service。<br>2、官网下载Zookeeper安装包【<a href="https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/" target="_blank" rel="noopener" title="Zookeeper安装包">猛戳下载</a>】，解压的目录结构如下，这是编译好的版本，可以把那些xxx.xml项目构建文件和源码删了。<br><img src="https://littleRich.github.io/images/20180827/zookeeper.jpg" alt="目录结构"><br>3、因为Zookeeper是用Java写的，所以还得需要JRE环境，安装配置JDK看我其它文章写过，这里就不啰嗦了；<br>4、在/tmp目录下新建一个zookeeper目录，并在zookeeper目录下新建一个data目录；<br>5、将安装包解压到特定目录，首先配置zoo.cfg文件。将$zookeeper/conf下的zoo-sample.cfg文件拷贝一份，文件名改为zoo.cfg，然后就在这个文件添加Zookeeper集群的所有节点信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">cp zoo-sample.cfg zoo.cfg</span><br><span class="line">---------------------------------</span><br><span class="line"># The number of milliseconds of each tick</span><br><span class="line">tickTime&#x3D;2000</span><br><span class="line"># The number of ticks that the initial </span><br><span class="line"># synchronization phase can take</span><br><span class="line">initLimit&#x3D;10  # 对于从节点最初连接到主节点时的超时时间，单位为tick值的倍数</span><br><span class="line"># The number of ticks that can pass between </span><br><span class="line"># sending a request and getting an acknowledgement</span><br><span class="line">syncLimit&#x3D;5   # 对于主节点与从节点进行同步操作时的超时时间，单位为tick值的倍数</span><br><span class="line"># the directory where the snapshot is stored.</span><br><span class="line"># do not use &#x2F;tmp for storage, &#x2F;tmp here is just </span><br><span class="line"># example sakes.</span><br><span class="line">dataDir&#x3D;&#x2F;tmp&#x2F;zookeeper </span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort&#x3D;2181  # 表示客户端所连接的服务器所监听的端口号，默认是2181。即zookeeper对外提供访问的端口号。</span><br><span class="line"># the maximum number of client connections.</span><br><span class="line"># increase this if you need to handle more clients</span><br><span class="line">#maxClientCnxns&#x3D;60</span><br><span class="line">#</span><br><span class="line"># Be sure to read the maintenance section of the </span><br><span class="line"># administrator guide before turning on autopurge.</span><br><span class="line">#</span><br><span class="line"># http:&#x2F;&#x2F;zookeeper.apache.org&#x2F;doc&#x2F;current&#x2F;zookeeperAdmin.html#sc_maintenance</span><br><span class="line">#</span><br><span class="line"># The number of snapshots to retain in dataDir</span><br><span class="line">#autopurge.snapRetainCount&#x3D;3</span><br><span class="line"># Purge task interval in hours</span><br><span class="line"># Set to &quot;0&quot; to disable auto purge feature</span><br><span class="line">#autopurge.purgeInterval&#x3D;1</span><br><span class="line">server.1&#x3D;192.168.1.200:2888:3888  # 2888为leader选举通信端口号，3888为leader与follower间通信端口号</span><br><span class="line">server.2&#x3D;192.168.1.201:2888:3888</span><br><span class="line">server.3&#x3D;192.168.1.202:2888:3888</span><br></pre></td></tr></table></figure>
 <p>其中：<br>dataDir=/tmp/zookeeper: 用于配置内存数据库保存的模糊快照的目录。即刚刚创建的data文件夹就是在此目录中。文件信息都存放在data目录下；<br>最底下三行就是Zookeeper集群的机器清单，序号代表各个机器编号。<br>6、新建myid文件。<br>在三个linux机器上刚刚创建的data目录下新建一个myid文件，在文件写入上面的对应编号。比如192.168.1.200机器就在myid文件中输入1即可。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt; myid   # 在上面配的dataDir目录下执行该命令，注意序号要对应</span><br></pre></td></tr></table></figure>
-
 <p>7、配置Zookeeper环境变量/etc/profile  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER_HOME=/home/hadoop/app/zookeeper-3.4.12</span><br><span class="line">export PATH=$PATH:$ZOOKEEPER_HOME/bin:$ZOOKEEPER_HOME/conf</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export ZOOKEEPER_HOME&#x3D;&#x2F;home&#x2F;hadoop&#x2F;app&#x2F;zookeeper-3.4.12</span><br><span class="line">export PATH&#x3D;$PATH:$ZOOKEEPER_HOME&#x2F;bin:$ZOOKEEPER_HOME&#x2F;conf</span><br></pre></td></tr></table></figure>
 <p>保存后，执行source /etc/profile立即生效。<br>8、启动Zookeeper<br>分别在3台机器上$zookeeper/bin目录下启动（PS：可以利用ssh写个脚本把集群的所有节点都起了【<a href="https://blog.csdn.net/yangjjuan/article/details/56022666" target="_blank" rel="noopener">参照</a>】）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start # 启动</span><br><span class="line">zkServer.sh restart　　(重启)</span><br><span class="line">zkServer.sh status　　(查看状态)</span><br><span class="line">zkServer.sh stop　　(关闭)</span><br><span class="line">zkServer.sh start-foreground　　(以打印日志方式启动)</span><br></pre></td></tr></table></figure>
 
 <hr>
 <p>启动的时候如果报权限问题，那就是Zookeeper的数据文件夹不是当前用户所有，修改下权限就好了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R hadoop:hadoop /tmp/zookeeper</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R hadoop:hadoop &#x2F;tmp&#x2F;zookeeper</span><br></pre></td></tr></table></figure>
 <p>9、验证是否成功启动Zookeeper<br>在$Zookeeper/bin目录下，执行命令：zkCli.sh -server，即可连接到其中一台Zookeeper服务器。<br><img src="https://littleRich.github.io/images/20180827/zkcli.jpg" alt="连接到Zookeeper"><br>成功连接后，系统会输出ZooKeeper的相关配置信息和相关环境，并在屏幕上输出Welcome to ZooKeeper!等信息。</p>
 <h3 id="0X03-Zookeeper数据结构"><a href="#0X03-Zookeeper数据结构" class="headerlink" title="0X03 Zookeeper数据结构"></a>0X03 Zookeeper数据结构</h3><p>通过查看上面部署好的Zookeeper各个节点状态，和我们前面说的一样，只有一个leader和多个follower组成的集群。整个集群分布式的读写、更新请求转发等操作都是由leader实施，但是全局数据是一致的。每个节点保存一份相同的数据副本，无论Zookeeper客户端连接到哪个节点，数据都是一致的。<br>Zookeeper的一个主要功能就是存储分布式各节点共同的配置数据，这当中有它自己的数据存储结构，就是树结构。Zookeeper中数据的管理方式类似一个HTML网页，从&lt;html&gt;根标签开始可以向下遍历到具体的数据和节点中的参数。可以看下图Zookeeper的数据结构图，是不是跟树一样是层次化的关联关系。只不过Zookeeper中的数据结构节点叫做znode,持久化的znode节点可以包含数据和子节点。可以在各个znode上设置监视器监听节点的数据和节点状态变化。<br><img src="https://littleRich.github.io/images/20180827/strugment.jpg" alt="Zookeeper数据结构"><br>其实可以把Zookeeper的存储看成一个文件系统就好了，节点名就当做文件名，节点中的数据看做文件中内容，这样是不是很形象。<br>znode有临时（断开连接自己删除）和持久（断开连接不删除）两种类型，上面说的znode节点都是默认的类型，另一种临时节点不能有子节点，也就是临时节点都是叶子节点。一旦创建这个 znode的客户端与服务器失去联系，这个znode也将自动删除，Zookeeper 的客户端和服务器通信采用长连接方式，每个客户端和服务器通过心跳来保持连接，这个连接状态称为session，如果znode是临时节点，这个session失效，znode也就删除了。<br>znode可以被监控，包括这个目录节点中存储的数据的修改，子节点目录的变化等，一旦变化可以通知设置监控的客户端，这个是Zookeeper的核心特性，Zookeeper的很多功能都是基于这个特性实现的。</p>
-<h3 id="0X04-Zookeeper命令行操作"><a href="#0X04-Zookeeper命令行操作" class="headerlink" title="0X04 Zookeeper命令行操作"></a>0X04 Zookeeper命令行操作</h3><p>可以用Zookeeper客户端连接Zookeeper集群感受下服务端内部的数据存储结构，运行zkCli.sh -server <a href="ip:port" target="_blank" rel="noopener">ip:port</a>连接一台Zookeeper服务器，就可以用命令来操作。<br><img src="https://littleRich.github.io/images/20180827/help.jpg" alt="命令行"><br>连接成功后，即可在主节点上创建一个新的zNode节点。zNode节点名称littleRich，数据HelloZookeeper，并且用get命令给该节点添加监听器。当我再起一个Zookeeper客户端去修改这个节点数据时，原先添加监听器的位置就会自动提示数据被修改了。<br><img src="https://littleRich.github.io/images/20180827/watch.jpg" alt="添加监视器"><br>发现我们创建节点里不单单存着我们的数据，还有其它Zookeeper自动生成的数据cZxid、cTime、mZxid等。</p>
+<h3 id="0X04-Zookeeper命令行操作"><a href="#0X04-Zookeeper命令行操作" class="headerlink" title="0X04 Zookeeper命令行操作"></a>0X04 Zookeeper命令行操作</h3><p>可以用Zookeeper客户端连接Zookeeper集群感受下服务端内部的数据存储结构，运行zkCli.sh -server <a href="ip:port">ip:port</a>连接一台Zookeeper服务器，就可以用命令来操作。<br><img src="https://littleRich.github.io/images/20180827/help.jpg" alt="命令行"><br>连接成功后，即可在主节点上创建一个新的zNode节点。zNode节点名称littleRich，数据HelloZookeeper，并且用get命令给该节点添加监听器。当我再起一个Zookeeper客户端去修改这个节点数据时，原先添加监听器的位置就会自动提示数据被修改了。<br><img src="https://littleRich.github.io/images/20180827/watch.jpg" alt="添加监视器"><br>发现我们创建节点里不单单存着我们的数据，还有其它Zookeeper自动生成的数据cZxid、cTime、mZxid等。</p>
 <h3 id="0X05-Zookeeper客户端API编程"><a href="#0X05-Zookeeper客户端API编程" class="headerlink" title="0X05 Zookeeper客户端API编程"></a>0X05 Zookeeper客户端API编程</h3><p>不知道你们听过SaaS软件即服务的概念没，比如说数据库别人已经开发好了，第三方开发者只要安装这个数据库就可以调用这个功能，无需自己再去造轮子。Zookeeper也是这样一个模式，它提供了Java API供我们使用它的功能。<br>这里推荐个Zookeeper的可视化工具【<a href="https://issues.apache.org/jira/secure/attachment/12436620/ZooInspector.zip" target="_blank" rel="noopener">下载ZooInspector</a>】和Eclipse的<a href="http://www.tuicool.com/articles/bQj2E3" target="_blank" rel="noopener">Zookeeper插件</a>。<br>先把在Linux中安装的Zookeeper压缩包解压出来，拷贝里面的依赖包，不想用jar包就用Maven就省事多了。<br><img src="https://littleRich.github.io/images/20180827/depend.png" alt="用到的依赖包"><br>创建ZooKeeper对象后，就可以对其存储系统进行增删改查了。注意到在创建Zookeeper对象的参数中有个监听器对象，只要节点注册了监听器，那么一旦节点有变化就会回调触发process方法，但是一次注册监听到一次就失效了，所以在process里面又注册一道，这样就会不间断监听啦。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//客户端会随机选个可用的Zookeeper服务端连接</span><br><span class="line">private static final String CONNECTS = &quot;192.168.1.200:2181, 192.168.1.201:2181, 192.168.1.202:2181&quot;;</span><br><span class="line">private static final int sessionTimeout = 2000;</span><br><span class="line">ZooKeeper zkCli = null;</span><br><span class="line">@Before</span><br><span class="line">public void createConnection() throws IOException&#123;</span><br><span class="line">	zkCli = new ZooKeeper(CONNECTS, sessionTimeout, new Watcher()&#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void process(WatchedEvent event) &#123;  //收到事件通知后的回调方法</span><br><span class="line">			System.out.println(event.getPath() + &quot;节点发生变化&quot;);</span><br><span class="line">			try &#123;</span><br><span class="line">				zkCli.getChildren(&quot;/&quot;, true);  // 根节点注册监听器，一次注册只能用一次</span><br><span class="line">			&#125; catch (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void testCreate() throws Exception&#123;</span><br><span class="line">	// 参数1：要创建的节点的路径 参数2：节点大数据 参数3：节点的权限 参数4：节点的类型</span><br><span class="line">	String node = zkCli.create(&quot;/xqf&quot;, &quot;HelloZK&quot;.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;客户端会随机选个可用的Zookeeper服务端连接</span><br><span class="line">private static final String CONNECTS &#x3D; &quot;192.168.1.200:2181, 192.168.1.201:2181, 192.168.1.202:2181&quot;;</span><br><span class="line">private static final int sessionTimeout &#x3D; 2000;</span><br><span class="line">ZooKeeper zkCli &#x3D; null;</span><br><span class="line">@Before</span><br><span class="line">public void createConnection() throws IOException&#123;</span><br><span class="line">	zkCli &#x3D; new ZooKeeper(CONNECTS, sessionTimeout, new Watcher()&#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void process(WatchedEvent event) &#123;  &#x2F;&#x2F;收到事件通知后的回调方法</span><br><span class="line">			System.out.println(event.getPath() + &quot;节点发生变化&quot;);</span><br><span class="line">			try &#123;</span><br><span class="line">				zkCli.getChildren(&quot;&#x2F;&quot;, true);  &#x2F;&#x2F; 根节点注册监听器，一次注册只能用一次</span><br><span class="line">			&#125; catch (Exception e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line">@Test</span><br><span class="line">public void testCreate() throws Exception&#123;</span><br><span class="line">	&#x2F;&#x2F; 参数1：要创建的节点的路径 参数2：节点大数据 参数3：节点的权限 参数4：节点的类型</span><br><span class="line">	String node &#x3D; zkCli.create(&quot;&#x2F;xqf&quot;, &quot;HelloZK&quot;.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>发现节点中传入的数据是byte数组，所以传入的数据可以是任意类型，包括文件。<br>CreateMode 取值：</p>
 <ol>
 <li>PERSISTENT：持久化，这个目录节点存储的数据不会丢失 </li>
@@ -251,10 +247,16 @@
 </ol>
 <h3 id="0X06-Zookeeper监控分布式应用系统服务器上下线"><a href="#0X06-Zookeeper监控分布式应用系统服务器上下线" class="headerlink" title="0X06 Zookeeper监控分布式应用系统服务器上下线"></a>0X06 Zookeeper监控分布式应用系统服务器上下线</h3><p>开头说了很多的应用场景，现在我们来实现一个具体应用场景，监听分布式应用系统服务器的上下线，主要还是运用Zookeeper的两大主要功能：数据存储和节点变化感知。<br>对于分布式应用系统肯定有好几台服务器做集群，客户端与服务端建立连接时都会先选出最优的负载均衡节点，一旦服务器某个节点宕机，可以重新建立可用节点进行连接。总之，客户端能实时洞察到服务器各个节点的上下线变化。</p>
 <h4 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h4><p>服务器集群中的每个节点一启动就去Zookeeper上注册，创建一个服务器IP等信息的临时znode。当该服务器节点宕机下线了，Zookeeper就会把这个znode删除，这样会产生事件，客户端才能监听到。<br><img src="https://littleRich.github.io/images/20180827/outline.png" alt="实现机制"><br>客户端启动的时候就去连接Zookeeper，获取分布式应用系统的所有可用节点信息，选择一个节点进行连接。（可以获取到服务器的IP或服务器的连接数量，通过各个节点的连接数量进行负载均衡）<br>一旦服务器集群中有某个节点下线了，就会通知到注册监听的客户端，回调客户端的监听器中的process方法，然后在process方法内重新获取服务器可用列表进行连接，并继续注册监听。<br>分布式应用系统节点启动时向Zookeeper集群注册服务器信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void registerServer(String hostname) throws Exception &#123;</span><br><span class="line">	String create = zkCli.create(parentNode + &quot;/server&quot;, hostname.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">	System.out.println(hostname + &quot;is online..&quot; + create);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void registerServer(String hostname) throws Exception &#123;</span><br><span class="line">	String create &#x3D; zkCli.create(parentNode + &quot;&#x2F;server&quot;, hostname.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line">	System.out.println(hostname + &quot;is online..&quot; + create);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>客户端启动的时候就去Zookeeper集群获取可用应用服务器节点：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">new ZooKeeper(connectString, sessionTimeout, new Watcher() &#123;  //创建对象时也会回调process方法去获取服务器信息列表</span><br><span class="line">	@Override</span><br><span class="line">	public void process(WatchedEvent event) &#123;</span><br><span class="line">		// 获取服务器子节点信息，并且对父节点进行监听</span><br><span class="line">		List&lt;String&gt; children = zk.getChildren(parentNode, true);</span><br><span class="line">		// 先创建一个局部的list来存服务器信息</span><br><span class="line">		List&lt;String&gt; servers = new ArrayList&lt;String&gt;();</span><br><span class="line">		for (String child : children) &#123;</span><br><span class="line">			// child只是子节点的节点名</span><br><span class="line">			byte[] data = zk.getData(parentNode + &quot;/&quot; + child, false, null);</span><br><span class="line">			servers.add(new String(data));</span><br><span class="line">		&#125;</span><br><span class="line">		// 把servers赋值给成员变量serverList，已提供给各业务线程使用</span><br><span class="line">		serverList = servers;		</span><br><span class="line">		//打印服务器列表</span><br><span class="line">		System.out.println(serverList);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">new ZooKeeper(connectString, sessionTimeout, new Watcher() &#123;  &#x2F;&#x2F;创建对象时也会回调process方法去获取服务器信息列表</span><br><span class="line">	@Override</span><br><span class="line">	public void process(WatchedEvent event) &#123;</span><br><span class="line">		&#x2F;&#x2F; 获取服务器子节点信息，并且对父节点进行监听</span><br><span class="line">		List&lt;String&gt; children &#x3D; zk.getChildren(parentNode, true);</span><br><span class="line">		&#x2F;&#x2F; 先创建一个局部的list来存服务器信息</span><br><span class="line">		List&lt;String&gt; servers &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">		for (String child : children) &#123;</span><br><span class="line">			&#x2F;&#x2F; child只是子节点的节点名</span><br><span class="line">			byte[] data &#x3D; zk.getData(parentNode + &quot;&#x2F;&quot; + child, false, null);</span><br><span class="line">			servers.add(new String(data));</span><br><span class="line">		&#125;</span><br><span class="line">		&#x2F;&#x2F; 把servers赋值给成员变量serverList，已提供给各业务线程使用</span><br><span class="line">		serverList &#x3D; servers;		</span><br><span class="line">		&#x2F;&#x2F;打印服务器列表</span><br><span class="line">		System.out.println(serverList);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
 
 <p>博客中涉及的代码已上传！【<a href="https://download.csdn.net/download/u012308094/10634684" target="_blank" rel="noopener">猛戳下载</a>】</p>
 <hr>
@@ -369,7 +371,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/09/10/大数据_分布式服务框架zookeeper管理分布式环境中的数据/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/09/10/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6zookeeper%E7%AE%A1%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -383,7 +385,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/18/大数据_Ubuntu16.04下Hadoop全分布式和伪分布式环境搭建/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/18/%E5%A4%A7%E6%95%B0%E6%8D%AE_Ubuntu16.04%E4%B8%8BHadoop%E5%85%A8%E5%88%86%E5%B8%83%E5%BC%8F%E5%92%8C%E4%BC%AA%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -393,7 +395,7 @@
     </a>
   
   
-    <a href="/2017/08/21/大数据_网络爬虫让机器伪装人类的行为/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/08/21/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BC%AA%E8%A3%85%E4%BA%BA%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">网络爬虫让机器伪装人类的行为</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -453,7 +455,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -537,7 +539,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,22 +568,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +599,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -614,18 +628,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,15 +659,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,6 +672,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,19 +707,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,6 +739,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -750,10 +756,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

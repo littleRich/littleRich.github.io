@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="专心致志，方能成功；Read The Fucking Code">
-<meta name="keywords" content="Android,移动安全,大数据,Hadoop,Spark,HDFS,Hive,分布式,数据分析,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,Java,后台,逆向分析,用户体验">
 <meta property="og:type" content="website">
 <meta property="og:title" content="奔跑吧，小代码！">
-<meta property="og:url" content="http://littleRich.github.io/page/4/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;page&#x2F;4&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="专心致志，方能成功；Read The Fucking Code">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="移动安全">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="Spark">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="Hive">
+<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="代码">
+<meta property="article:tag" content="开源">
+<meta property="article:tag" content="IT网站">
+<meta property="article:tag" content="Developer">
+<meta property="article:tag" content="Programmer">
+<meta property="article:tag" content="Coder">
+<meta property="article:tag" content="Geek">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="后台">
+<meta property="article:tag" content="逆向分析">
+<meta property="article:tag" content="用户体验">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奔跑吧，小代码！">
-<meta name="twitter:description" content="专心致志，方能成功；Read The Fucking Code">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -36,8 +55,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -62,7 +81,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -162,7 +181,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -181,6 +200,93 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-使用Git管理自己的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/24/%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/">使用Git管理自己的项目</a>
+    </h1>
+  
+
+        
+        <a href="/2016/10/24/%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+  	<time datetime="2016-10-24T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘要:<br>&emsp;&emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。</p>
+        
+          <a class="article-more-a" href="/2016/10/24/%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Git之旅</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Git分布式版本控制//" class="article-tag-list-link color1">Git分布式版本控制</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/10/24/%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Hexo+GitHub搭建属于自己的博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -188,12 +294,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/19/Hexo+GitHub搭建属于自己的博客/">程序员如何建立自己的个人品牌（持续更新）</a>
+      <a class="article-title" href="/2016/10/19/Hexo+GitHub%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">程序员如何建立自己的个人品牌（持续更新）</a>
     </h1>
   
 
         
-        <a href="/2016/10/19/Hexo+GitHub搭建属于自己的博客/" class="archive-article-date">
+        <a href="/2016/10/19/Hexo+GitHub%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
   	<time datetime="2016-10-19T07:15:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-19</time>
 </a>
         
@@ -203,7 +309,7 @@
       
         <p>摘要:<br>&emsp;&emsp;本文是一篇关于如何在 Windows 下搭建一个独立博客的教程，里面介绍了如何使用 GitHub Pages 和 Hexo 搭建一个属于自己的博客，并配置它的过程。<br><img src="https://github.com/littleRich/littleRich.github.io/blob/master/images/20161020/octopress.jpg?raw=true" alt="Octopress"></p>
         
-          <a class="article-more-a" href="/2016/10/19/Hexo+GitHub搭建属于自己的博客/#more">more >></a>
+          <a class="article-more-a" href="/2016/10/19/Hexo+GitHub%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/#more">more >></a>
         
       
 
@@ -246,7 +352,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/19/Hexo+GitHub搭建属于自己的博客/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/10/19/Hexo+GitHub%E6%90%AD%E5%BB%BA%E5%B1%9E%E4%BA%8E%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
         </p>
       
 
@@ -283,12 +389,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/21/Java剑指offer/">Java剑指offer</a>
+      <a class="article-title" href="/2016/03/21/Java%E5%89%91%E6%8C%87offer/">Java剑指offer</a>
     </h1>
   
 
         
-        <a href="/2016/03/21/Java剑指offer/" class="archive-article-date">
+        <a href="/2016/03/21/Java%E5%89%91%E6%8C%87offer/" class="archive-article-date">
   	<time datetime="2016-03-21T11:17:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-03-21</time>
 </a>
         
@@ -298,7 +404,7 @@
       
         <p>&emsp;&emsp;有些人问我为啥选择java？其实我从最初的C、C++、.net、C#到后来的java和Python，学的语言很多，熟练使用的却不多。关键还是要懂得各语言之间的融会贯通，只要数据结构和设计模式精通了，语言只是换种方式表达而已。因此，研究生期间再也不是搞各种语言了，而是静下心来学习做技术沉淀，做一个有理想的程序员。</p>
         
-          <a class="article-more-a" href="/2016/03/21/Java剑指offer/#more">more >></a>
+          <a class="article-more-a" href="/2016/03/21/Java%E5%89%91%E6%8C%87offer/#more">more >></a>
         
       
 
@@ -333,7 +439,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/03/21/Java剑指offer/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/03/21/Java%E5%89%91%E6%8C%87offer/">展开全文 >></a>
         </p>
       
 
@@ -365,7 +471,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+      <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
     </nav>
   
 
@@ -377,7 +483,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -461,7 +567,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,22 +596,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -521,6 +627,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -538,18 +656,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -581,15 +687,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,6 +700,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -625,19 +735,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -661,6 +767,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -674,10 +784,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

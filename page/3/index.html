@@ -1,24 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="专心致志，方能成功；Read The Fucking Code">
-<meta name="keywords" content="Android,移动安全,大数据,Hadoop,Spark,HDFS,Hive,分布式,数据分析,编程,代码,开源,IT网站,Developer,Programmer,Coder,Geek,Java,后台,逆向分析,用户体验">
 <meta property="og:type" content="website">
 <meta property="og:title" content="奔跑吧，小代码！">
-<meta property="og:url" content="http://littleRich.github.io/page/3/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;page&#x2F;3&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="专心致志，方能成功；Read The Fucking Code">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="移动安全">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="Spark">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="Hive">
+<meta property="article:tag" content="分布式">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="编程">
+<meta property="article:tag" content="代码">
+<meta property="article:tag" content="开源">
+<meta property="article:tag" content="IT网站">
+<meta property="article:tag" content="Developer">
+<meta property="article:tag" content="Programmer">
+<meta property="article:tag" content="Coder">
+<meta property="article:tag" content="Geek">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="后台">
+<meta property="article:tag" content="逆向分析">
+<meta property="article:tag" content="用户体验">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="奔跑吧，小代码！">
-<meta name="twitter:description" content="专心致志，方能成功；Read The Fucking Code">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -36,8 +55,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -62,7 +81,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -162,7 +181,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -181,6 +200,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Struts2工作原理与核心思想" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/">Struts2工作原理与核心思想</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/" class="archive-article-date">
+  	<time datetime="2017-06-03T02:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>摘要:<br>&emsp;&emsp;Struts2是一个基于MVC设计模式的Web应用开源框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。Web层框架都是一个特点有前端控制器模式，Struts2框架前端的控制器就是过滤器。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts_position.bmp" alt="前端控制器模式"> </p>
+        
+          <a class="article-more-a" href="/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">框架集成</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">拦截器</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">OGNL表达式</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">值栈</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/J2EE//" class="article-tag-list-link color5">J2EE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Hibernate持久层框架快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -188,12 +306,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/01/Hibernate持久层框架快速入门/">Hibernate让你解放SQL的持久层框架</a>
+      <a class="article-title" href="/2017/06/01/Hibernate%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">Hibernate让你解放SQL的持久层框架</a>
     </h1>
   
 
         
-        <a href="/2017/06/01/Hibernate持久层框架快速入门/" class="archive-article-date">
+        <a href="/2017/06/01/Hibernate%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="archive-article-date">
   	<time datetime="2017-06-01T02:19:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
 </a>
         
@@ -203,7 +321,7 @@
       
         <p>摘要:<br>&emsp;&emsp;Hibernate是一个开源的对象/关系数据库映射框架，用于把面向对象模型表示的对象映射到基于SQL的关系模型的数据结构中。能相除那些针对特定数据库厂商的SQL代码，并且把结果集从表格式的形式转换成值对象的形式，简单一句话：Hibernate使程序员通过对象的方式来操作数据库表记录。  </p>
         
-          <a class="article-more-a" href="/2017/06/01/Hibernate持久层框架快速入门/#more">more >></a>
+          <a class="article-more-a" href="/2017/06/01/Hibernate%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/#more">more >></a>
         
       
 
@@ -250,7 +368,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/01/Hibernate持久层框架快速入门/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/06/01/Hibernate%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">展开全文 >></a>
         </p>
       
 
@@ -287,12 +405,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/Linux必知必会的日常操作/">Linux必知必会的日常操作</a>
+      <a class="article-title" href="/2017/05/19/Linux%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C/">Linux必知必会的日常操作</a>
     </h1>
   
 
         
-        <a href="/2017/05/19/Linux必知必会的日常操作/" class="archive-article-date">
+        <a href="/2017/05/19/Linux%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C/" class="archive-article-date">
   	<time datetime="2017-05-19T13:16:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
 </a>
         
@@ -302,7 +420,7 @@
       
         <p>&emsp;&emsp;对于开发者来说，Linux系统你值得拥有，但是Linux上与Window的差别导致我们有些生疏，很多Linux上面的操作都是去百度查了再敲进去，过后又忘了。所以这里我也给自己总结了一些Linux日常开发使用到的部署配置，用到的时候查查博文就晓得了。</p>
         
-          <a class="article-more-a" href="/2017/05/19/Linux必知必会的日常操作/#more">more >></a>
+          <a class="article-more-a" href="/2017/05/19/Linux%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C/#more">more >></a>
         
       
 
@@ -345,7 +463,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/19/Linux必知必会的日常操作/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/19/Linux%E5%BF%85%E7%9F%A5%E5%BF%85%E4%BC%9A%E7%9A%84%E6%97%A5%E5%B8%B8%E6%93%8D%E4%BD%9C/">展开全文 >></a>
         </p>
       
 
@@ -382,12 +500,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/01/Android安全：Smali从入门到疯狂/">Android安全：Smali从入门到疯狂</a>
+      <a class="article-title" href="/2017/04/01/Android%E5%AE%89%E5%85%A8%EF%BC%9ASmali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%96%AF%E7%8B%82/">Android安全：Smali从入门到疯狂</a>
     </h1>
   
 
         
-        <a href="/2017/04/01/Android安全：Smali从入门到疯狂/" class="archive-article-date">
+        <a href="/2017/04/01/Android%E5%AE%89%E5%85%A8%EF%BC%9ASmali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%96%AF%E7%8B%82/" class="archive-article-date">
   	<time datetime="2017-04-01T08:36:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
 </a>
         
@@ -397,7 +515,7 @@
       
         <p>摘要:<br>&emsp;&emsp;对于从事Android安全工程师职业来说，熟悉Smali是基本技能，这样就可以修改Smali代码来逆向分析破解APP程序，又或者二次打包发布【当然这样做不是很好】。然而，目前市面上却没有专门一门系统讲解Smali语法及实战的书籍教程，所以觉得有必要连载几篇关于Android逆向分析之Smali语法讲解及实战教程。有什么笔误的地方还望指正，欢迎搅基！<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170401/smalidemo.png" alt="Smali例子"> </p>
         
-          <a class="article-more-a" href="/2017/04/01/Android安全：Smali从入门到疯狂/#more">more >></a>
+          <a class="article-more-a" href="/2017/04/01/Android%E5%AE%89%E5%85%A8%EF%BC%9ASmali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%96%AF%E7%8B%82/#more">more >></a>
         
       
 
@@ -440,7 +558,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/04/01/Android安全：Smali从入门到疯狂/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/01/Android%E5%AE%89%E5%85%A8%EF%BC%9ASmali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%96%AF%E7%8B%82/">展开全文 >></a>
         </p>
       
 
@@ -477,12 +595,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/">基于Xposed框架Hook定位功能来破解QQ的LBS红包</a>
+      <a class="article-title" href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/">基于Xposed框架Hook定位功能来破解QQ的LBS红包</a>
     </h1>
   
 
         
-        <a href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/" class="archive-article-date">
+        <a href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/" class="archive-article-date">
   	<time datetime="2017-01-17T02:01:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
 </a>
         
@@ -492,7 +610,7 @@
       
         <p>摘要:<br>&emsp;&emsp;今年的LBS+AR红包无疑是过年的一大热点。刚好最近在研究利用Xposed框架Hook抢群红包的外挂，就试试利用Hook技术来实现虚拟定位，这样就可以随意到处寻找AR红包了。QQ上基于LBS的红包不需要实物扫描，这个与支付宝的LBS红包策略不一样，所以只需要定位到红包地点即可领取。其实支付宝刚出来扫描红包时是可以用PS破解的，现在支付宝这个BUG已经被修复了。下面三张截图就是Hook定位QQ程序分别定位北京、杭州、成都，是不是很有意思。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_beijing.png" alt="北京定位"> <img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_hangzhou.png" alt="杭州定位"> <img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_chengdu.png" alt="成都定位"></p>
         
-          <a class="article-more-a" href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/#more">more >></a>
+          <a class="article-more-a" href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/#more">more >></a>
         
       
 
@@ -543,7 +661,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/">展开全文 >></a>
         </p>
       
 
@@ -580,12 +698,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/Android自动化模拟操作开源库/">Android自动化模拟操作开源库源码解析(持续维护中...)</a>
+      <a class="article-title" href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/">Android自动化模拟操作开源库源码解析(持续维护中...)</a>
     </h1>
   
 
         
-        <a href="/2016/12/05/Android自动化模拟操作开源库/" class="archive-article-date">
+        <a href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/" class="archive-article-date">
   	<time datetime="2016-12-05T02:16:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-05</time>
 </a>
         
@@ -595,7 +713,7 @@
       
         <p>摘要:<br>&emsp;&emsp;今天给大家开源一个很强大的自动化模拟人交互的开源库，基于本开源库你可以深度开发很多好玩的应用，比如常见的网购抢单插件、红包插件、自动安装APP等，更多好玩的应用等你来集成哦。获取开源库包和开发Demo可以到我的GitHub上fork，我的GitHub上有详细的使用介绍，这里就不多说了。如果想要深入探析本开源库的设计思路及数据结构等，那就跟随我一起搅基吧。（本开源库经过我多轮测试，目前开源V1.0.3正式版，使用上如果发现BUG，可以给我留言，多谢支持！）<br>&emsp;&emsp;注意本文只分享了本开源库的设计思路等，具体集成使用开源库可到我的GitHub；</p>
         
-          <a class="article-more-a" href="/2016/12/05/Android自动化模拟操作开源库/#more">more >></a>
+          <a class="article-more-a" href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/#more">more >></a>
         
       
 
@@ -646,7 +764,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/12/05/Android自动化模拟操作开源库/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/">展开全文 >></a>
         </p>
       
 
@@ -683,12 +801,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/">在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版)</a>
+      <a class="article-title" href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/">在Ubuntu14.04_X64编译官方Android6.0.0_r1源码(完整版)</a>
     </h1>
   
 
         
-        <a href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/" class="archive-article-date">
+        <a href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/" class="archive-article-date">
   	<time datetime="2016-11-05T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-11-05</time>
 </a>
         
@@ -696,9 +814,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>摘要:<br>&emsp;&emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到<a href="http://www.android-x86.org/" title="android-x86镜像网" target="_blank" rel="noopener">android-x86仓库</a>上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅吧。</p>
+        <p>摘要:<br>&emsp;&emsp;本文只用Ubuntu14.04_x64版本编译AOSP上的Android系统源码，AOSP上的源码最终编译完的得到三个镜像文件，再把这三个镜像文件烧录成ROM包，这样就可以刷到手机上了。如果你只想编译拿到ISO镜像文件，那么就需要到<a href="http://www.android-x86.org/" target="_blank" rel="noopener" title="android-x86镜像网">android-x86仓库</a>上下载源码，这个就跟本文有点区别了，但大同小异啦，如果碰到问题可以给我留言。废话少说，开始AOSP源码的编译之旅吧。</p>
         
-          <a class="article-more-a" href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/#more">more >></a>
+          <a class="article-more-a" href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/#more">more >></a>
         
       
 
@@ -749,7 +867,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/">展开全文 >></a>
         </p>
       
 
@@ -786,12 +904,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/">使用Git管理自己的项目</a>
+      <a class="article-title" href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/">使用Git管理自己的项目</a>
     </h1>
   
 
         
-        <a href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/" class="archive-article-date">
+        <a href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/" class="archive-article-date">
   	<time datetime="2016-10-24T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
 </a>
         
@@ -801,7 +919,7 @@
       
         <p>摘要:<br>&emsp;&emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。</p>
         
-          <a class="article-more-a" href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/#more">more >></a>
+          <a class="article-more-a" href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/#more">more >></a>
         
       
 
@@ -836,94 +954,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-使用Git管理自己的项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/24/使用Git管理自己的项目/">使用Git管理自己的项目</a>
-    </h1>
-  
-
-        
-        <a href="/2016/10/24/使用Git管理自己的项目/" class="archive-article-date">
-  	<time datetime="2016-10-24T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>摘要:<br>&emsp;&emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。</p>
-        
-          <a class="article-more-a" href="/2016/10/24/使用Git管理自己的项目/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Git之旅</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Git分布式版本控制//" class="article-tag-list-link color1">Git分布式版本控制</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2016/10/24/使用Git管理自己的项目/">展开全文 >></a>
+          <a class="article-more-a" href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/">展开全文 >></a>
         </p>
       
 
@@ -955,7 +986,7 @@
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &amp;raquo;</a>
     </nav>
   
 
@@ -967,7 +998,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -1051,7 +1082,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1064,22 +1111,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1111,6 +1142,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -1128,18 +1171,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1171,15 +1202,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1192,6 +1215,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1215,19 +1250,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1251,6 +1282,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -1264,10 +1299,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

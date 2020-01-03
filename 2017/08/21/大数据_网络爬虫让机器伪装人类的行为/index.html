@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>网络爬虫让机器伪装人类的行为 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要：之前在公司做过好几个项目都需要网络爬虫，像舆情分析什么的前提就是爬取各大贴吧论坛上的数据。特别在学术在想要对某个问题进行大数据分析，常常碰到的问题就是没数据作分析。本篇文章就由浅入深的说说我所熟知的爬虫那些坑，找出网页规律技巧。">
-<meta name="keywords" content="爬虫原理,requests + BeautifulSoup,异步加载">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络爬虫让机器伪装人类的行为">
-<meta property="og:url" content="http://littleRich.github.io/2017/08/21/大数据_网络爬虫让机器伪装人类的行为/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;08&#x2F;21&#x2F;%E5%A4%A7%E6%95%B0%E6%8D%AE_%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BC%AA%E8%A3%85%E4%BA%BA%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要：之前在公司做过好几个项目都需要网络爬虫，像舆情分析什么的前提就是爬取各大贴吧论坛上的数据。特别在学术在想要对某个问题进行大数据分析，常常碰到的问题就是没数据作分析。本篇文章就由浅入深的说说我所熟知的爬虫那些坑，找出网页规律技巧。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/activate.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/selector.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/beautifulsoup.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/ajax.jpg">
-<meta property="og:updated_time" content="2018-08-23T14:30:00.904Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180820&#x2F;activate.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180820&#x2F;selector.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180820&#x2F;beautifulsoup.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180820&#x2F;ajax.jpg">
+<meta property="article:published_time" content="2017-08-21T04:57:12.000Z">
+<meta property="article:modified_time" content="2018-08-23T14:30:00.904Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="爬虫原理">
+<meta property="article:tag" content="requests + BeautifulSoup">
+<meta property="article:tag" content="异步加载">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络爬虫让机器伪装人类的行为">
-<meta name="twitter:description" content="摘要：之前在公司做过好几个项目都需要网络爬虫，像舆情分析什么的前提就是爬取各大贴吧论坛上的数据。特别在学术在想要对某个问题进行大数据分析，常常碰到的问题就是没数据作分析。本篇文章就由浅入深的说说我所熟知的爬虫那些坑，找出网页规律技巧。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/activate.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180820&#x2F;activate.jpg">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -42,8 +44,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -68,7 +70,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -168,7 +170,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -197,7 +199,7 @@
   
 
         
-        <a href="/2017/08/21/大数据_网络爬虫让机器伪装人类的行为/" class="archive-article-date">
+        <a href="/2017/08/21/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BC%AA%E8%A3%85%E4%BA%BA%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA/" class="archive-article-date">
   	<time datetime="2017-08-21T04:57:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-21</time>
 </a>
         
@@ -209,51 +211,43 @@
 <a id="more"></a>
 
 
-<h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><p>很多人写爬虫程序都会在选语言上有疑问，其实大多数语言都能写爬虫来模拟我们平常访问HTTP请求响应的过程，主要还是好不好写的问题。爬虫普遍还是用Python，不单单因为Python十几行能解决Java几十行代码写爬虫，还应为Python还有很多爬虫相关的依赖库，功能强大还好用，下面我也会介绍到。<br>Python语言是出了名的易学，有其它语言基础的就直接看看Python的数据结构：list、dict、tuple、set。我推荐个简单的快速入门教程：《<a href="https://download.csdn.net/download/u012308094/10610414" title="Python快速入门魔力手册" target="_blank" rel="noopener">Python快速入门魔力手册</a>》<br>Python的IDE工具还是用Pycharm，激活就按如下图就行了，输入<em><a href="http://15.idea.lanyus.com/" target="_blank" rel="noopener">http://15.idea.lanyus.com/</a></em>。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/activate.jpg" alt="pycharm5激活方式"></p>
+<h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><p>很多人写爬虫程序都会在选语言上有疑问，其实大多数语言都能写爬虫来模拟我们平常访问HTTP请求响应的过程，主要还是好不好写的问题。爬虫普遍还是用Python，不单单因为Python十几行能解决Java几十行代码写爬虫，还应为Python还有很多爬虫相关的依赖库，功能强大还好用，下面我也会介绍到。<br>Python语言是出了名的易学，有其它语言基础的就直接看看Python的数据结构：list、dict、tuple、set。我推荐个简单的快速入门教程：《<a href="https://download.csdn.net/download/u012308094/10610414" target="_blank" rel="noopener" title="Python快速入门魔力手册">Python快速入门魔力手册</a>》<br>Python的IDE工具还是用Pycharm，激活就按如下图就行了，输入<em><a href="http://15.idea.lanyus.com/" target="_blank" rel="noopener">http://15.idea.lanyus.com/</a></em>。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/activate.jpg" alt="pycharm5激活方式"></p>
 <h3 id="0X01-网页元素选取"><a href="#0X01-网页元素选取" class="headerlink" title="0X01 网页元素选取"></a>0X01 网页元素选取</h3><p>如何唯一确定网页上标签的位置才能找到对应的数据，一句话就是找目标标签的唯一特性，常用的有两种方法：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/selector.jpg" alt="获取标签位置"><br>1、xpath方式<br>还记得大学学过的数据结构么？可以把一个网页看成以html标签为根节点的树，网页中任一标签都可以从根节点开始遍历到，xpath就表示从根节点到目标标签节点的路径。如下定位到一个列表。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/html/body/div[1]/ul</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;html&#x2F;body&#x2F;div[1]&#x2F;ul</span><br></pre></td></tr></table></figure>
 <p>2、selector方式<br>如果说xpath是按路径找，那么selector就是按长的模样找。它是按CSS样式来确定路径上的关键节点（带有CSS选择器的标签就是关键节点）。selector除了xpath的路径信息，还多了长的样子来更快速的定位。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">body &gt; div.header &gt; img     //&quot;&gt;&quot;表示直接子节点，如果是“ ”空格表示任意子节点</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">body &gt; div.header &gt; img     &#x2F;&#x2F;&quot;&gt;&quot;表示直接子节点，如果是“ ”空格表示任意子节点</span><br></pre></td></tr></table></figure>
 <p>科普下如果引用Html中的id，那么就用‘#id名’表示，引用class一类选择器时用‘.class名’。<br>selector方式定位目标位置，写法更简洁，不必都从根节点开始写起，而是可以直接找个带有css样式的标签开始写起，甚至都不用依次每层级标签都写明，例如下面的例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#content div.header &gt; img  //注意#content与div是有空格的</span><br></pre></td></tr></table></figure>
-
-<p>上面是定位一个img标签的写法，意思就是id为content的标签开始，后面的数个层级中带有header类选择器的div标签，在该div标签的下一层级有img标签。<br>更多高级用法可以查查文档：<a href="http://www.cheat-sheets.org/saved-copy/Locators_table_1_0_2.pdf" title="Xpath，CSS的语法说明" target="_blank" rel="noopener">Xpath、CSS的语法大全</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#content div.header &gt; img  &#x2F;&#x2F;注意#content与div是有空格的</span><br></pre></td></tr></table></figure>
+<p>上面是定位一个img标签的写法，意思就是id为content的标签开始，后面的数个层级中带有header类选择器的div标签，在该div标签的下一层级有img标签。<br>更多高级用法可以查查文档：<a href="http://www.cheat-sheets.org/saved-copy/Locators_table_1_0_2.pdf" target="_blank" rel="noopener" title="Xpath，CSS的语法说明">Xpath、CSS的语法大全</a></p>
 <h3 id="0X02-requests-BeautifulSoup解析网页"><a href="#0X02-requests-BeautifulSoup解析网页" class="headerlink" title="0X02 requests + BeautifulSoup解析网页"></a>0X02 requests + BeautifulSoup解析网页</h3><p>先要下载安装requests和beautifulsoup4库并导入到项目中。用requests去请求获取网页源数据，再往BeautifulSoup传入网页源码就能解析网页中的元素。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/beautifulsoup.jpg" alt="BeautifulSoup解析网页"><br>BeautifulSoup传入的第一参数就是要解析的网页，第二个参数就是解析网页所需的规则，BeautifulSoup有多个规则：html.parser、lxml HTML、lxml XML、html5lib。<br>注意：Beautiful只能用selector定位元素位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Soup = BeautifulSoup(f.read(), &apos;html.parser&apos;)</span><br><span class="line">titles = Soup.select(&apos;ul &gt; li &gt; div.article-info &gt; h3 &gt; a&apos;)</span><br><span class="line">text = title.get_text()     //.get_text()：获取标签间文本数据</span><br><span class="line">title.get(&apos;href&apos;)           //.get(属性)：获取标签内的属性值</span><br></pre></td></tr></table></figure>
-
-<p>更多BeautifulSoup用法可以查阅<a href="https://www.crummy.com/software/BeautifulSoup/bs3/documentation.zh.html" title="BeautifulSoup中文文档" target="_blank" rel="noopener">BeautifulSoup中文文档</a>，后续用到再说。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Soup &#x3D; BeautifulSoup(f.read(), &#39;html.parser&#39;)</span><br><span class="line">titles &#x3D; Soup.select(&#39;ul &gt; li &gt; div.article-info &gt; h3 &gt; a&#39;)</span><br><span class="line">text &#x3D; title.get_text()     &#x2F;&#x2F;.get_text()：获取标签间文本数据</span><br><span class="line">title.get(&#39;href&#39;)           &#x2F;&#x2F;.get(属性)：获取标签内的属性值</span><br></pre></td></tr></table></figure>
+<p>更多BeautifulSoup用法可以查阅<a href="https://www.crummy.com/software/BeautifulSoup/bs3/documentation.zh.html" target="_blank" rel="noopener" title="BeautifulSoup中文文档">BeautifulSoup中文文档</a>，后续用到再说。</p>
 <h3 id="0X03-抓取异步加载动态数据"><a href="#0X03-抓取异步加载动态数据" class="headerlink" title="0X03 抓取异步加载动态数据"></a>0X03 抓取异步加载动态数据</h3><p>异步加载是网页先被请求回来，再通过Ajax获取网页中的各个模块中的数据，使用JS填充到各个模块中。所以直接一次请求网页是获取不到实际数据，我暂时的解决方案还是通过查找对应Ajax的请求URL获取数据。下面我举了个例子：抓取异步更新分页数据。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup  # 报错就先安装包：File -&gt; Default Setting -&gt; Project Interpreter -&gt; 下拉选择本地安装Python -&gt; 点加号 -&gt; 搜索要安装的包 -&gt; Install Package</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">import json	</span><br><span class="line">url = &apos;https://knewone.com/discover?page=&apos;	</span><br><span class="line">def get_page(url,data=None):</span><br><span class="line">    wb_data = requests.get(url)</span><br><span class="line">    soup = BeautifulSoup(wb_data.text,&apos;lxml&apos;)</span><br><span class="line">    # print (soup.text)</span><br><span class="line">    imgs = soup.select(&apos;a.cover-inner &gt; img&apos;)</span><br><span class="line">    titles = soup.select(&apos;section.content &gt; h4 &gt; a&apos;)</span><br><span class="line">    links = soup.select(&apos;section.content &gt; h4 &gt; a&apos;)</span><br><span class="line">    likes = soup.select(&apos;span.fanciers_count&apos;)</span><br><span class="line">    if data==None:</span><br><span class="line">        for img,title,link, like in zip(imgs,titles,links, likes):</span><br><span class="line">            data = &#123;</span><br><span class="line">                &apos;img&apos;:img.get(&apos;src&apos;),</span><br><span class="line">                &apos;title&apos;:title.get(&apos;title&apos;),</span><br><span class="line">                &apos;link&apos;:link.get(&apos;href&apos;),</span><br><span class="line">                &apos;like&apos;:like.get_text()</span><br><span class="line">            &#125;</span><br><span class="line">            print(json.dumps(data, ensure_ascii=False))</span><br><span class="line">            save_imgs(&apos;C:/Users/littleRich/Desktop/test1/&apos;, img.get(&apos;src&apos;))   # 先手动创建test文件夹用于存图片</span><br><span class="line">def get_more_pages(start,end):</span><br><span class="line">    for one in range(start,end):</span><br><span class="line">        try:</span><br><span class="line">            get_page(url+str(one))</span><br><span class="line">            time.sleep(2)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print (e.message)	</span><br><span class="line">def save_imgs(folder, img_addr):  # 下载图片</span><br><span class="line">    filename = img_addr.split(&apos;/&apos;)[-1][:-16]   # [:-16]表示截取从头开始到倒数第十六个字符之前</span><br><span class="line">    img = requests.get(img_addr).content   # 获取图片流数据</span><br><span class="line">    with open(folder + filename, &apos;wb&apos;) as f:    # 打开文件</span><br><span class="line">        f.write(img)	</span><br><span class="line">get_more_pages(1,5000)  # 爬取5000页异步加载数据</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup  # 报错就先安装包：File -&gt; Default Setting -&gt; Project Interpreter -&gt; 下拉选择本地安装Python -&gt; 点加号 -&gt; 搜索要安装的包 -&gt; Install Package</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">import json	</span><br><span class="line">url &#x3D; &#39;https:&#x2F;&#x2F;knewone.com&#x2F;discover?page&#x3D;&#39;	</span><br><span class="line">def get_page(url,data&#x3D;None):</span><br><span class="line">    wb_data &#x3D; requests.get(url)</span><br><span class="line">    soup &#x3D; BeautifulSoup(wb_data.text,&#39;lxml&#39;)</span><br><span class="line">    # print (soup.text)</span><br><span class="line">    imgs &#x3D; soup.select(&#39;a.cover-inner &gt; img&#39;)</span><br><span class="line">    titles &#x3D; soup.select(&#39;section.content &gt; h4 &gt; a&#39;)</span><br><span class="line">    links &#x3D; soup.select(&#39;section.content &gt; h4 &gt; a&#39;)</span><br><span class="line">    likes &#x3D; soup.select(&#39;span.fanciers_count&#39;)</span><br><span class="line">    if data&#x3D;&#x3D;None:</span><br><span class="line">        for img,title,link, like in zip(imgs,titles,links, likes):</span><br><span class="line">            data &#x3D; &#123;</span><br><span class="line">                &#39;img&#39;:img.get(&#39;src&#39;),</span><br><span class="line">                &#39;title&#39;:title.get(&#39;title&#39;),</span><br><span class="line">                &#39;link&#39;:link.get(&#39;href&#39;),</span><br><span class="line">                &#39;like&#39;:like.get_text()</span><br><span class="line">            &#125;</span><br><span class="line">            print(json.dumps(data, ensure_ascii&#x3D;False))</span><br><span class="line">            save_imgs(&#39;C:&#x2F;Users&#x2F;littleRich&#x2F;Desktop&#x2F;test1&#x2F;&#39;, img.get(&#39;src&#39;))   # 先手动创建test文件夹用于存图片</span><br><span class="line">def get_more_pages(start,end):</span><br><span class="line">    for one in range(start,end):</span><br><span class="line">        try:</span><br><span class="line">            get_page(url+str(one))</span><br><span class="line">            time.sleep(2)</span><br><span class="line">        except Exception as e:</span><br><span class="line">            print (e.message)	</span><br><span class="line">def save_imgs(folder, img_addr):  # 下载图片</span><br><span class="line">    filename &#x3D; img_addr.split(&#39;&#x2F;&#39;)[-1][:-16]   # [:-16]表示截取从头开始到倒数第十六个字符之前</span><br><span class="line">    img &#x3D; requests.get(img_addr).content   # 获取图片流数据</span><br><span class="line">    with open(folder + filename, &#39;wb&#39;) as f:    # 打开文件</span><br><span class="line">        f.write(img)	</span><br><span class="line">get_more_pages(1,5000)  # 爬取5000页异步加载数据</span><br></pre></td></tr></table></figure>
 <p>通过分析网页发现，上拉网页翻页异步加载数据后，网页会用Ajax请求新页面数据，再通过JS把请求回来的标签数据填充到原网页的指定位置。所以我们就用BeautifulSoup解析Ajax请求回来的数据<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180820/ajax.jpg" alt="异步请求数据分析"></p>
 <h3 id="0X04-多进程爬虫"><a href="#0X04-多进程爬虫" class="headerlink" title="0X04 多进程爬虫"></a>0X04 多进程爬虫</h3><p>Python的多进程是用multiprocessing第三方库实现，导入库中的Pool函数即可使用多进程啦。在Pool中可以配置进程池的个数什么的，一般我是用默认的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line">if __name__ == &apos;__main__&apos;:</span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(func, iterable[chunksize=None])  # func就是要在多进程中跑的函数</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from multiprocessing import Pool</span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    pool &#x3D; Pool()</span><br><span class="line">    pool.map(func, iterable[chunksize&#x3D;None])  # func就是要在多进程中跑的函数</span><br></pre></td></tr></table></figure>
 <p>需要说明pool的map函数，这个方法很神奇，在map函数的第二个参数是向第一个参数传入函数名的参数，即第二个参数是第一个参数函数的传入的值，关键是一个list，list中的每个值依次传入第一参数的函数中，这样第一个参数的函数就会在进程池中不断的跑。（我擦，说的乱七八糟，汗！！！）下面还是举个爬取58同城所有商品链接的例子吧。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">from multiprocessing import Pool</span><br><span class="line"># 多个待爬取链接入口</span><br><span class="line">channel_list= &apos;&apos;&apos;</span><br><span class="line">    http://bj.58.com/shouji/</span><br><span class="line">    http://bj.58.com/shoujihao/</span><br><span class="line">    http://bj.58.com/tongxunyw/</span><br><span class="line">    http://bj.58.com/diannao/</span><br><span class="line">    http://bj.58.com/bijiben/</span><br><span class="line">&apos;&apos;&apos;</span><br><span class="line"># 提取所有的商品的链接</span><br><span class="line">def get_links_from(channel, pages):</span><br><span class="line">    # http://bj.58.com/pbdnipad/pn2/?PGTID=0d3065d1-0000-1c3b-ecfd-c058ada2e844&amp;ClickID=1</span><br><span class="line">    list_view = &apos;&#123;&#125;/pn&#123;&#125;/&apos;.format(channel, str(pages))</span><br><span class="line">    web_data = requests.get(list_view)</span><br><span class="line">    time.sleep(5)</span><br><span class="line">    soup = BeautifulSoup(web_data.text, &apos;lxml&apos;)</span><br><span class="line">    if soup.find(&apos;td&apos;, &apos;t&apos;): # 判断是否为最后一个页面是没有商品的,没有找到就返回None</span><br><span class="line">        for link in soup.select(&apos;td.t  a.t&apos;):</span><br><span class="line">            item_link = link.get(&apos;href&apos;).split(&apos;?&apos;)[0]</span><br><span class="line">            print (item_link)</span><br><span class="line">    else: # 最后都是没有数据页</span><br><span class="line">        pass</span><br><span class="line"># 控制爬取页码</span><br><span class="line">def get_all_links_from(channel):  </span><br><span class="line">    for i in range(1,100):</span><br><span class="line">        get_links_from(channel,i)</span><br><span class="line"># 实现多进程爬取</span><br><span class="line">if __name__ == &apos;__main__&apos;:   </span><br><span class="line">    pool = Pool()</span><br><span class="line">    pool.map(get_all_links_from, channel_list.split())</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">import requests</span><br><span class="line">import time</span><br><span class="line">from multiprocessing import Pool</span><br><span class="line"># 多个待爬取链接入口</span><br><span class="line">channel_list&#x3D; &#39;&#39;&#39;</span><br><span class="line">    http:&#x2F;&#x2F;bj.58.com&#x2F;shouji&#x2F;</span><br><span class="line">    http:&#x2F;&#x2F;bj.58.com&#x2F;shoujihao&#x2F;</span><br><span class="line">    http:&#x2F;&#x2F;bj.58.com&#x2F;tongxunyw&#x2F;</span><br><span class="line">    http:&#x2F;&#x2F;bj.58.com&#x2F;diannao&#x2F;</span><br><span class="line">    http:&#x2F;&#x2F;bj.58.com&#x2F;bijiben&#x2F;</span><br><span class="line">&#39;&#39;&#39;</span><br><span class="line"># 提取所有的商品的链接</span><br><span class="line">def get_links_from(channel, pages):</span><br><span class="line">    # http:&#x2F;&#x2F;bj.58.com&#x2F;pbdnipad&#x2F;pn2&#x2F;?PGTID&#x3D;0d3065d1-0000-1c3b-ecfd-c058ada2e844&amp;ClickID&#x3D;1</span><br><span class="line">    list_view &#x3D; &#39;&#123;&#125;&#x2F;pn&#123;&#125;&#x2F;&#39;.format(channel, str(pages))</span><br><span class="line">    web_data &#x3D; requests.get(list_view)</span><br><span class="line">    time.sleep(5)</span><br><span class="line">    soup &#x3D; BeautifulSoup(web_data.text, &#39;lxml&#39;)</span><br><span class="line">    if soup.find(&#39;td&#39;, &#39;t&#39;): # 判断是否为最后一个页面是没有商品的,没有找到就返回None</span><br><span class="line">        for link in soup.select(&#39;td.t  a.t&#39;):</span><br><span class="line">            item_link &#x3D; link.get(&#39;href&#39;).split(&#39;?&#39;)[0]</span><br><span class="line">            print (item_link)</span><br><span class="line">    else: # 最后都是没有数据页</span><br><span class="line">        pass</span><br><span class="line"># 控制爬取页码</span><br><span class="line">def get_all_links_from(channel):  </span><br><span class="line">    for i in range(1,100):</span><br><span class="line">        get_links_from(channel,i)</span><br><span class="line"># 实现多进程爬取</span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:   </span><br><span class="line">    pool &#x3D; Pool()</span><br><span class="line">    pool.map(get_all_links_from, channel_list.split())</span><br></pre></td></tr></table></figure>
 
 <h3 id="0X05-requests代理池的使用"><a href="#0X05-requests代理池的使用" class="headerlink" title="0X05 requests代理池的使用"></a>0X05 requests代理池的使用</h3><p>为了减少单一IP短时间内过多的访问量，所以我们加入了代理的方式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">proxy_list = [</span><br><span class="line">    &apos;http://117.177.250.151:8081&apos;,</span><br><span class="line">    &apos;http://111.85.219.250:3129&apos;,</span><br><span class="line">    &apos;http://122.70.183.138:8118&apos;,</span><br><span class="line">    ]</span><br><span class="line">proxy_ip = random.choice(proxy_list) # 随机获取代理ip</span><br><span class="line">proxies = &#123;&apos;http&apos;: proxy_ip&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">proxy_list &#x3D; [</span><br><span class="line">    &#39;http:&#x2F;&#x2F;117.177.250.151:8081&#39;,</span><br><span class="line">    &#39;http:&#x2F;&#x2F;111.85.219.250:3129&#39;,</span><br><span class="line">    &#39;http:&#x2F;&#x2F;122.70.183.138:8118&#39;,</span><br><span class="line">    ]</span><br><span class="line">proxy_ip &#x3D; random.choice(proxy_list) # 随机获取代理ip</span><br><span class="line">proxies &#x3D; &#123;&#39;http&#39;: proxy_ip&#125;</span><br></pre></td></tr></table></figure>
 <p>在requests发起请求时加入代理即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb_data = requests.get(url, headers = headers, proxies = proxies)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wb_data &#x3D; requests.get(url, headers &#x3D; headers, proxies &#x3D; proxies)</span><br></pre></td></tr></table></figure>
 
 <h3 id="0X06-大规模爬虫架构"><a href="#0X06-大规模爬虫架构" class="headerlink" title="0X06 大规模爬虫架构"></a>0X06 大规模爬虫架构</h3><p>对于爬取的大规模数据一般我们都把抓取到的数据存储在MongoDB文档数据库中，主要由于爬取的数据不像关系型数据库中表关系字段那么规规矩矩，而且MongoDB中存储的数据结构与Python中的字典类似（数据格式跟json也一样，实际是BSON），存储就很方便了。在Python中操作MongoDB也挺简单的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line">client = pymongo.MongoClient(&apos;localhost&apos;, 27017)</span><br><span class="line">testdb = client[&apos;test&apos;]   # 创建数据库</span><br><span class="line">url_list = testdb[&apos;url_list&apos;]  # 数据库中的集合（和表是一个等级的）</span><br><span class="line">url_list.insert_one(&#123;&apos;url&apos;: xxx&#125;)  # 插入数据</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import pymongo</span><br><span class="line">client &#x3D; pymongo.MongoClient(&#39;localhost&#39;, 27017)</span><br><span class="line">testdb &#x3D; client[&#39;test&#39;]   # 创建数据库</span><br><span class="line">url_list &#x3D; testdb[&#39;url_list&#39;]  # 数据库中的集合（和表是一个等级的）</span><br><span class="line">url_list.insert_one(&#123;&#39;url&#39;: xxx&#125;)  # 插入数据</span><br></pre></td></tr></table></figure>
 <p>再说说大规模爬虫的架构设计，这部分后续我开源个爬虫框架再详细讲。</p>
 <h3 id="反爬技巧"><a href="#反爬技巧" class="headerlink" title="反爬技巧"></a>反爬技巧</h3><p>1、当遇到JS控制网页元素加载内容时，比如图片懒加载，简单的解决办法是爬取手机上的网页，因为手机版网页为了兼容适配，JS不会写太复杂，会直接一次性加载网页内容。<br>2、适当增加请求间隔时长<br>3、代理</p>
 <hr>
 <p><em>参考文献</em></p>
 <ul>
-<li><a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" title="Requests帮助文档" target="_blank" rel="noopener">Requests官方文档（中文）</a></li>
-<li><a href="https://beautifulsoup.readthedocs.io/zh_CN/latest/" title="Beautiful Soup" target="_blank" rel="noopener">Beautiful Soup官方文档（中文）</a></li>
-<li><a href="http://www.cheat-sheets.org/saved-copy/Locators_groups_1_0_2.pdf" title="选择器写法" target="_blank" rel="noopener">Xpath，CSS的语法说明（英文）</a></li>
-<li><a href="http://files.blogjava.net/sunchaojin/http1.3.pdf" title="超文本传输协议HTTP1.1" target="_blank" rel="noopener">超文本传输协议-HTTP1.1（中文）</a></li>
-<li><a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" title="菜鸟教程" target="_blank" rel="noopener">MongoDB教程（中文）</a></li>
-<li><a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" title="MongoDB的操作集合" target="_blank" rel="noopener">MongoDB的操作语法汇总（英文）</a></li>
+<li><a href="http://docs.python-requests.org/zh_CN/latest/user/quickstart.html" target="_blank" rel="noopener" title="Requests帮助文档">Requests官方文档（中文）</a></li>
+<li><a href="https://beautifulsoup.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener" title="Beautiful Soup">Beautiful Soup官方文档（中文）</a></li>
+<li><a href="http://www.cheat-sheets.org/saved-copy/Locators_groups_1_0_2.pdf" target="_blank" rel="noopener" title="选择器写法">Xpath，CSS的语法说明（英文）</a></li>
+<li><a href="http://files.blogjava.net/sunchaojin/http1.3.pdf" target="_blank" rel="noopener" title="超文本传输协议HTTP1.1">超文本传输协议-HTTP1.1（中文）</a></li>
+<li><a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="noopener" title="菜鸟教程">MongoDB教程（中文）</a></li>
+<li><a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="noopener" title="MongoDB的操作集合">MongoDB的操作语法汇总（英文）</a></li>
 </ul>
 
       
@@ -369,7 +363,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/08/21/大数据_网络爬虫让机器伪装人类的行为/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/08/21/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB%E8%AE%A9%E6%9C%BA%E5%99%A8%E4%BC%AA%E8%A3%85%E4%BA%BA%E7%B1%BB%E7%9A%84%E8%A1%8C%E4%B8%BA/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -383,7 +377,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/09/10/大数据_分布式服务框架zookeeper管理分布式环境中的数据/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/09/10/%E5%A4%A7%E6%95%B0%E6%8D%AE_%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%8D%E5%8A%A1%E6%A1%86%E6%9E%B6zookeeper%E7%AE%A1%E7%90%86%E5%88%86%E5%B8%83%E5%BC%8F%E7%8E%AF%E5%A2%83%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -393,7 +387,7 @@
     </a>
   
   
-    <a href="/2017/08/14/二级缓存终结者Redis用起来/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/08/14/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98%E7%BB%88%E7%BB%93%E8%80%85Redis%E7%94%A8%E8%B5%B7%E6%9D%A5/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">二级缓存终结者Redis用起来</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -453,7 +447,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -537,7 +531,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,22 +560,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +591,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -614,18 +620,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,15 +651,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,6 +664,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,19 +699,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,6 +731,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -750,10 +748,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

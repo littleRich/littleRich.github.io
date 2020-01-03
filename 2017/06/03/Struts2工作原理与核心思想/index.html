@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>Struts2工作原理与核心思想 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要:&amp;emsp;&amp;emsp;Struts2是一个基于MVC设计模式的Web应用开源框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。Web层框架都是一个特点有前端控制器模式，Struts2框架前端的控制器就是过滤器。">
-<meta name="keywords" content="框架集成,拦截器,OGNL表达式,值栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Struts2工作原理与核心思想">
-<meta property="og:url" content="http://littleRich.github.io/2017/06/03/Struts2工作原理与核心思想/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;06&#x2F;03&#x2F;Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;Struts2是一个基于MVC设计模式的Web应用开源框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。Web层框架都是一个特点有前端控制器模式，Struts2框架前端的控制器就是过滤器。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts_position.bmp">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts2.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts2_process.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/interceptor.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/abstractmethod.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/OgnlValueStack.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/ValueStack.jpg">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/parameters.jpg">
-<meta property="og:updated_time" content="2018-08-08T09:25:10.759Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;struts_position.bmp">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;struts2.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;struts2_process.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;interceptor.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;abstractmethod.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;OgnlValueStack.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;ValueStack.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;parameters.jpg">
+<meta property="article:published_time" content="2017-06-03T02:14:10.000Z">
+<meta property="article:modified_time" content="2018-08-08T09:25:10.759Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="框架集成">
+<meta property="article:tag" content="拦截器">
+<meta property="article:tag" content="OGNL表达式">
+<meta property="article:tag" content="值栈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Struts2工作原理与核心思想">
-<meta name="twitter:description" content="摘要:&amp;emsp;&amp;emsp;Struts2是一个基于MVC设计模式的Web应用开源框架，它本质上相当于一个servlet，在MVC设计模式中，Struts2作为控制器(Controller)来建立模型与视图的数据交互。Web层框架都是一个特点有前端控制器模式，Struts2框架前端的控制器就是过滤器。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts_position.bmp">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170602&#x2F;struts_position.bmp">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -46,8 +49,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -72,7 +75,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -172,7 +175,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -201,7 +204,7 @@
   
 
         
-        <a href="/2017/06/03/Struts2工作原理与核心思想/" class="archive-article-date">
+        <a href="/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/" class="archive-article-date">
   	<time datetime="2017-06-03T02:14:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-03</time>
 </a>
         
@@ -213,35 +216,34 @@
 <a id="more"></a>
 
 <h3 id="0X00-前言："><a href="#0X00-前言：" class="headerlink" title="0X00 前言："></a>0X00 前言：</h3><p>&emsp;&emsp;最近闲下来回顾了一下J2EE的传统SSH三大框架，许久没碰（新项目都用SpringMVC），莫名有些生疏，故继前天写了Hibernate的快速入门篇，今天再来一篇Struts的核心原理及思想分析。行文如有误差，可与我指正！ </p>
-<h3 id="0X01-Struts快速入门"><a href="#0X01-Struts快速入门" class="headerlink" title="0X01 Struts快速入门"></a>0X01 Struts快速入门</h3><p>1.下载<a href="https://struts.apache.org/download.cgi#struts2516" title="Struts开发包" target="_blank" rel="noopener">struts2的开发包</a></p>
+<h3 id="0X01-Struts快速入门"><a href="#0X01-Struts快速入门" class="headerlink" title="0X01 Struts快速入门"></a>0X01 Struts快速入门</h3><p>1.下载<a href="https://struts.apache.org/download.cgi#struts2516" target="_blank" rel="noopener" title="Struts开发包">struts2的开发包</a></p>
 <ul>
 <li>Full Distribution:下载Struts2的完整版，通常建议下载该选项，该选项包括Struts2的示例应用、空示例应用、核心库、源代码和文档等。  </li>
 <li>Essential Dependencies：仅下载Struts2的核心库，使用Struts2的web应用并不需要利用到Struts2全部特性，因此只需要最小化导包。  </li>
 </ul>
 <p><em>注：旧版本Struts开发包中的示例应用有个struts2-blank.war空应用，将该压缩包的WEB-INF/路径下lib包中的所有</em>.jar文件复制到Web应用的WEB-INF/lib路径下。*  </p>
 <p>2.导入Essential Dependencies中包含的依赖包到WEB应用中；<br>3.配置Struts2的前端控制器，注意：这一步是必须要做的操作，这是Struts2核心的控制器。Struts2的前端控制器就是一个过滤器，需要在web.xml中进行配置。前端控制器类的包路径和类名可以到Struts的核心包中Copy：Web APP Libraries –&gt; struts2-core-*.jar –&gt; org.apache.struts2.dispatcher.filter –&gt; StrutsPrepareAndExecuteFilter。具体在web.xml中配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Struts2的核心Filter --&gt;</span><br><span class="line">&lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;struts2&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;struts2&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- Struts2的核心Filter --&gt;</span><br><span class="line">&lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;struts2&lt;&#x2F;filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter&lt;&#x2F;filter-class&gt;</span><br><span class="line">&lt;&#x2F;filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;struts2&lt;&#x2F;filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;&#x2F;*&lt;&#x2F;url-pattern&gt;</span><br><span class="line">&lt;&#x2F;filter-mapping&gt;</span><br></pre></td></tr></table></figure>
 <p>是不是可以说Struts框架就是基于过滤器实现的。<br>4.Action类是动作类（一般要继承ActionSupport），是Struts2处理用户的请求，封装数据，响应页面的核心控制器。这也是开发者主要写的地方。不过Action类中的方法签名是有要求的，必须这么做：  </p>
 <ul>
 <li>public公有修饰</li>
 <li>必须有返回值，而且是String类型</li>
-<li>方法名可以任意，但不能有参数列表  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public String sayHello()&#123;</span><br><span class="line">	System.out.println(&quot;处理用户请求业务&quot;);</span><br><span class="line">	return &quot;ok&quot;;  //strut.xml中配置的跳转result名字，实现页面跳转</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>方法名可以任意，但不能有参数列表  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public String sayHello()&#123;</span><br><span class="line">	System.out.println(&quot;处理用户请求业务&quot;);</span><br><span class="line">	return &quot;ok&quot;;  &#x2F;&#x2F;strut.xml中配置的跳转result名字，实现页面跳转</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
 <p>5.第四步虽然写了Action动作类，但是Struts2并不知道关联调用哪个方法处理用户请求(Web请求路径与Action方法进行关联映射)，所以还需要一个struts.xml配置文件。在src下引入struts.xml配置文件（配置文件的路径必须是在src的目录下），简洁的配置如下：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE struts PUBLIC</span><br><span class="line">	&quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;</span><br><span class="line">	&quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&gt;		</span><br><span class="line">&lt;struts&gt;</span><br><span class="line">	&lt;package name=&quot;default&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;</span><br><span class="line">		&lt;action name=&quot;hello&quot; class=&quot;top.littlerich.action.HelloAction&quot; method=&quot;sayHello&quot;&gt;</span><br><span class="line">			&lt;!-- 配置跳转的页面，路径的写法：在Struts2框架中，不管是转发还是重定向，都不用写项目名 --&gt;</span><br><span class="line">			&lt;result name=&quot;ok&quot;&gt;/VIEW/ok.jsp&lt;/result&gt;</span><br><span class="line">		&lt;/action&gt;</span><br><span class="line">	&lt;/package&gt;</span><br><span class="line">&lt;/struts&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE struts PUBLIC</span><br><span class="line">	&quot;-&#x2F;&#x2F;Apache Software Foundation&#x2F;&#x2F;DTD Struts Configuration 2.3&#x2F;&#x2F;EN&quot;</span><br><span class="line">	&quot;http:&#x2F;&#x2F;struts.apache.org&#x2F;dtds&#x2F;struts-2.3.dtd&quot;&gt;		</span><br><span class="line">&lt;struts&gt;</span><br><span class="line">	&lt;package name&#x3D;&quot;default&quot; namespace&#x3D;&quot;&#x2F;&quot; extends&#x3D;&quot;struts-default&quot;&gt;</span><br><span class="line">		&lt;action name&#x3D;&quot;hello&quot; class&#x3D;&quot;top.littlerich.action.HelloAction&quot; method&#x3D;&quot;sayHello&quot;&gt;</span><br><span class="line">			&lt;!-- 配置跳转的页面，路径的写法：在Struts2框架中，不管是转发还是重定向，都不用写项目名 --&gt;</span><br><span class="line">			&lt;result name&#x3D;&quot;ok&quot;&gt;&#x2F;VIEW&#x2F;ok.jsp&lt;&#x2F;result&gt;</span><br><span class="line">		&lt;&#x2F;action&gt;</span><br><span class="line">	&lt;&#x2F;package&gt;</span><br><span class="line">&lt;&#x2F;struts&gt;</span><br></pre></td></tr></table></figure>
 
 <p>经过上面步骤，一个WEB应用中使用Struts基本功能了，在浏览器输入localhost:8080/Struts2Demo/hello.action（后缀.action只是标识这是用Struts开发的，可以省略），控制台既有输出。使用MVC框架后就该严格遵守MVC思想，MVC框架推荐应该避免让浏览者直接访问Web应用的视图页面，用户的所有请求都只应向控制器发送，由控制器调用模型组件、视图组件向用户呈现数据。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts2.jpg" alt="Struts2访问流程"> </p>
 <hr>
 <h3 id="0X02-Struts2的执行流程"><a href="#0X02-Struts2的执行流程" class="headerlink" title="0X02 Struts2的执行流程"></a>0X02 Struts2的执行流程</h3><p>用户请求 –&gt; Web容器 –&gt; StrutsPrepareAndExecuteFilter过滤器 –&gt; 执行一系列拦截器（在struts-default.xml配置文件中） –&gt; 执行到目标Action –&gt; 返回字符串 –&gt; 结果页面(result) –&gt; 页面跳转。<br><em>注：Eclipse导入Struts2源码，只需要导入上面下载的struts-xxx-all.zip即可。（Full Distribution版）</em><br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/struts2_process.png" alt="Struts2的执行流程"></p>
 <p>通过分析Struts2源码可知框架的运行机制（PS：Eclipse中查看方法被谁调用的快捷键<strong>Ctrl+Alt+H+选中该方法</strong>），StrutsPrePareAndExecuteFilter –&gt; init() –&gt; initDispatcher() –&gt; init()，可以看到该方法内具体加载的配置文件和加载配置文件的顺序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_FileManager();</span><br><span class="line">init_DefaultProperties();            // 加载org/apache/struts2/default.properties</span><br><span class="line">init_TraditionalXmlConfigurations(); // 加载struts-default.xml,struts-plugin.xml,struts.xml</span><br><span class="line">init_LegacyStrutsProperties();       // 加载自定义的struts.properties</span><br><span class="line">init_CustomConfigurationProviders(); // 加载用户自定义配置提供者</span><br><span class="line">init_FilterInitParameters() ;        // 加载web.xml</span><br><span class="line">init_AliasStandardObjects() ;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">init_FileManager();</span><br><span class="line">init_DefaultProperties();            &#x2F;&#x2F; 加载org&#x2F;apache&#x2F;struts2&#x2F;default.properties</span><br><span class="line">init_TraditionalXmlConfigurations(); &#x2F;&#x2F; 加载struts-default.xml,struts-plugin.xml,struts.xml</span><br><span class="line">init_LegacyStrutsProperties();       &#x2F;&#x2F; 加载自定义的struts.properties</span><br><span class="line">init_CustomConfigurationProviders(); &#x2F;&#x2F; 加载用户自定义配置提供者</span><br><span class="line">init_FilterInitParameters() ;        &#x2F;&#x2F; 加载web.xml</span><br><span class="line">init_AliasStandardObjects() ;</span><br></pre></td></tr></table></figure>
 
 <p>default.properties代表的是配置的是Struts2的常量的值；<br>struts-default.xml在Struts2的核心包下，代表的是Struts2核心功能的配置（Bean、拦截器、结果类型等）；<br>struts.xml重点中的重点配置，代表WEB应用的默认配置，在工作中，基本就配置它就可以了！！（可以配置常量）；<br>web.xml配置前端控制器（可以配置常量）。<br>先加载default.properties文件，在org/apache/struts2/default.properties文件，都是常量，又加载struts-default.xml配置文件，在核心的jar包最下方，struts2框架的核心功能都是在该配置文件中配置的。再加载struts.xml的配置文件，在src的目录下，代表用户自己配置的配置文件，最后加载web.xml的配置文件（这是Struts主动再次加载web.xml文件，原本服务器启动，Tomcat会先加载该文件的）。<br><em>后加载的配置文件会覆盖掉之前加载的配置文件</em>（在这些配置文件中可以配置常量）。   </p>
 <h3 id="0X03-Action中使用Servlet的API"><a href="#0X03-Action中使用Servlet的API" class="headerlink" title="0X03 Action中使用Servlet的API"></a>0X03 Action中使用Servlet的API</h3><ul>
-<li>Struts2提供操作的方式<br>既然Action可以响应前端的请求，那么如何像Servlet那样获取用户的请求数据呢？通过查找<a href="https://download.csdn.net/download/u012308094/10575429" title="Struts2接口文档" target="_blank" rel="noopener">Struts2的API文档</a>发现，Struts提供了一个类ActionContext，该静态类是当前接口的上下文，显然可以获取各种操作，可以通过操作request对象一样操作ActionContext对象。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// 完全接耦合的方式</span><br><span class="line">ActionContext context = ActionContext.getContext();</span><br><span class="line">// 获取到请求的参数，封装所有请求的参数</span><br><span class="line">Map&lt;String, Object&gt; map = context.getParameters();</span><br><span class="line">// 遍历获取数据</span><br><span class="line">Set&lt;String&gt; keys = map.keySet();</span><br><span class="line">for (String key : keys) &#123;</span><br><span class="line">	// 通过key，来获取到值</span><br><span class="line">	String [] vals = (String[]) map.get(key);</span><br><span class="line">	System.out.println(key+&quot; : &quot;+Arrays.toString(vals));</span><br><span class="line">&#125;	</span><br><span class="line">// 如果向request对象中存入值</span><br><span class="line">context.put(&quot;msg&quot;, &quot;数据挖掘&quot;);</span><br><span class="line">// 获取其他map集合</span><br><span class="line">context.getSession().put(&quot;msg&quot;, &quot;机器学习&quot;);</span><br><span class="line">context.getApplication().put(&quot;msg&quot;, &quot;数学建模&quot;);</span><br></pre></td></tr></table></figure>
+<li>Struts2提供操作的方式<br>既然Action可以响应前端的请求，那么如何像Servlet那样获取用户的请求数据呢？通过查找<a href="https://download.csdn.net/download/u012308094/10575429" target="_blank" rel="noopener" title="Struts2接口文档">Struts2的API文档</a>发现，Struts提供了一个类ActionContext，该静态类是当前接口的上下文，显然可以获取各种操作，可以通过操作request对象一样操作ActionContext对象。  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 完全接耦合的方式</span><br><span class="line">ActionContext context &#x3D; ActionContext.getContext();</span><br><span class="line">&#x2F;&#x2F; 获取到请求的参数，封装所有请求的参数</span><br><span class="line">Map&lt;String, Object&gt; map &#x3D; context.getParameters();</span><br><span class="line">&#x2F;&#x2F; 遍历获取数据</span><br><span class="line">Set&lt;String&gt; keys &#x3D; map.keySet();</span><br><span class="line">for (String key : keys) &#123;</span><br><span class="line">	&#x2F;&#x2F; 通过key，来获取到值</span><br><span class="line">	String [] vals &#x3D; (String[]) map.get(key);</span><br><span class="line">	System.out.println(key+&quot; : &quot;+Arrays.toString(vals));</span><br><span class="line">&#125;	</span><br><span class="line">&#x2F;&#x2F; 如果向request对象中存入值</span><br><span class="line">context.put(&quot;msg&quot;, &quot;数据挖掘&quot;);</span><br><span class="line">&#x2F;&#x2F; 获取其他map集合</span><br><span class="line">context.getSession().put(&quot;msg&quot;, &quot;机器学习&quot;);</span><br><span class="line">context.getApplication().put(&quot;msg&quot;, &quot;数学建模&quot;);</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
@@ -252,9 +254,9 @@
 <li>原生Servlet的操作方式（这个方法更推荐）  </li>
 </ul>
 <p>Struts2框架提供了一个类ServletActionContext，可以获取到Servlet的HttpServletRequest和HttpServletRequest对象，这样就直接操作Servlet，是不是很方便。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 获取到request对象</span><br><span class="line">HttpServletRequest request = ServletActionContext.getRequest();</span><br><span class="line">request.setAttribute(&quot;msg&quot;, &quot;jQuery&quot;);</span><br><span class="line">request.getSession().setAttribute(&quot;msg&quot;, &quot;HTML&quot;);</span><br><span class="line">ServletActionContext.getServletContext().setAttribute(&quot;msg&quot;, &quot;Bootstrap&quot;);</span><br><span class="line">// 使用输出流，输出字符串内容（异步请求开发）</span><br><span class="line">HttpServletResponse response = ServletActionContext.getResponse();</span><br><span class="line">response.getWriter().print(&quot;json&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 获取到request对象</span><br><span class="line">HttpServletRequest request &#x3D; ServletActionContext.getRequest();</span><br><span class="line">request.setAttribute(&quot;msg&quot;, &quot;jQuery&quot;);</span><br><span class="line">request.getSession().setAttribute(&quot;msg&quot;, &quot;HTML&quot;);</span><br><span class="line">ServletActionContext.getServletContext().setAttribute(&quot;msg&quot;, &quot;Bootstrap&quot;);</span><br><span class="line">&#x2F;&#x2F; 使用输出流，输出字符串内容（异步请求开发）</span><br><span class="line">HttpServletResponse response &#x3D; ServletActionContext.getResponse();</span><br><span class="line">response.getWriter().print(&quot;json&quot;);</span><br></pre></td></tr></table></figure>
 
-<h3 id="0X04-拦截器"><a href="#0X04-拦截器" class="headerlink" title="0X04 拦截器"></a>0X04 拦截器</h3><p>拦截器就是AOP（Aspect-Oriented Programming）的一种实现。（AOP是指用于在某个方法或字段被访问之前，进行拦截然后在之前或之后加入某些操作。）<br><em>拓展：在移动逆向安全中常常用到Hook技术，跟拦截器是一样的原理，拦截被破解程序的函数执行，修改第三方程序函数运行过程中的参数值。</em><br>可以在Struts2接口文档中查找Interceptor接口。intercetor就是拦截到方法后要处理的操作，其中参数ActionInvocation对象就是管理所有拦截器。拦截完方法后要放开执行，不然会中断原有的执行逻辑，故要调用invoke方法即放开执行被拦截方法。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/interceptor.jpg" alt="拦截器接口Interceptor"><br>一般我们不直接实现拦截器Interceptor接口，而是去继承它的子类，比较常用的子类有AbstractInterceptor和<a href="https://blog.csdn.net/judyge/article/details/50996865" title="实现未登录验证" target="_blank" rel="noopener">MethodFilterInterceptor</a>类。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/abstractmethod.jpg" alt="Interceptor的子类">  </p>
+<h3 id="0X04-拦截器"><a href="#0X04-拦截器" class="headerlink" title="0X04 拦截器"></a>0X04 拦截器</h3><p>拦截器就是AOP（Aspect-Oriented Programming）的一种实现。（AOP是指用于在某个方法或字段被访问之前，进行拦截然后在之前或之后加入某些操作。）<br><em>拓展：在移动逆向安全中常常用到Hook技术，跟拦截器是一样的原理，拦截被破解程序的函数执行，修改第三方程序函数运行过程中的参数值。</em><br>可以在Struts2接口文档中查找Interceptor接口。intercetor就是拦截到方法后要处理的操作，其中参数ActionInvocation对象就是管理所有拦截器。拦截完方法后要放开执行，不然会中断原有的执行逻辑，故要调用invoke方法即放开执行被拦截方法。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/interceptor.jpg" alt="拦截器接口Interceptor"><br>一般我们不直接实现拦截器Interceptor接口，而是去继承它的子类，比较常用的子类有AbstractInterceptor和<a href="https://blog.csdn.net/judyge/article/details/50996865" target="_blank" rel="noopener" title="实现未登录验证">MethodFilterInterceptor</a>类。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/abstractmethod.jpg" alt="Interceptor的子类">  </p>
 <ul>
 <li>拦截器与过滤器的区别<br>1）拦截器是基于JAVA反射机制的，而过滤器是基于函数回调的；<br>2）过滤器依赖于Servlet容器，而拦截器不依赖于Servlet容器；<br>3）拦截器只能对Action请求起作用（Action中的方法），而过滤器可以对几乎所有的请求起作用（CSS JSP JS）。注意：拦截器不能拦截JSP！    </li>
 </ul>
@@ -263,35 +265,48 @@
 <li>自定义拦截器  </li>
 </ul>
 <p>1.创建拦截器类，继承AbstractInterceptor<br>2、实现intercept方法，编写拦截处理的操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public String intercept(ActionInvocation invocation) throws Exception &#123;	</span><br><span class="line">   //Action拦截之前		</span><br><span class="line">   String result = invocation.invoke();   //执行被拦截的函数</span><br><span class="line">   //Action拦截之后</span><br><span class="line">   return result; //必须有返回值，后续的拦截器才能执行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public String intercept(ActionInvocation invocation) throws Exception &#123;	</span><br><span class="line">   &#x2F;&#x2F;Action拦截之前		</span><br><span class="line">   String result &#x3D; invocation.invoke();   &#x2F;&#x2F;执行被拦截的函数</span><br><span class="line">   &#x2F;&#x2F;Action拦截之后</span><br><span class="line">   return result; &#x2F;&#x2F;必须有返回值，后续的拦截器才能执行</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>3、在struts.xml中声明拦截器，并绑定到指定Action类中的方法上；  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;package name=&quot;interceptor&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;	</span><br><span class="line">	&lt;interceptors&gt; </span><br><span class="line">		&lt;interceptor name=&quot;DemoInterceptor&quot; class=&quot;top.littlerich.demo.DemoInterceptor&quot;/&gt;</span><br><span class="line">        &lt;interceptor-stack name=&quot;myStack&quot;&gt;</span><br><span class="line">			&lt;interceptor-ref name=&quot;DemoInterceptor&quot;/&gt;</span><br><span class="line">			&lt;interceptor-ref name=&quot;defaultStack&quot;/&gt;</span><br><span class="line">		&lt;/interceptor-stack&gt;		</span><br><span class="line">	&lt;/interceptors&gt;	</span><br><span class="line">	&lt;action name=&quot;demoInterceptor&quot; class=&quot;top.littlerich.demo.Demo3Action&quot;&gt; //Demo3Action类中的默认execute方法被拦截</span><br><span class="line">		&lt;interceptor-ref name=&quot;myStack&quot; /&gt;   //引入拦截器栈就OK</span><br><span class="line">	&lt;/action&gt;</span><br><span class="line">&lt;/package&gt;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;package name&#x3D;&quot;interceptor&quot; namespace&#x3D;&quot;&#x2F;&quot; extends&#x3D;&quot;struts-default&quot;&gt;	</span><br><span class="line">	&lt;interceptors&gt; </span><br><span class="line">		&lt;interceptor name&#x3D;&quot;DemoInterceptor&quot; class&#x3D;&quot;top.littlerich.demo.DemoInterceptor&quot;&#x2F;&gt;</span><br><span class="line">        &lt;interceptor-stack name&#x3D;&quot;myStack&quot;&gt;</span><br><span class="line">			&lt;interceptor-ref name&#x3D;&quot;DemoInterceptor&quot;&#x2F;&gt;</span><br><span class="line">			&lt;interceptor-ref name&#x3D;&quot;defaultStack&quot;&#x2F;&gt;</span><br><span class="line">		&lt;&#x2F;interceptor-stack&gt;		</span><br><span class="line">	&lt;&#x2F;interceptors&gt;	</span><br><span class="line">	&lt;action name&#x3D;&quot;demoInterceptor&quot; class&#x3D;&quot;top.littlerich.demo.Demo3Action&quot;&gt; &#x2F;&#x2F;Demo3Action类中的默认execute方法被拦截</span><br><span class="line">		&lt;interceptor-ref name&#x3D;&quot;myStack&quot; &#x2F;&gt;   &#x2F;&#x2F;引入拦截器栈就OK</span><br><span class="line">	&lt;&#x2F;action&gt;</span><br><span class="line">&lt;&#x2F;package&gt;</span><br></pre></td></tr></table></figure>
 <p>注意第6行代码，只引入自定义的拦截器，默认栈的拦截器就不执行了，所以必须引入Struts2默认的拦截器栈，不然默认的一些功能就没了，比如自带的处理post中文乱码问题等。  </p>
 <h3 id="0X05-OGNL"><a href="#0X05-OGNL" class="headerlink" title="0X05 OGNL"></a>0X05 OGNL</h3><p>以往我们在Servlet和JSP间通信通过EL表达式操作四大域对象，比如存入到request域对象中，转发到JSP页面中取出值。现在Struts2框架提供了值杖，把Action中查询到的数据，存入到值栈中，转发到JSP页面上就可以从值栈中获取值，提供标签。<br>其实值栈是由OGNL包装而成，OGNL本身是个Java项目，一种比EL表达式强大很多的表达式语言，不仅可以存取对象的任意属性，还可以调用对象的方法。（EL表达式只能对域对象存取值）  </p>
 <ol>
-<li><p>OGNL存取值  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 上下文对象</span><br><span class="line">OgnlContext context = new OgnlContext();</span><br><span class="line">// 获取到跟对象</span><br><span class="line">Object root = context.getRoot();</span><br><span class="line">// 存储数据</span><br><span class="line">context.put(&quot;name&quot;, &quot;物联网实验室&quot;);</span><br><span class="line">// 获取值，表达式写法</span><br><span class="line">Object value = Ognl.getValue(&quot;#name&quot;, context, root);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>OGNL表达式调用方法演示</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 上下文对象</span><br><span class="line">OgnlContext context = new OgnlContext();</span><br><span class="line">// 获取到根对象</span><br><span class="line">Object root = context.getRoot();</span><br><span class="line">// 获取值，表达式写法</span><br><span class="line">Object value = Ognl.getValue(&quot;&apos;haha&apos;.length()&quot;, context, root);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure>
-
-</li>
+<li>OGNL存取值  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 上下文对象</span><br><span class="line">OgnlContext context &#x3D; new OgnlContext();</span><br><span class="line">&#x2F;&#x2F; 获取到跟对象</span><br><span class="line">Object root &#x3D; context.getRoot();</span><br><span class="line">&#x2F;&#x2F; 存储数据</span><br><span class="line">context.put(&quot;name&quot;, &quot;物联网实验室&quot;);</span><br><span class="line">&#x2F;&#x2F; 获取值，表达式写法</span><br><span class="line">Object value &#x3D; Ognl.getValue(&quot;#name&quot;, context, root);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure></li>
+<li>OGNL表达式调用方法演示<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 上下文对象</span><br><span class="line">OgnlContext context &#x3D; new OgnlContext();</span><br><span class="line">&#x2F;&#x2F; 获取到根对象</span><br><span class="line">Object root &#x3D; context.getRoot();</span><br><span class="line">&#x2F;&#x2F; 获取值，表达式写法</span><br><span class="line">Object value &#x3D; Ognl.getValue(&quot;&#39;haha&#39;.length()&quot;, context, root);</span><br><span class="line">System.out.println(value);</span><br></pre></td></tr></table></figure>
+Struts2把所有标签都定义在一个s标签库里。</li>
 </ol>
-<p>Struts2把所有标签都定义在一个s标签库里。</p>
 <h3 id="0X06-值栈"><a href="#0X06-值栈" class="headerlink" title="0X06 值栈"></a>0X06 值栈</h3><p>值栈就相当于Struts2框架的数据中转站，值栈使用OGNL表达式来存取数据，向值栈存入一些数据，再从值栈中获取到数据。<br>上面我们了解了Struts2的执行流程知道，当Struts2接收到请求后，最先由核心的StrutsPrepareAndExecuteFilter过滤器来处理，其中就有个操作就是创建值栈，后续经过数个拦截器都可以往值栈存取数据，最后才执行到开发者编写的Action动作类，同样可以往值栈存取数据，在前端页面就可以在值栈中取出数据显示出来。<br>Servlet是单例的，每次请求都创建一个线程共用一个Servlet实例。但Action是多例的，每来一个请求就创建一个Action实例，并会创建一个ActionContext上下文对象和ValueStack对象。也就是说，每个Action实例都有一个ValueStack对象（一个请求对应一个ValueStack对象），将ValueStack对象命名为struts.valueStack，存储到request对象中（值栈对象是request域对象的一个属性）。因此可以从request对象中获取ValueStack对象：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueStack vs = (ValueStack)request.getAttribute(&quot;struts.valueStack&quot;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueStack vs &#x3D; (ValueStack)request.getAttribute(&quot;struts.valueStack&quot;);</span><br></pre></td></tr></table></figure>
 
 <p>从源码角度来看看值栈。在Eclipse中搜索ValueStack类（Ctrl+Shift+t），ValueStack是Struts2提供的一个接口，紧接着鼠标选中ValueStack接口名(Ctrl+t查看子类)，看看它的实现类有OgnlValueStack。如下图OgnlValueStack中比较重要的属性有root和context两个对象，CompoundRoot类实际就是个List。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/OgnlValueStack.jpg" alt="OgnlValueStack源码分析"><br>context键值对中存放了大部分是Struts2框架处理的数据。ValueStack值栈的内部结构如图所示：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/ValueStack.jpg" alt="ValueStack内部结构"><br>所以就可以获取context默认填充的数据：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170602/parameters.jpg" alt="取出请求的数据"></p>
 <h4 id="0X07-Action中存值和JSP取值"><a href="#0X07-Action中存值和JSP取值" class="headerlink" title="0X07 Action中存值和JSP取值"></a>0X07 Action中存值和JSP取值</h4><p>往root栈中压入数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ValueStack vs = ActionContext.getContext().getValueStack();</span><br><span class="line">vs.push(&quot;大数据处理&quot;);  //向root栈中压入一个字符串</span><br><span class="line">vs.set(&quot;msg&quot;, &quot;Struts2框架&quot;);  //向root栈中创建一个Map并压入数据</span><br><span class="line">vs.set(&quot;info&quot;, &quot;这个也是测试数据&quot;); //直接往root栈顶Map添加数据</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ValueStack vs &#x3D; ActionContext.getContext().getValueStack();</span><br><span class="line">vs.push(&quot;大数据处理&quot;);  &#x2F;&#x2F;向root栈中压入一个字符串</span><br><span class="line">vs.set(&quot;msg&quot;, &quot;Struts2框架&quot;);  &#x2F;&#x2F;向root栈中创建一个Map并压入数据</span><br><span class="line">vs.set(&quot;info&quot;, &quot;这个也是测试数据&quot;); &#x2F;&#x2F;直接往root栈顶Map添加数据</span><br></pre></td></tr></table></figure>
 <p>在JSP中取出root栈中数据,[序号]表示root栈中数据顺序,top是为了去除多余数据  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//JSP文件头引入OGNL标签库</span><br><span class="line">&lt;%@ taglib prefix=&quot;s&quot; uri=&quot;/struts-tags&quot;%&gt;</span><br><span class="line">//取出root栈顶的字符串</span><br><span class="line">&lt;s:property value=&quot;[0].top&quot;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;JSP文件头引入OGNL标签库</span><br><span class="line">&lt;%@ taglib prefix&#x3D;&quot;s&quot; uri&#x3D;&quot;&#x2F;struts-tags&quot;%&gt;</span><br><span class="line">&#x2F;&#x2F;取出root栈顶的字符串</span><br><span class="line">&lt;s:property value&#x3D;&quot;[0].top&quot;&gt;</span><br></pre></td></tr></table></figure>
 
 <p>OGNL表达式取出context中的数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;s:property value=&quot;#request.msg&quot;/&gt;</span><br><span class="line">&lt;s:property value=&quot;#session.msg&quot;/&gt;</span><br><span class="line">&lt;s:property value=&quot;#parameters.id&quot;/&gt;</span><br><span class="line">&lt;s:property value=&quot;#attr.msg&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;s:property value&#x3D;&quot;#request.msg&quot;&#x2F;&gt;</span><br><span class="line">&lt;s:property value&#x3D;&quot;#session.msg&quot;&#x2F;&gt;</span><br><span class="line">&lt;s:property value&#x3D;&quot;#parameters.id&quot;&#x2F;&gt;</span><br><span class="line">&lt;s:property value&#x3D;&quot;#attr.msg&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       
@@ -411,7 +426,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/06/03/Struts2工作原理与核心思想/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/06/03/Struts2%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B8%8E%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -425,7 +440,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/08/04/快让Maven管理你的项目吧/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/08/04/%E5%BF%AB%E8%AE%A9Maven%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E5%90%A7/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -435,7 +450,7 @@
     </a>
   
   
-    <a href="/2017/06/01/Hibernate持久层框架快速入门/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/06/01/Hibernate%E6%8C%81%E4%B9%85%E5%B1%82%E6%A1%86%E6%9E%B6%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Hibernate让你解放SQL的持久层框架</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -495,7 +510,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -579,7 +594,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -592,22 +623,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -639,6 +654,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -656,18 +683,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -699,15 +714,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -720,6 +727,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -743,19 +762,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -779,6 +794,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -792,10 +811,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

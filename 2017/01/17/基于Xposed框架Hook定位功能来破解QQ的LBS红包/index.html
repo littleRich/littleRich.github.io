@@ -1,31 +1,35 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>基于Xposed框架Hook定位功能来破解QQ的LBS红包 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文首发于 http://littleRich.top，原文地址：http://littlerich.top/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E">
-<meta name="keywords" content="Hook进阶,逆向分析,Xposed插件开发,虚拟定位,Xposed教程">
+  <meta name="description" content="本文首发于 http:&#x2F;&#x2F;littleRich.top，原文地址：http:&#x2F;&#x2F;littlerich.top&#x2F;2017&#x2F;01&#x2F;17&#x2F;%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Xposed框架Hook定位功能来破解QQ的LBS红包">
-<meta property="og:url" content="http://littleRich.github.io/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2017&#x2F;01&#x2F;17&#x2F;%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
-<meta property="og:description" content="本文首发于 http://littleRich.top，原文地址：http://littlerich.top/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_beijing.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_hangzhou.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_chengdu.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/set_as.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/multi_dex.png">
-<meta property="og:updated_time" content="2017-04-28T09:10:40.471Z">
+<meta property="og:description" content="本文首发于 http:&#x2F;&#x2F;littleRich.top，原文地址：http:&#x2F;&#x2F;littlerich.top&#x2F;2017&#x2F;01&#x2F;17&#x2F;%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;location_beijing.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;location_hangzhou.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;location_chengdu.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;set_as.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;multi_dex.png">
+<meta property="article:published_time" content="2017-01-17T02:01:17.000Z">
+<meta property="article:modified_time" content="2017-04-28T09:10:40.471Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Hook进阶">
+<meta property="article:tag" content="逆向分析">
+<meta property="article:tag" content="Xposed插件开发">
+<meta property="article:tag" content="虚拟定位">
+<meta property="article:tag" content="Xposed教程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于Xposed框架Hook定位功能来破解QQ的LBS红包">
-<meta name="twitter:description" content="本文首发于 http://littleRich.top，原文地址：http://littlerich.top/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/location_beijing.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20170117&#x2F;location_beijing.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -43,8 +47,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -69,7 +73,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -169,7 +173,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -198,7 +202,7 @@
   
 
         
-        <a href="/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/" class="archive-article-date">
+        <a href="/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/" class="archive-article-date">
   	<time datetime="2017-01-17T02:01:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-01-17</time>
 </a>
         
@@ -212,19 +216,17 @@
 <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;&emsp;最先开始打算用Android设备上的开发者选项里的虚拟定位功能，但经过测试这个已被QQ微信检测过滤掉了，并不能欺骗QQ微信定位到我们设定的位置。所以就通过Hook系统定位模块，还加上反编译QQ，Hook了QQ特定的基于基站定位的代码。<br>下面给出Xposed相关的网址，相信对你使用Xposed插件开发肯定有用，也有利于理解Android上Hook的实现原理。<br>xposed官网：<a href="http://repo.xposed.info/" target="_blank" rel="noopener">http://repo.xposed.info/</a><br>xposed javadoc地址：<a href="http://api.xposed.info" target="_blank" rel="noopener">http://api.xposed.info</a><br>xda论坛的xposed版块：<a href="http://forum.xda-developers.com/xposed" target="_blank" rel="noopener">http://forum.xda-developers.com/xposed</a><br>XposedBridgeApi地址：<a href="https://jcenter.bintray.com/de/robv/android/xposed/api/" target="_blank" rel="noopener">https://jcenter.bintray.com/de/robv/android/xposed/api/</a><br>&emsp;&emsp;注：其实最初是我女朋友问我能不能实现这个功能，所以打算集成百度地图获取经纬度，省的手动输入经纬度，便于使用。</p>
 <hr>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h3><p>要实现Hook虚拟定位，得要先知道定位功能的实现原理，再进一步会正常定位功能的代码实现，接着就可以针对定位代码进行Hook修改定位返回的经纬度值。下面我也是按照这个顺序分析本程序的实现，写的不清楚的地方可以给我留言，探讨探讨。</p>
-<h4 id="一、常用定位技术原理"><a href="#一、常用定位技术原理" class="headerlink" title="一、常用定位技术原理"></a>一、常用定位技术原理</h4><p>动手之前，先了解下定位原理，这样就可以有针对性的Hook定位模块代码。<br>地理定位有常用的4中方式：GPS定位、基站定位、WiFi辅助定位、AGPS辅助全球卫星定位系统；<br>（1）需要GPS硬件支持，直接和卫星交互来获取当前经纬度，通过GPS方式准确度是最高的，GPS走的是卫星通信的通道，在没有网络连接的情况下也能用。<br>（2）<a href="http://blog.csdn.net/qq_15807167/article/details/51899388" title="基站定位技术" target="_blank" rel="noopener">基站定位</a>：本程序里就是Hook基站定位的代码，所以这个你可以好好看看实现原理。移动设备在GSM网络中通信，实际上就是通过某一个蜂窝基站接入GSM网络，然后通过GSM网络进行数据（语音数据、文本数据、多媒体数据等）传输的。也就是说我们在GSM中通信时，总是需要和某一个蜂窝基站连接的，或者说是处于某一个蜂窝小区中的。那么GSM定位，就是借助这些蜂窝基站进行定位。基站定位一般有几种，第一种是利用手机附近的三个基站进行三角定位，由于每个基站的位置是固定的，利用电磁波在这三个基站间中转所需要时间来算出手机所在的坐标；第二种则是利用获取最近的基站的信息，其中包括基站 id，location area code、mobile country code、mobile network code和信号强度，将这些数据发送到google的定位web服务里，就能拿到当前所在的位置信息，误差一般在几十米到几百米之内。其中信号强度这个数据很重要。下面前两个参数，必须通过Hook修改掉，分别是基站ID和基站所在地编号。<br>&emsp;&emsp;”cell_id” → cid<br>&emsp;&emsp;”location_area_code” → lac<br>&emsp;&emsp;”mobile_country_code” → mcc<br>&emsp;&emsp;”mobile_network_code” → mnc<br>（3）<a href="https://www.zhihu.com/question/20593603" title="WIFI的原理" target="_blank" rel="noopener">WIFI定位</a>：根据一个固定的WifiMAC地址，通过收集到的该Wifi热点的位置，然后访问网络上的定位服务以获得经纬度坐标，原理也和基站定位一样，必须要拿到WIFI路由器的SSID和信号强度。因为它和基站定位其实都需要使用网络，所以在Android也统称为Network方式。<br>（4）<a href="http://www.cnblogs.com/magicboy110/archive/2010/12/12/1903927.html" title="AGPS定位基本原理浅析" target="_blank" rel="noopener">AGPS定位</a>：结合GSM或GPRS与传统卫星定位，利用基地台代送辅助卫星信息，以缩减GPS芯片获取卫星信号的延迟时间，受遮盖的室内也能借基地台讯号弥补，减轻GPS芯片对卫星的依赖度。  </p>
+<h4 id="一、常用定位技术原理"><a href="#一、常用定位技术原理" class="headerlink" title="一、常用定位技术原理"></a>一、常用定位技术原理</h4><p>动手之前，先了解下定位原理，这样就可以有针对性的Hook定位模块代码。<br>地理定位有常用的4中方式：GPS定位、基站定位、WiFi辅助定位、AGPS辅助全球卫星定位系统；<br>（1）需要GPS硬件支持，直接和卫星交互来获取当前经纬度，通过GPS方式准确度是最高的，GPS走的是卫星通信的通道，在没有网络连接的情况下也能用。<br>（2）<a href="http://blog.csdn.net/qq_15807167/article/details/51899388" target="_blank" rel="noopener" title="基站定位技术">基站定位</a>：本程序里就是Hook基站定位的代码，所以这个你可以好好看看实现原理。移动设备在GSM网络中通信，实际上就是通过某一个蜂窝基站接入GSM网络，然后通过GSM网络进行数据（语音数据、文本数据、多媒体数据等）传输的。也就是说我们在GSM中通信时，总是需要和某一个蜂窝基站连接的，或者说是处于某一个蜂窝小区中的。那么GSM定位，就是借助这些蜂窝基站进行定位。基站定位一般有几种，第一种是利用手机附近的三个基站进行三角定位，由于每个基站的位置是固定的，利用电磁波在这三个基站间中转所需要时间来算出手机所在的坐标；第二种则是利用获取最近的基站的信息，其中包括基站 id，location area code、mobile country code、mobile network code和信号强度，将这些数据发送到google的定位web服务里，就能拿到当前所在的位置信息，误差一般在几十米到几百米之内。其中信号强度这个数据很重要。下面前两个参数，必须通过Hook修改掉，分别是基站ID和基站所在地编号。<br>&emsp;&emsp;”cell_id” → cid<br>&emsp;&emsp;”location_area_code” → lac<br>&emsp;&emsp;”mobile_country_code” → mcc<br>&emsp;&emsp;”mobile_network_code” → mnc<br>（3）<a href="https://www.zhihu.com/question/20593603" target="_blank" rel="noopener" title="WIFI的原理">WIFI定位</a>：根据一个固定的WifiMAC地址，通过收集到的该Wifi热点的位置，然后访问网络上的定位服务以获得经纬度坐标，原理也和基站定位一样，必须要拿到WIFI路由器的SSID和信号强度。因为它和基站定位其实都需要使用网络，所以在Android也统称为Network方式。<br>（4）<a href="http://www.cnblogs.com/magicboy110/archive/2010/12/12/1903927.html" target="_blank" rel="noopener" title="AGPS定位基本原理浅析">AGPS定位</a>：结合GSM或GPRS与传统卫星定位，利用基地台代送辅助卫星信息，以缩减GPS芯片获取卫星信号的延迟时间，受遮盖的室内也能借基地台讯号弥补，减轻GPS芯片对卫星的依赖度。  </p>
 <hr>
 <h5 id="二、Xposed插件开发流程"><a href="#二、Xposed插件开发流程" class="headerlink" title="二、Xposed插件开发流程"></a>二、Xposed插件开发流程</h5><p>1、将jar复制到app下的libs目录中，并右键选择As a library。在gradle.build文件中将compile files(‘jar/XposedBridgeApi-54.jar’)改成provided files(‘jar/XposedBridgeApi-54.jar’)<br>2、在AndroidManifest.xml中添加标识为Xposed插件程序：  </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- xposed模块开关，默认true就行 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">meta-data</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:name</span>=<span class="string">"xposedmodule"</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:value</span>=<span class="string">"true"</span> /&gt;</span>             </span><br><span class="line"> <span class="comment">&lt;!-- 提示文字 --&gt;</span> </span><br><span class="line"> <span class="tag">&lt;<span class="name">meta-data</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:name</span>=<span class="string">"xposeddescription"</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:value</span>=<span class="string">"本程序描述，会在Xposed上显示"</span> /&gt;</span> </span><br><span class="line"><span class="comment">&lt;!-- 最低版本支持 --&gt;</span> </span><br><span class="line">  <span class="tag">&lt;<span class="name">meta-data</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:name</span>=<span class="string">"xposedminversion"</span>  </span></span><br><span class="line"><span class="tag">     <span class="attr">android:value</span>=<span class="string">"54"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>3、新建一个类HookApk.java，并实现IXposedHookLoadPackage接口，并实现IXposedHookLoadPackage接口中的handleLoadPackage方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HookApk</span> <span class="keyword">implements</span> <span class="title">IXposedHookLoadPackage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(XC_LoadPackage.LoadPackageParam loadPackageParam)</span> <span class="keyword">throws</span> Throwable </span>&#123; </span><br><span class="line">        <span class="comment">//这里测试Hook静态变量,修改手机机型和厂商       </span></span><br><span class="line">		XposedHelpers.setStaticObjectField(android.os.Build.class, <span class="string">"MODEL"</span>, <span class="string">"7 plus 256G(全球预售)"</span>);<span class="comment">//机型</span></span><br><span class="line">        <span class="comment">//XposedHelpers.setStaticObjectField(android.os.Build.class, "BOARD", "Apple");</span></span><br><span class="line">       XposedHelpers.setStaticObjectField(android.os.Build.class, <span class="string">"MANUFACTURER"</span>, <span class="string">"iPhone"</span>);<span class="comment">//厂商</span></span><br><span class="line">       XposedHelpers.setStaticObjectField(android.os.Build.class, <span class="string">"BRAND"</span>, <span class="string">"Apple"</span>);<span class="comment">//品牌</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HookApk</span> <span class="keyword">implements</span> <span class="title">IXposedHookLoadPackage</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleLoadPackage</span><span class="params">(XC_LoadPackage.LoadPackageParam loadPackageParam)</span> <span class="keyword">throws</span> Throwable </span>&#123; </span><br><span class="line">        <span class="comment">//这里测试Hook静态变量,修改手机机型和厂商       </span></span><br><span class="line">		XposedHelpers.setStaticObjectField(android.os.Build.class, "MODEL", "7 plus 256G(全球预售)");//机型</span><br><span class="line">        <span class="comment">//XposedHelpers.setStaticObjectField(android.os.Build.class, "BOARD", "Apple");</span></span><br><span class="line">       XposedHelpers.setStaticObjectField(android.os.Build.class, "MANUFACTURER", "iPhone");//厂商</span><br><span class="line">       XposedHelpers.setStaticObjectField(android.os.Build.class, "BRAND", "Apple");//品牌</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>4、在assets中创建一个新的文件，命名为xposed_init，在里面添加你刚才创建的类名top.littlerich.HookApk<br>5、运行应用，在xposed框架中勾选你刚才编写的模块，重启手机，我们写的Xposed插件就开始运行了。<br>【注：本程序是用Android Studio开发，Eclipse已许久不开发Android了】<br>如果只是单纯的Hook，不需要Activity，那么编译打包的时候会报android studio default activity not found异常，这时就要把AS默认打开Activity配置改了，如下图：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20170117/set_as.png" alt="修改android studio default activity not found问题"></p>
 <hr>
 <h5 id="三、Hook-GPS定位模块代码"><a href="#三、Hook-GPS定位模块代码" class="headerlink" title="三、Hook GPS定位模块代码"></a>三、Hook GPS定位模块代码</h5><p>先要知道GPS定位代码是如何写，GPS获取经纬度如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getLocation</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">    <span class="comment">// 获取位置管理服务  </span></span><br><span class="line">    LocationManager locationManager;  </span><br><span class="line">    String serviceName = Context.LOCATION_SERVICE;  </span><br><span class="line">    locationManager = (LocationManager)<span class="keyword">this</span>.getSystemService(serviceName);  </span><br><span class="line">    <span class="comment">// 查找到服务信息  </span></span><br><span class="line">    Criteria criteria = <span class="keyword">new</span> Criteria();  </span><br><span class="line">    criteria.setAccuracy(Criteria.ACCURACY_FINE); <span class="comment">// 高精度  </span></span><br><span class="line">    criteria.setAltitudeRequired(<span class="keyword">false</span>);  </span><br><span class="line">    criteria.setBearingRequired(<span class="keyword">false</span>);  </span><br><span class="line">    criteria.setCostAllowed(<span class="keyword">true</span>);  </span><br><span class="line">    criteria.setPowerRequirement(Criteria.POWER_LOW); <span class="comment">// 低功耗  </span></span><br><span class="line">    String provider =locationManager.getBestProvider(criteria, <span class="keyword">true</span>); <span class="comment">// 获取GPS信息  </span></span><br><span class="line">    Location location =locationManager.getLastKnownLocation(provider); <span class="comment">// 通过GPS获取位置  </span></span><br><span class="line">    updateToNewLocation(location);  </span><br><span class="line">    <span class="comment">// 设置监听器，自动更新的最小时间为间隔N秒(1秒为1*1000，这样写主要为了方便)或最小位移变化超过N米  </span></span><br><span class="line">    locationManager.requestLocationUpdates(provider,<span class="number">100</span> * <span class="number">1000</span>, <span class="number">500</span>,locationListener);  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="comment">//到这里就可以获取到地理位置信息了：</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateToNewLocation</span><span class="params">(Location location)</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">if</span> (location != <span class="keyword">null</span>) &#123;  </span><br><span class="line">        <span class="keyword">double</span> latitude = location.getLatitude();<span class="comment">//维度</span></span><br><span class="line">        <span class="keyword">double</span> longitude=location.getLongitude();<span class="comment">//经度 </span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">        tv1.setText( 无法获取地理信息 );  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>通过上述GPS定位代码可知，注意第14行代码处，Location对象封装了经纬度数据，我们首先hook住LocationManager类的方法getLastKnownLocation()，修改返回结果为我们自己定义的Location对象。Hook代码如下：</p>
 <pre><code>XposedHelpers.findAndHookMethod(LocationManager.class, &quot;getLastKnownLocation&quot;, String.class, new     XC_MethodHook()     {
         @Override
@@ -253,14 +255,13 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@hide</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">attach</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">	attachBaseContext(context);  </span><br><span class="line">    mLoadedApk = ContextImpl.getImpl(context).mPackageInfo;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
 <p>根据上面分析，所有我们可以根据APP的ApplicationContext来加载Dex分包中的字节码文件。总结一点：如果Hook Apk中类代码（SDK自带的API不用），我们就先获取APP的Context上下文，再加载类加载器。示例代码如下：  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">findAndHookMethod(<span class="string">"android.app.Application"</span>, loadPackageParam.classLoader, <span class="string">"attach"</span>, Context.class, <span class="keyword">new</span> XC_MethodHook()&#123;  </span><br><span class="line">	<span class="meta">@override</span>  </span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;  </span><br><span class="line">		Context context = (Context)param.args[<span class="number">0</span>];  </span><br><span class="line">		hookMultiDex(context.getClassLoader());  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行Hook应用内代码  </span></span><br><span class="line"><span class="comment"> * /  </span></span><br><span class="line"><span class="comment">private void hookMultiDex(ClassLoader classLoader) &#123;  </span></span><br><span class="line"><span class="comment">        Class&lt;?&gt; pluginNearby = null;  </span></span><br><span class="line"><span class="comment">        try &#123;  </span></span><br><span class="line"><span class="comment">            pluginNearby = classLoader.loadClass("com.tencent.mm.plugin.nearby.ui.NearbyFriendsUI");  </span></span><br><span class="line"><span class="comment">        &#125;catch (Exception e)&#123;  </span></span><br><span class="line"><span class="comment">            e.printStackTrace();  </span></span><br><span class="line"><span class="comment">        &#125;  </span></span><br><span class="line"><span class="comment">        XposedHelpers.findAndHookMethod(pluginNearby, "Gy", new XC_MethodHook() &#123;  </span></span><br><span class="line"><span class="comment">            <span class="doctag">@Override</span>  </span></span><br><span class="line"><span class="comment">            protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;  </span></span><br><span class="line"><span class="comment">                super.afterHookedMethod(param);  </span></span><br><span class="line"><span class="comment">                Log.e(TAG, "com.tencent.mm.plugin.nearby.ui.NearbyFriendsUI");  </span></span><br><span class="line"><span class="comment">                for (int i = 0; i &lt; param.args.length; i++)&#123;  </span></span><br><span class="line"><span class="comment">                    parseObject(param.args[i]);  </span></span><br><span class="line"><span class="comment">                &#125;  </span></span><br><span class="line"><span class="comment">            &#125;  </span></span><br><span class="line"><span class="comment">        &#125;);  </span></span><br><span class="line"><span class="comment">    &#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">findAndHookMethod(<span class="string">"android.app.Application"</span>, loadPackageParam.classLoader, <span class="string">"attach"</span>, Context<span class="class">.<span class="keyword">class</span>, <span class="title">new</span> <span class="title">XC_MethodHook</span>()</span>&#123;  </span><br><span class="line">	<span class="meta">@override</span>  </span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">afterHookedMethod</span><span class="params">(MethodHookParam param)</span> <span class="keyword">throws</span> Throwable </span>&#123;  </span><br><span class="line">		Context context = (Context)param.args[<span class="number">0</span>];  </span><br><span class="line">		hookMultiDex(context.getClassLoader());  </span><br><span class="line">	&#125;  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 执行Hook应用内代码  </span></span><br><span class="line"><span class="comment"> * /  </span></span><br><span class="line"><span class="comment">private void hookMultiDex(ClassLoader classLoader) &#123;  </span></span><br><span class="line"><span class="comment">        Class&lt;?&gt; pluginNearby = null;  </span></span><br><span class="line"><span class="comment">        try &#123;  </span></span><br><span class="line"><span class="comment">            pluginNearby = classLoader.loadClass("com.tencent.mm.plugin.nearby.ui.NearbyFriendsUI");  </span></span><br><span class="line"><span class="comment">        &#125;catch (Exception e)&#123;  </span></span><br><span class="line"><span class="comment">            e.printStackTrace();  </span></span><br><span class="line"><span class="comment">        &#125;  </span></span><br><span class="line"><span class="comment">        XposedHelpers.findAndHookMethod(pluginNearby, "Gy", new XC_MethodHook() &#123;  </span></span><br><span class="line"><span class="comment">            <span class="doctag">@Override</span>  </span></span><br><span class="line"><span class="comment">            protected void afterHookedMethod(MethodHookParam param) throws Throwable &#123;  </span></span><br><span class="line"><span class="comment">                super.afterHookedMethod(param);  </span></span><br><span class="line"><span class="comment">                Log.e(TAG, "com.tencent.mm.plugin.nearby.ui.NearbyFriendsUI");  </span></span><br><span class="line"><span class="comment">                for (int i = 0; i &lt; param.args.length; i++)&#123;  </span></span><br><span class="line"><span class="comment">                    parseObject(param.args[i]);  </span></span><br><span class="line"><span class="comment">                &#125;  </span></span><br><span class="line"><span class="comment">            &#125;  </span></span><br><span class="line"><span class="comment">        &#125;);  </span></span><br><span class="line"><span class="comment">    &#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>&emsp;&emsp;这个只是Hook系统的GPS定位返回的经纬度，相应的可以Hook系统的基站定位、WIFI定位和AGPS定位模块代码，这里我给出这些要Hook位置的类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android.telephony.TelephonyManager</span><br><span class="line">android.telephony.PhoneStateListener</span><br><span class="line">android.net.wifi.WifiManager</span><br><span class="line">android.net.wifi.WifiInfo</span><br><span class="line">android.net.NetworkInfo</span><br><span class="line">android.telephony.CellInfo</span><br><span class="line">LocationManager.class</span><br><span class="line">android.location.LocationManager</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">android.telephony.TelephonyManager</span><br><span class="line">android.telephony.PhoneStateListener</span><br><span class="line">android.net.wifi.WifiManager</span><br><span class="line">android.net.wifi.WifiInfo</span><br><span class="line">android.net.NetworkInfo</span><br><span class="line">android.telephony.CellInfo</span><br><span class="line">LocationManager<span class="class">.<span class="keyword">class</span></span></span><br><span class="line"><span class="class"><span class="title">android</span>.<span class="title">location</span>.<span class="title">LocationManager</span></span></span><br></pre></td></tr></table></figure>
 <p>只要知道定位的实现代码，就可以Hook修改定位的返回值，跟上面Hook修改GPS定位的类似，就不粘代码了，省的贴太多代码不好看，不懂的可以跟我要源码一起探讨探讨。  </p>
 <p>安装包下载：<a href="https://github.com/littleRich/littleRich.github.io/blob/images/20170117/hooklocation-debug.apk" target="_blank" rel="noopener">抢LBS红包.apk</a></p>
-<p>下面推荐几篇分析Xposed的不错文章：<br>Xposed (一) Android hook框架入门<a href="https://my.oschina.net/wisedream/blog/471292" title="Xposed框架使用入门" target="_blank" rel="noopener">https://my.oschina.net/wisedream/blog/471292</a></p>
+<p>下面推荐几篇分析Xposed的不错文章：<br>Xposed (一) Android hook框架入门<a href="https://my.oschina.net/wisedream/blog/471292" target="_blank" rel="noopener" title="Xposed框架使用入门">https://my.oschina.net/wisedream/blog/471292</a></p>
 
       
 
@@ -383,7 +384,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2017/01/17/基于Xposed框架Hook定位功能来破解QQ的LBS红包/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2017/01/17/%E5%9F%BA%E4%BA%8EXposed%E6%A1%86%E6%9E%B6Hook%E5%AE%9A%E4%BD%8D%E5%8A%9F%E8%83%BD%E6%9D%A5%E7%A0%B4%E8%A7%A3QQ%E7%9A%84LBS%E7%BA%A2%E5%8C%85/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -397,7 +398,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/04/01/Android安全：Smali从入门到疯狂/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/04/01/Android%E5%AE%89%E5%85%A8%EF%BC%9ASmali%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E7%96%AF%E7%8B%82/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -407,7 +408,7 @@
     </a>
   
   
-    <a href="/2016/12/05/Android自动化模拟操作开源库/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/12/05/Android%E8%87%AA%E5%8A%A8%E5%8C%96%E6%A8%A1%E6%8B%9F%E6%93%8D%E4%BD%9C%E5%BC%80%E6%BA%90%E5%BA%93/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">Android自动化模拟操作开源库源码解析(持续维护中...)</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -467,7 +468,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -551,7 +552,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -564,22 +581,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -611,6 +612,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -628,18 +641,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -671,15 +672,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,6 +685,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -715,19 +720,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -751,6 +752,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -764,10 +769,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

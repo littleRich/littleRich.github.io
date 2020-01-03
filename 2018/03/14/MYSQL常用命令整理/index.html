@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>MYSQL常用命令锦集【课堂归纳版】 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要:&amp;emsp;&amp;emsp;本学期研究生课程《网络数据库与应用》课程作业，内容比较基础，主要涉及存储结构、索引和触发器相关内容，进阶部分是分布式数据库的原理与使用。">
-<meta name="keywords" content="存储结构,触发器,索引">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MYSQL常用命令锦集【课堂归纳版】">
-<meta property="og:url" content="http://littleRich.github.io/2018/03/14/MYSQL常用命令整理/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2018&#x2F;03&#x2F;14&#x2F;MYSQL%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;本学期研究生课程《网络数据库与应用》课程作业，内容比较基础，主要涉及存储结构、索引和触发器相关内容，进阶部分是分布式数据库的原理与使用。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180314/ER.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180314/regexp.png">
-<meta property="og:updated_time" content="2018-05-31T09:44:24.815Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180314&#x2F;ER.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180314&#x2F;regexp.png">
+<meta property="article:published_time" content="2018-03-14T06:40:10.000Z">
+<meta property="article:modified_time" content="2018-05-31T09:44:24.815Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="存储结构">
+<meta property="article:tag" content="触发器">
+<meta property="article:tag" content="索引">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MYSQL常用命令锦集【课堂归纳版】">
-<meta name="twitter:description" content="摘要:&amp;emsp;&amp;emsp;本学期研究生课程《网络数据库与应用》课程作业，内容比较基础，主要涉及存储结构、索引和触发器相关内容，进阶部分是分布式数据库的原理与使用。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180314/ER.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180314&#x2F;ER.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -40,8 +42,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -66,7 +68,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -166,7 +168,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -195,7 +197,7 @@
   
 
         
-        <a href="/2018/03/14/MYSQL常用命令整理/" class="archive-article-date">
+        <a href="/2018/03/14/MYSQL%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/" class="archive-article-date">
   	<time datetime="2018-03-14T06:40:10.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-14</time>
 </a>
         
@@ -216,15 +218,13 @@
 <h4 id="数据表的基本操作"><a href="#数据表的基本操作" class="headerlink" title="数据表的基本操作"></a>数据表的基本操作</h4><p><em>注意事项：操作数据表之前，需要使用”use 数据库名”指定操作哪个数据库。</em><br>1、创建表命令<br>Create table 表名<br>(<br>字段名1，数据类型 [完整性约束条件]，<br>字段名2，数据类型 [完整性约束条件]，<br>…<br>字段名n，数据类型 [完整性约束条件]，<br>);  </p>
 <hr>
 <p><em>课程案例</em><br>创建三个表结构  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//学生表  </span><br><span class="line">CREATE TABLE `students`(`sno` VARCHAR(10) NOT NULL PRIMARY KEY, `sname` VARCHAR(20), `birthday` DATE, `total` DECIMAL(5,1), `avg_grade` DECIMAL(5,2));	  </span><br><span class="line">//课程表  </span><br><span class="line">CREATE TABLE `courses`(`cno` VARCHAR(3) NOT NULL PRIMARY KEY, `cname` VARCHAR(20), `credit` DECIMAL(2,1));</span><br><span class="line">//学生与课程的中间表  </span><br><span class="line">CREATE TABLE `sc`(`sno` VARCHAR(10) NOT NULL, `cno` VARCHAR(3) NOT NULL, `grade` DECIMAL(3,1), PRIMARY KEY(`sno`, `cno`), CONSTRAINT fk_courses FOREIGN KEY(cno) REFERENCES courses(cno));</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;学生表  </span><br><span class="line">CREATE TABLE &#96;students&#96;(&#96;sno&#96; VARCHAR(10) NOT NULL PRIMARY KEY, &#96;sname&#96; VARCHAR(20), &#96;birthday&#96; DATE, &#96;total&#96; DECIMAL(5,1), &#96;avg_grade&#96; DECIMAL(5,2));	  </span><br><span class="line">&#x2F;&#x2F;课程表  </span><br><span class="line">CREATE TABLE &#96;courses&#96;(&#96;cno&#96; VARCHAR(3) NOT NULL PRIMARY KEY, &#96;cname&#96; VARCHAR(20), &#96;credit&#96; DECIMAL(2,1));</span><br><span class="line">&#x2F;&#x2F;学生与课程的中间表  </span><br><span class="line">CREATE TABLE &#96;sc&#96;(&#96;sno&#96; VARCHAR(10) NOT NULL, &#96;cno&#96; VARCHAR(3) NOT NULL, &#96;grade&#96; DECIMAL(3,1), PRIMARY KEY(&#96;sno&#96;, &#96;cno&#96;), CONSTRAINT fk_courses FOREIGN KEY(cno) REFERENCES courses(cno));</span><br></pre></td></tr></table></figure>
 <p>表的约束<br>主键约束：primary key；<br>外键约束：foreign key;<br>非空约束：not null;<br>唯一性约束：unique;<br>默认值约束，用于设置字段的默认值：default;  </p>
 <p>主键约束：<br>单字段主键：字段名 数据类型 primary key<br>多字段主键：primary key(字段名1，字段名2，…，字段名n)<br>非空约束：字段名 数据类型 not null<br>唯一约束：字段名 数据类型 unique<br>默认约束：字段名 数据类型 default 默认值 </p>
 <p>*表增加约束  *  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table sc add constraint fk_sc_students foreign key(sno) references students(sno);</span><br></pre></td></tr></table></figure>
-
 <p>注意：MySQL中约束保存在information_schema.table_constraints中，可以通过该表查询约束信息；(上课有同学问我如何看表添加了约束，我竟只能通过添加异常数据来测试是否添加约束，方法太挫了，原来这个才是正解！)   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM information_schema.TABLE_CONSTRAINTS WHERE TABLE_NAME=&apos;sc&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM information_schema.TABLE_CONSTRAINTS WHERE TABLE_NAME&#x3D;&#39;sc&#39;</span><br></pre></td></tr></table></figure>
 
 <p>2、查看表的建表语句<br>Show create table 表名；</p>
 <hr>
@@ -243,14 +243,15 @@
 </ol>
 <hr>
 <p><em>课程案例</em><br>查找用户表中Email格式错误的用户记录：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM students WHERE email NOT REGEXP &apos;^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]&#123;2,4&#125;$&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT * FROM students WHERE email NOT REGEXP &#39;^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]&#123;2,4&#125;$&#39;</span><br></pre></td></tr></table></figure>
+
+
 
 <h4 id="事务机制和锁机制"><a href="#事务机制和锁机制" class="headerlink" title="事务机制和锁机制"></a>事务机制和锁机制</h4><p>此处省略一千字，有空再更新…</p>
 <h4 id="存储过程"><a href="#存储过程" class="headerlink" title="存储过程"></a>存储过程</h4><p>如果对编写存储过程比较陌生，可以看另一篇博客：<a href="http://blog.sina.com.cn/s/blog_86fe5b440100wdyt.html" target="_blank" rel="noopener">mysql存储过程详细教程</a>  </p>
 <hr>
 <p><em>课程案例</em><br>检查遍历选课表sc中成绩大于60分，就在students表中加相应学分。  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">DROP PROCEDURE if EXISTS check_sum_credit;</span><br><span class="line">CREATE PROCEDURE check_sum_credit(sno INT)</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE mSum INT DEFAULT 0;  -- 总学分</span><br><span class="line">	DECLARE mGrade INT DEFAULT 0;</span><br><span class="line">	DECLARE mCredit INT;</span><br><span class="line">  	DECLARE mCno INT;</span><br><span class="line">	DECLARE done INT DEFAULT FALSE;  -- 遍历数据结束标志  </span><br><span class="line">	DECLARE cur_grade CURSOR FOR SELECT grade, cno FROM sc WHERE sc.sno = sno;  -- 声明游标</span><br><span class="line">	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;  -- 将结束标志绑定到游标,所以必须先声明游标</span><br><span class="line">	OPEN cur_grade; -- 打开游标	</span><br><span class="line">	FETCH NEXT FROM cur_grade INTO mGrade, mCno;  -- 逐个取出游标中多个字段的值</span><br><span class="line">	REPEAT -- 循环遍历游标				</span><br><span class="line">		SET mCredit = (SELECT credit FROM courses WHERE courses.cno = mCno);</span><br><span class="line">		IF (mGrade &gt;= 60) THEN</span><br><span class="line">			SET mSum = mSum + mCredit;</span><br><span class="line">		END IF;</span><br><span class="line">		SELECT mGrade, mCno, mCredit, mSum;  -- 打印调试语句</span><br><span class="line">		FETCH NEXT FROM cur_grade INTO mGrade, mCno;</span><br><span class="line">	UNTIL done END REPEAT;</span><br><span class="line">	CLOSE cur_grade;  -- 关闭游标</span><br><span class="line">	UPDATE students SET students.total = mSum, students.avg_grade = (SELECT AVG(sc.grade) FROM sc WHERE sc.sno = sno) WHERE students.sno = sno;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">DROP PROCEDURE if EXISTS check_sum_credit;</span><br><span class="line">CREATE PROCEDURE check_sum_credit(sno INT)</span><br><span class="line">BEGIN</span><br><span class="line">	DECLARE mSum INT DEFAULT 0;  -- 总学分</span><br><span class="line">	DECLARE mGrade INT DEFAULT 0;</span><br><span class="line">	DECLARE mCredit INT;</span><br><span class="line">  	DECLARE mCno INT;</span><br><span class="line">	DECLARE done INT DEFAULT FALSE;  -- 遍历数据结束标志  </span><br><span class="line">	DECLARE cur_grade CURSOR FOR SELECT grade, cno FROM sc WHERE sc.sno &#x3D; sno;  -- 声明游标</span><br><span class="line">	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done &#x3D; TRUE;  -- 将结束标志绑定到游标,所以必须先声明游标</span><br><span class="line">	OPEN cur_grade; -- 打开游标	</span><br><span class="line">	FETCH NEXT FROM cur_grade INTO mGrade, mCno;  -- 逐个取出游标中多个字段的值</span><br><span class="line">	REPEAT -- 循环遍历游标				</span><br><span class="line">		SET mCredit &#x3D; (SELECT credit FROM courses WHERE courses.cno &#x3D; mCno);</span><br><span class="line">		IF (mGrade &gt;&#x3D; 60) THEN</span><br><span class="line">			SET mSum &#x3D; mSum + mCredit;</span><br><span class="line">		END IF;</span><br><span class="line">		SELECT mGrade, mCno, mCredit, mSum;  -- 打印调试语句</span><br><span class="line">		FETCH NEXT FROM cur_grade INTO mGrade, mCno;</span><br><span class="line">	UNTIL done END REPEAT;</span><br><span class="line">	CLOSE cur_grade;  -- 关闭游标</span><br><span class="line">	UPDATE students SET students.total &#x3D; mSum, students.avg_grade &#x3D; (SELECT AVG(sc.grade) FROM sc WHERE sc.sno &#x3D; sno) WHERE students.sno &#x3D; sno;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 <p>注意：MySQL中的三中循环 while 、 loop 、repeat，不懂用法可以看另一篇博客：<a href="https://www.cnblogs.com/Lvhengshuai/p/6826174.html" target="_blank" rel="noopener">MySQL 中的三中循环 while loop repeat 的基本用法</a></p>
 <h4 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h4><p>触发器是一个特殊的存储过程，不同的是存储过程要用CALL来调用，而触发器不需要使用CALL也不需要手工启动，只要当一个预定义的事件发生的时候，就会被MYSQL自动调用。可以让你在执行INSERT,UPDATE或者DELETE的时候，执行一些特定的操作，用来维护数据库数据的一致性。<br>触发器中自带了类似事务的机制,当触发器被触发，触发器所在表会被标记为OLD表，并生成一个NEW临时表。触发器执行过程中如有异常，可由OLD表回滚到原始状态。<br><em>MYSQL触发器的注意事项</em><br>（1）对于每一个表的每一个事件的触发，最多只能定义一个触发器，比如说你不能定义两个AFTER INSERT的触发器，但是可以定义其他的触发点的触发器。<br>（2）MYSQL只支持“基于行的触发”，也就是说触发器始终是针对一条记录的，如果变更的数据集非常大，效率会很低。<br>（3）触发器并不一定能够保证更新的原子性，区分INNODB和MYISAM两种表，INNODB可以回滚【TODO：后续深入了解】。</p>
 <hr>
@@ -265,7 +266,7 @@
 <li>60以上改成60分以下，total自动减少相应课程的学分，平均成绩改变；</li>
 <li>60以下改成60分以上，total自动加上相应课程的学分，平均成绩改变。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER IF EXISTS tri_avg_grade;</span><br><span class="line">CREATE TRIGGER tri_avg_grade AFTER UPDATE ON sc FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">  DECLARE a INT;       -- 平均分</span><br><span class="line">  DECLARE mCredit INT; -- 该门课学分</span><br><span class="line">  DECLARE mTotal INT;  -- 该生总学分</span><br><span class="line">  SET a = (SELECT AVG(grade) FROM sc WHERE sno = new.sno);</span><br><span class="line">  SET mTotal = (SELECT total FROM students WHERE sno = new.sno);</span><br><span class="line">  SET mCredit = (SELECT credit FROM courses WHERE cno = new.cno);</span><br><span class="line">  IF (new.grade IS NOT NULL) THEN</span><br><span class="line">	UPDATE students SET avg_grade = a WHERE sno = new.sno;</span><br><span class="line">	IF (mTotal IS NULL AND new.grade &gt;= 60) THEN</span><br><span class="line">		UPDATE students SET total = mCredit WHERE sno = new.sno;</span><br><span class="line">	ELSEIF (new.grade &gt;= 60 AND (OLD.grade &lt; 60 OR OLD.grade IS NULL)) THEN		</span><br><span class="line">		UPDATE students SET total = students.total + mCredit WHERE sno = new.sno;  </span><br><span class="line">	ELSEIF (new.grade &lt; 60 AND OLD.grade &gt;= 60) THEN</span><br><span class="line">		UPDATE students SET total = students.total - mCredit WHERE sno = new.sno;</span><br><span class="line">	END IF;</span><br><span class="line">  END IF;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">DROP TRIGGER IF EXISTS tri_avg_grade;</span><br><span class="line">CREATE TRIGGER tri_avg_grade AFTER UPDATE ON sc FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">  DECLARE a INT;       -- 平均分</span><br><span class="line">  DECLARE mCredit INT; -- 该门课学分</span><br><span class="line">  DECLARE mTotal INT;  -- 该生总学分</span><br><span class="line">  SET a &#x3D; (SELECT AVG(grade) FROM sc WHERE sno &#x3D; new.sno);</span><br><span class="line">  SET mTotal &#x3D; (SELECT total FROM students WHERE sno &#x3D; new.sno);</span><br><span class="line">  SET mCredit &#x3D; (SELECT credit FROM courses WHERE cno &#x3D; new.cno);</span><br><span class="line">  IF (new.grade IS NOT NULL) THEN</span><br><span class="line">	UPDATE students SET avg_grade &#x3D; a WHERE sno &#x3D; new.sno;</span><br><span class="line">	IF (mTotal IS NULL AND new.grade &gt;&#x3D; 60) THEN</span><br><span class="line">		UPDATE students SET total &#x3D; mCredit WHERE sno &#x3D; new.sno;</span><br><span class="line">	ELSEIF (new.grade &gt;&#x3D; 60 AND (OLD.grade &lt; 60 OR OLD.grade IS NULL)) THEN		</span><br><span class="line">		UPDATE students SET total &#x3D; students.total + mCredit WHERE sno &#x3D; new.sno;  </span><br><span class="line">	ELSEIF (new.grade &lt; 60 AND OLD.grade &gt;&#x3D; 60) THEN</span><br><span class="line">		UPDATE students SET total &#x3D; students.total - mCredit WHERE sno &#x3D; new.sno;</span><br><span class="line">	END IF;</span><br><span class="line">  END IF;</span><br><span class="line">END</span><br></pre></td></tr></table></figure>
 
 
 <h4 id="备份恢复"><a href="#备份恢复" class="headerlink" title="备份恢复"></a>备份恢复</h4><p>数据备份期间，按照是否需要停止MySQL服务实例，可以将MySQL的数据恢复分为：冷备份、温备份、热备份。其中温备份介于热备份与冷备份之间，温备份允许MySQL服务实例继续运行，备份数据期间，温备份借助读锁机制保证备份期间，没有新的数据写入。例如常常会执行如下命令来进行温备份：  </p>
@@ -274,21 +275,18 @@
 <p><strong>备份数据库</strong><br>1、mysql&gt; flush table with read lock;  锁表 (窗口不能退出，不然失效)<br>2、新开窗口进行导出备份（如果数据量大，且允许停机，就使用停机打包，而不用dump）<br>    mysqldump -h主机名 -u用户名 -p密码 数据库名字 &gt; 备份的文件名字.sql<br>3、mysql&gt; unlock tables;　　解锁<br><strong>还原数据库</strong><br>    mysql -h主机名 -u用户名 -p密码 需要恢复的数据库名字 &lt; 已备份的文件名字.sql<br>注意：需要恢复的数据库名字，必须保证在需要恢复的数据库主机上面有个空库或者库名。执行备份还原命令不需要登陆MySQL后操作。</p>
 <hr>
 <p><em>课程案例</em><br>备份还原上面案例数据库：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -psuperman testdb &gt; D://test.sql  </span><br><span class="line">mysql -uroot -p testdb &lt; D://test.sql</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -psuperman testdb &gt; D:&#x2F;&#x2F;test.sql  </span><br><span class="line">mysql -uroot -p testdb &lt; D:&#x2F;&#x2F;test.sql</span><br></pre></td></tr></table></figure>
 
 <h4 id="开启MYSQL远程访问权限，允许远程连接"><a href="#开启MYSQL远程访问权限，允许远程连接" class="headerlink" title="开启MYSQL远程访问权限，允许远程连接"></a>开启MYSQL远程访问权限，允许远程连接</h4><p>进入MySQL自带的mysql数据库中查看user表</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; select host, user from user;</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| host      | user      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| localhost | iot       |</span><br><span class="line">| localhost | mysql.sys |</span><br><span class="line">| localhost | root      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">3 rows in set (0.01 sec)</span><br></pre></td></tr></table></figure>
-
 <p>可以看到在user表中已创建的root用户。host字段表示登录的主机，其值可以用IP，也可用主机名，有时想用本地IP登录，那么可以将以上的Host值改为自己的Ip即可。  </p>
 <h5 id="实现远程连接-授权法"><a href="#实现远程连接-授权法" class="headerlink" title="实现远程连接(授权法)"></a>实现远程连接(授权法)</h5><p>默认情况下，mysql帐号不允许从远程登陆，只能在localhost登录。<br>将权限改为ALL PRIVILEGES</p>
 <hr>
 <p><em>课程案例</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&apos;%&apos; identified by &quot;root&quot;;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.09 sec)</span><br><span class="line">mysql&gt; select host, user from user;</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| host      | user      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| %         | root      |</span><br><span class="line">| localhost | iot       |</span><br><span class="line">| localhost | mysql.sys |</span><br><span class="line">| localhost | root      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&apos;%&apos; identified by &apos;******&apos; //***表示数据库连接密码</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; grant all privileges  on *.* to root@&#39;%&#39; identified by &quot;root&quot;;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.09 sec)</span><br><span class="line">mysql&gt; select host, user from user;</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| host      | user      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">| %         | root      |</span><br><span class="line">| localhost | iot       |</span><br><span class="line">| localhost | mysql.sys |</span><br><span class="line">| localhost | root      |</span><br><span class="line">+-----------+-----------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">mysql&gt; grant all privileges on *.* to root@&#39;%&#39; identified by &#39;******&#39; &#x2F;&#x2F;***表示数据库连接密码</span><br><span class="line">mysql&gt; flush privileges;</span><br></pre></td></tr></table></figure>
 <p>这样机器就可以以用户名root密码root远程访问该机器上的MYSQL。  </p>
 <h5 id="实现远程连接（改表法）-PS：网传可以"><a href="#实现远程连接（改表法）-PS：网传可以" class="headerlink" title="实现远程连接（改表法）  PS：网传可以"></a>实现远程连接（改表法）  PS：网传可以</h5><p>将host字段的值改为%就表示在任何客户端机器上能以root用户登录到mysql服务器，建议在开发时设为%。 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user set host = &apos;%&apos; where user = &apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use mysql;</span><br><span class="line">update user set host &#x3D; &#39;%&#39; where user &#x3D; &#39;root&#39;;</span><br></pre></td></tr></table></figure>
 <p>这样在远端就可以通过root用户访问Mysql。</p>
 
       
@@ -404,7 +402,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2018/03/14/MYSQL常用命令整理/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2018/03/14/MYSQL%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%95%B4%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -418,7 +416,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/18/区块链架构与应用/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/18/%E5%8C%BA%E5%9D%97%E9%93%BE%E6%9E%B6%E6%9E%84%E4%B8%8E%E5%BA%94%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -428,7 +426,7 @@
     </a>
   
   
-    <a href="/2017/10/10/面对Java新手必吹的牛批汇总/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/10/%E9%9D%A2%E5%AF%B9Java%E6%96%B0%E6%89%8B%E5%BF%85%E5%90%B9%E7%9A%84%E7%89%9B%E6%89%B9%E6%B1%87%E6%80%BB/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">关于Java的那些高级特性</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -488,7 +486,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -572,7 +570,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -585,22 +599,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -632,6 +630,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -649,18 +659,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -692,15 +690,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -713,6 +703,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -736,19 +738,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -772,6 +770,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -785,10 +787,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

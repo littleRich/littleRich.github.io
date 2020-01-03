@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>使用Git管理自己的项目 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。">
-<meta name="keywords" content="Git之旅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Git管理自己的项目">
-<meta property="og:url" content="http://littleRich.github.io/2016/10/24/用微信虚拟定位,看尽全球各地妹子/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2016&#x2F;10&#x2F;24&#x2F;%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_hash.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_working.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_work_way.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_three_areas.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_work_way.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_struct.png">
-<meta property="og:updated_time" content="2016-10-27T01:31:35.954Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_hash.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_working.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_work_way.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_three_areas.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_work_way.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_struct.png">
+<meta property="article:published_time" content="2016-10-24T08:45:24.000Z">
+<meta property="article:modified_time" content="2016-10-27T01:31:35.954Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="Git之旅">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Git管理自己的项目">
-<meta name="twitter:description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_hash.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_hash.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -44,8 +44,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -70,7 +70,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -170,7 +170,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -199,7 +199,7 @@
   
 
         
-        <a href="/2016/10/24/用微信虚拟定位,看尽全球各地妹子/" class="archive-article-date">
+        <a href="/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/" class="archive-article-date">
   	<time datetime="2016-10-24T08:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-10-24</time>
 </a>
         
@@ -213,10 +213,8 @@
 <h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;&emsp;其实我开始接触Git有三大原因，并不是碰到其它版本控制工具的短板而跳到Git来的。第一，由于我毕业之后就一直从事Android研发相关工作，大家都知道Android都是采用Git进行源码管理的，而我要深入研究Android源码这个大坑，就必然需要Git这个强大工具；第二，个人一直热衷于开源精神，GitHub是每个程序员的绝对干货，我也常在上面开源一些好玩的小程序；第三，就冲着Git是Linux之父的第二大作品，那么就有必要去了解了解。  </p>
 <h3 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h3><h5 id="Git相关工具"><a href="#Git相关工具" class="headerlink" title="Git相关工具"></a>Git相关工具</h5><p>Linux上安装Git命令：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git-core</span><br></pre></td></tr></table></figure>
-
 <p>或者Linux上源码编译安装Git命令  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget http://git-core.googlecode.com/files/git-2.10.1.tar.gz  </span><br><span class="line">$ tar zxvf git-2.10.1.tar.gz  </span><br><span class="line">$ cd git-2.10.1  </span><br><span class="line">$ make prefix=/usr all doc info  </span><br><span class="line">$ make prefix=/usr install install-doc install-info</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ wget http:&#x2F;&#x2F;git-core.googlecode.com&#x2F;files&#x2F;git-2.10.1.tar.gz  </span><br><span class="line">$ tar zxvf git-2.10.1.tar.gz  </span><br><span class="line">$ cd git-2.10.1  </span><br><span class="line">$ make prefix&#x3D;&#x2F;usr all doc info  </span><br><span class="line">$ make prefix&#x3D;&#x2F;usr install install-doc install-info</span><br></pre></td></tr></table></figure>
 <p>Window上安装Git就到<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git官网下载</a>即可。【注：如果喜欢界面化操作可以再安装tortoiseGit】</p>
 <h5 id="Git基本工作原理"><a href="#Git基本工作原理" class="headerlink" title="Git基本工作原理"></a>Git基本工作原理</h5><p><strong>※</strong> 时刻保持数据完整性<br>&emsp;&emsp;在保存到 Git 之前，Git 使用 SHA-1 算法计算数据的校验和，通过对文件的内容或目录的结构计算出一个 SHA-1 哈希值，作为指纹字符串。该字串由 40 个十六进制字符组成。如下就是Git对文件提取数字指纹的命令：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_hash.png" alt="Git对文件提取的数字指纹"><br>Git 的工作完全依赖于这类指纹字串，所以你会经常看到这样的哈希值。实际上，所有保存在 Git 数据库中的东西都是用此哈希值来作索引的，而不是靠文件名。 </p>
 <p><strong>※</strong> 直接记录快照，而非差异比较<br>&emsp;&emsp;Git和其他版本控制系统的主要差别在于，Git是在发现文件有改变时整体保存，无变化文件用指针指向旧文件即可，而大多数其他系统则只关心文件内容的具体差异（类似于APP更新中的增量更新）。如下图所示：<br>SVN保存数据采用差异化的方式，如下图：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_working.png" alt="其它版本控制原理">  </p>
@@ -226,24 +224,20 @@
 <p>所以，我们可以从文件所处的位置来判断状态：如果是 Git 目录中保存着的特定版本文件，就属于已提交状态；如果作了修改并已放入暂存区域，就属于已暂存状态；如果自上次取出后，作了修改但还没有放到暂存区域，就是已修改状态。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git status //查看当前git版本库的状态</span><br></pre></td></tr></table></figure>
 
-
 <p>最后再看一下，.git目录下的文件结构：<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/images/20161024/git_struct.png" alt=".git仓库的文件结构"><br>=====================我是华丽的分割线20161025===========================</p>
 <h5 id="Git管理项目的实际操作"><a href="#Git管理项目的实际操作" class="headerlink" title="Git管理项目的实际操作"></a>Git管理项目的实际操作</h5><p>&emsp;&emsp;Git是分布式的版本管理软件，不需要服务器也可以使用。也就是使用Git在每个人的机子上都存在一个代码仓库，这和集中式的版本控制工具SVN有很大区别，SVN是多人共用一个代码仓库。所以Git可以适用于个人独自开发的项目中做版本控制管理。</p>
 <h6 id="Git在独立开发项目中的运用"><a href="#Git在独立开发项目中的运用" class="headerlink" title="Git在独立开发项目中的运用"></a>Git在独立开发项目中的运用</h6><p>&emsp;&emsp;这种场景也是我经常碰到的，很多时候头脑风暴出了一个新点子，决心跳坑的话，开始就要初始化一个Git仓库，然后就任由我各种捣鼓了。<br>&emsp;&emsp;那么下面就介绍开发中常用的一些Git操作：<br><strong>※</strong> 初始化Git仓库，这个命令只在创建仓库的时候执行一次，完了之后就会在你所在的文件内生成一个隐藏git文件夹，接下来所有的版本控制信息都会存储在这里面；</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure>
-
 <p><strong>※</strong> 提交文件到仓库，可以单个文件提交，或者通配符提交</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add .     //文件名/通配符筛选放到暂存区中  </span><br><span class="line">$ git commit -m <span class="string">"提交日志"</span></span><br></pre></td></tr></table></figure>
 
 <p>当然也可以同时执行上面两个指令：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add -am &quot;提交日志&quot;</span><br></pre></td></tr></table></figure>
 
-
 <p><strong>※</strong> 创建仓库分支，初始化仓库后默认创建了master主分支，如果我们要新建一个分支来修改bug后再合并到主分支去，此时就需要新分支啦。Git新建分支的实质是向.git\refs\heads目录中写入41个字节的文件（外加一个换行符）。Git默认在新建分支后还是处于当前分支中，需要执行切换分支命令；  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch hotfix   //新建分支名  </span><br><span class="line">$ git checkout hotfix //切换到新分支中去</span><br></pre></td></tr></table></figure>
-
 <p>当然也可以同时执行上面两个指令：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b hotfix //新建分支并切换到新分支中</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b hotfix &#x2F;&#x2F;新建分支并切换到新分支中</span><br></pre></td></tr></table></figure>
 
 <p>【注：在.git目录中有个HEAD文件，其实就是一个指向你所处分支的指针，这个指针就是记录文件存储的一个文件快照，即一个Hash值。如果听不懂，那就好好研究上面说的原理吧】<br><strong>※</strong> 合并分支，当修复完bug后，就要先返回到master主分支，再将hotfix分支合并到主分支中去；  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge hotfix</span><br></pre></td></tr></table></figure>
@@ -255,13 +249,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">help</span> 不会的命令   //打开说明文档</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span>  //查看提交的日志</span><br></pre></td></tr></table></figure>
-
 <p><strong>※</strong> 切换分支时，工作区必须是干净状态,也就是要先commit本分支内的文件，如果工作到一半，不想提交版本库中又要切换到另外的分支如何做呢？<br>解决这个问题的办法就是git stash命令。  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git stash      //储藏当前状态之后，就能切换到别的分支</span><br></pre></td></tr></table></figure>
-
 <p>在其它分支做完之后要回到原来的分支，就要恢复之前的工作点：  </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git stash list  //查看储藏状态的列表    </span><br><span class="line">$ git stash apply 储藏的名字 //恢复之前的工作点</span><br></pre></td></tr></table></figure>
-
 <p>====================我是华丽的分割线20161026=======================</p>
 
       
@@ -369,7 +360,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2016/10/24/用微信虚拟定位,看尽全球各地妹子/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2016/10/24/%E7%94%A8%E5%BE%AE%E4%BF%A1%E8%99%9A%E6%8B%9F%E5%AE%9A%E4%BD%8D,%E7%9C%8B%E5%B0%BD%E5%85%A8%E7%90%83%E5%90%84%E5%9C%B0%E5%A6%B9%E5%AD%90/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -383,7 +374,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2016/11/05/在Ubuntu-14.04.3X64编译Android6_r1源码/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/11/05/%E5%9C%A8Ubuntu-14.04.3X64%E7%BC%96%E8%AF%91Android6_r1%E6%BA%90%E7%A0%81/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -393,7 +384,7 @@
     </a>
   
   
-    <a href="/2016/10/24/使用Git管理自己的项目/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/24/%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">使用Git管理自己的项目</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -453,7 +444,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -537,7 +528,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -550,22 +557,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -597,6 +588,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -614,18 +617,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -657,15 +648,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -678,6 +661,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -701,19 +696,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -737,6 +728,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -750,10 +745,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">

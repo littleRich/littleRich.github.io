@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>MapReduce并行编程模型的执行过程和快速入门 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="&amp;emsp;&amp;emsp;MapReduce是一个分布式运算程序的编程模型，其核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上。主要用于大规模数据集（大于1TB）的并行计算，对复杂的、运行于大规模集群上的并行计算过程高度抽象到Map和Reduce两个函数中。">
-<meta name="keywords" content="MR模型分析,shuffle机制,MR编程实践">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MapReduce并行编程模型的执行过程和快速入门">
-<meta property="og:url" content="http://littleRich.github.io/2018/04/23/大数据/MapReduce并行编程模型的执行过程和开发技巧/index.html">
+<meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2018&#x2F;04&#x2F;23&#x2F;%E5%A4%A7%E6%95%B0%E6%8D%AE&#x2F;MapReduce%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
 <meta property="og:description" content="&amp;emsp;&amp;emsp;MapReduce是一个分布式运算程序的编程模型，其核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上。主要用于大规模数据集（大于1TB）的并行计算，对复杂的、运行于大规模集群上的并行计算过程高度抽象到Map和Reduce两个函数中。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/MapReduce.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/daobao.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/wordcount.png">
-<meta property="og:updated_time" content="2019-03-13T13:54:13.842Z">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180423&#x2F;MapReduce.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180423&#x2F;daobao.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180423&#x2F;wordcount.png">
+<meta property="article:published_time" content="2018-04-23T01:01:19.000Z">
+<meta property="article:modified_time" content="2019-03-13T13:54:13.842Z">
+<meta property="article:author" content="littleRich">
+<meta property="article:tag" content="MR模型分析">
+<meta property="article:tag" content="shuffle机制">
+<meta property="article:tag" content="MR编程实践">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MapReduce并行编程模型的执行过程和快速入门">
-<meta name="twitter:description" content="&amp;emsp;&amp;emsp;MapReduce是一个分布式运算程序的编程模型，其核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上。主要用于大规模数据集（大于1TB）的并行计算，对复杂的、运行于大规模集群上的并行计算过程高度抽象到Map和Reduce两个函数中。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/MapReduce.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;master&#x2F;images&#x2F;20180423&#x2F;MapReduce.png">
   
     <link rel="alternative" href="/atom.xml" title="奔跑吧，小代码！" type="application/atom+xml">
   
@@ -41,8 +43,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 4.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -67,7 +69,7 @@
 			
 				<li><a href="/">編程開發</a></li>
 	        
-				<li><a href="/tags/文件结构/">趣玩</a></li>
+				<li><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 	        
 				<li><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 	        
@@ -167,7 +169,7 @@
 				
 					<li style="width: 33.333333333333336%"><a href="/">編程開發</a></li>
 		        
-					<li style="width: 33.333333333333336%"><a href="/tags/文件结构/">趣玩</a></li>
+					<li style="width: 33.333333333333336%"><a href="/tags/%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/">趣玩</a></li>
 		        
 					<li style="width: 33.333333333333336%"><a href="http://littleRich.github.io/resume/rejected">关于我</a></li>
 		        
@@ -196,7 +198,7 @@
   
 
         
-        <a href="/2018/04/23/大数据/MapReduce并行编程模型的执行过程和开发技巧/" class="archive-article-date">
+        <a href="/2018/04/23/%E5%A4%A7%E6%95%B0%E6%8D%AE/MapReduce%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/" class="archive-article-date">
   	<time datetime="2018-04-23T01:01:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-04-23</time>
 </a>
         
@@ -207,7 +209,7 @@
         <p>&emsp;&emsp;MapReduce是一个分布式运算程序的编程模型，其核心功能是将用户编写的业务逻辑代码和自带默认组件整合成一个完整的分布式运算程序，并发运行在一个hadoop集群上。主要用于大规模数据集（大于1TB）的并行计算，对复杂的、运行于大规模集群上的并行计算过程高度抽象到Map和Reduce两个函数中。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/MapReduce.png" alt="MapReduce应用程序执行过程"></p>
 <a id="more"></a>
 
-<h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height="86" src="http://music.163.com/outchain/player?type=2&id=415792881&auto=1&height=66"></iframe>
+<h3 id="0X00-前言"><a href="#0X00-前言" class="headerlink" title="0X00 前言"></a>0X00 前言</h3><iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=100% height=86 src="http://music.163.com/outchain/player?type=2&id=415792881&auto=1&height=66"></iframe>
 在MapReduce中，一个存储在分布式文件系统中的大规模数据集会被切分成许多独立的小数据块，这些小数据块可以被多个Map任务并行处理。MapReduce框架会为每个Map任务输入一个数据子集，Map任务生成的结果会继续作为Reduce任务的输入，最终由Reduce任务输出最后结果，并写入分布式文件系统。然而适用于MapReduce来处理的数据集需要满足一个前提条件：*待处理的数据集可以分解成许多小的数据集，而且每一个小数据集都可以完全并行地进行处理。*  
 如果想要深入研究MapReduce设计理念（计算向数据靠拢），可以推荐口碑不错的几本书。
 ![书籍推荐][tuijian]
@@ -229,17 +231,13 @@
 <h3 id="0X02-编程实践：WordCount"><a href="#0X02-编程实践：WordCount" class="headerlink" title="0X02 编程实践：WordCount"></a>0X02 编程实践：WordCount</h3><p>要求：WordCount类似“HelloWorld”的MapReduce入门程序，统计文件中每个单词出现的次数。<br>设计思路：把一个大文件切分成许多个小分片，每个分片输入给不同机器上的Map任务，并行执行完成“从文件中解析出所有单词”的任务。Map的输入采用Hadoop默认的&lt;key,value&gt;输入方式，即文件的行号作为key，文件的一行作为value；Map的输出以单词作为key，1作为value，即&lt;单词，1&gt;表示单词出现了1次。Map阶段完成后，会输出一系列&lt;单词,1&gt;这种形式的中间结果，然后Shuffle阶段会对这些中间结果进行排序、分区，得到&lt;key,value-list&gt;的形式（比如&lt;hadoop,&lt;1,1,1,1&gt;&gt;），分发给不同的Reduce任务。Reduce任务接收到所有分配给自己的中间结果（一系列键值对）以后，就开始执行汇总计算工作，计算得到每个单词的频数并把结果输出到分布式文件系统。</p>
 <h4 id="项目导包预处理"><a href="#项目导包预处理" class="headerlink" title="项目导包预处理"></a>项目导包预处理</h4><p>在Eclipse中新建项目，导入hadoop安装包中的share目录下的实例依赖包，包括common、hdfs、yarn、mapreduce四个核心包以及相关依赖包。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/daobao.png" alt="导包"></p>
 <h4 id="编写Map处理逻辑"><a href="#编写Map处理逻辑" class="headerlink" title="编写Map处理逻辑"></a>编写Map处理逻辑</h4><p>通过继承Mapper类，重写map方法来处理相应的逻辑操作。首先，为Mapper类设定好输入类型以及输出类型。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @author littleRich KEYIN: VALUEIN: KEYOUT: VALUEOUT:</span><br><span class="line"> * KEYIN: 默认情况下，是mr框架所读到的一行文本的起始偏移量，Long,</span><br><span class="line"> * 但是在hadoop中有自己的更精简的序列化接口，所以不直接用Long，而用LongWritable</span><br><span class="line"> * </span><br><span class="line"> * VALUEIN:默认情况下，是mr框架所读到的一行文本的内容，String，同上，用Text</span><br><span class="line"> * </span><br><span class="line"> * KEYOUT：是用户自定义逻辑处理完成之后输出数据中的key，在此处是单词，String，同上，用Text</span><br><span class="line"> * VALUEOUT：是用户自定义逻辑处理完成之后输出数据中的value，在此处是单词次数，Integer，同上，用IntWritable</span><br><span class="line"> */</span><br><span class="line">public class WordCountMapper extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt; &#123;</span><br><span class="line">	@Override</span><br><span class="line">	protected void map(LongWritable key, Text value, Mapper&lt;LongWritable, Text, Text, IntWritable&gt;.Context context)</span><br><span class="line">			throws Exception &#123;</span><br><span class="line">		//将maptask传给我们的文本内容先转换成String</span><br><span class="line">		String line = value.toString();</span><br><span class="line">		//根据空格将这一行切分成单词</span><br><span class="line">		String[] words = line.split(&quot; &quot;);</span><br><span class="line">		//将单词输出为&lt;单词，1&gt;</span><br><span class="line">		for(String word: words)&#123;</span><br><span class="line">			//将单词作为key，将次数1作为value，以便于后续的数据分发，可以根据单词分发，以便于相同单词会到相同的reduce task</span><br><span class="line">			context.write(new Text(word), new IntWritable(1));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * @author littleRich KEYIN: VALUEIN: KEYOUT: VALUEOUT:</span><br><span class="line"> * KEYIN: 默认情况下，是mr框架所读到的一行文本的起始偏移量，Long,</span><br><span class="line"> * 但是在hadoop中有自己的更精简的序列化接口，所以不直接用Long，而用LongWritable</span><br><span class="line"> * </span><br><span class="line"> * VALUEIN:默认情况下，是mr框架所读到的一行文本的内容，String，同上，用Text</span><br><span class="line"> * </span><br><span class="line"> * KEYOUT：是用户自定义逻辑处理完成之后输出数据中的key，在此处是单词，String，同上，用Text</span><br><span class="line"> * VALUEOUT：是用户自定义逻辑处理完成之后输出数据中的value，在此处是单词次数，Integer，同上，用IntWritable</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class WordCountMapper extends Mapper&lt;LongWritable, Text, Text, IntWritable&gt; &#123;</span><br><span class="line">	@Override</span><br><span class="line">	protected void map(LongWritable key, Text value, Mapper&lt;LongWritable, Text, Text, IntWritable&gt;.Context context)</span><br><span class="line">			throws Exception &#123;</span><br><span class="line">		&#x2F;&#x2F;将maptask传给我们的文本内容先转换成String</span><br><span class="line">		String line &#x3D; value.toString();</span><br><span class="line">		&#x2F;&#x2F;根据空格将这一行切分成单词</span><br><span class="line">		String[] words &#x3D; line.split(&quot; &quot;);</span><br><span class="line">		&#x2F;&#x2F;将单词输出为&lt;单词，1&gt;</span><br><span class="line">		for(String word: words)&#123;</span><br><span class="line">			&#x2F;&#x2F;将单词作为key，将次数1作为value，以便于后续的数据分发，可以根据单词分发，以便于相同单词会到相同的reduce task</span><br><span class="line">			context.write(new Text(word), new IntWritable(1));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="编写Reduce处理逻辑"><a href="#编写Reduce处理逻辑" class="headerlink" title="编写Reduce处理逻辑"></a>编写Reduce处理逻辑</h4><p>在Map阶段得到中间结果后，接下来首先进入Shuffle阶段，在这个阶段中Hadoop自动将Map的输出结果进行分区、排序、合并，然后分发给对应的Reduce任务去处理，对整合后的输入结果进行求和。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * KEYIN, VALUEIN 对应  mapper输出的KEYOUT,VALUEOUT类型对应</span><br><span class="line"> * </span><br><span class="line"> * KEYOUT, VALUEOUT 是自定义reduce逻辑处理结果的输出数据类型</span><br><span class="line"> * KEYOUT是单词</span><br><span class="line"> * VLAUEOUT是总次数</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class WordCountReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;&#123;</span><br><span class="line">	// 入参key，是一组相同单词kv对的key。每进来一组键值对，reduce方法就被调用一次</span><br><span class="line">	@Override</span><br><span class="line">	protected void reduce(Text key, Iterable&lt;IntWritable&gt; values,</span><br><span class="line">			Reducer&lt;Text, IntWritable, Text, IntWritable&gt;.Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">		int count = 0;   //定义一个计数器</span><br><span class="line">		for(IntWritable value: values)&#123;  //遍历这一组kv的所有v，累加到count中</span><br><span class="line">			count += value.get();</span><br><span class="line">		&#125;</span><br><span class="line">		context.write(key, new IntWritable(count));	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * KEYIN, VALUEIN 对应  mapper输出的KEYOUT,VALUEOUT类型对应</span><br><span class="line"> * </span><br><span class="line"> * KEYOUT, VALUEOUT 是自定义reduce逻辑处理结果的输出数据类型</span><br><span class="line"> * KEYOUT是单词</span><br><span class="line"> * VLAUEOUT是总次数</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class WordCountReducer extends Reducer&lt;Text, IntWritable, Text, IntWritable&gt;&#123;</span><br><span class="line">	&#x2F;&#x2F; 入参key，是一组相同单词kv对的key。每进来一组键值对，reduce方法就被调用一次</span><br><span class="line">	@Override</span><br><span class="line">	protected void reduce(Text key, Iterable&lt;IntWritable&gt; values,</span><br><span class="line">			Reducer&lt;Text, IntWritable, Text, IntWritable&gt;.Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">		int count &#x3D; 0;   &#x2F;&#x2F;定义一个计数器</span><br><span class="line">		for(IntWritable value: values)&#123;  &#x2F;&#x2F;遍历这一组kv的所有v，累加到count中</span><br><span class="line">			count +&#x3D; value.get();</span><br><span class="line">		&#125;</span><br><span class="line">		context.write(key, new IntWritable(count));	</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="编写main方法，描述job"><a href="#编写main方法，描述job" class="headerlink" title="编写main方法，描述job"></a>编写main方法，描述job</h4><p>为了让WordCountMapper和WordCountReducer类能够协同工作，需要再编写一个主函数设置Hadoop程序运行时的环境变量。把业务逻辑相关的信息（哪个是mapper，哪个是reducer，要处理的数据在哪里，输出的结果放哪里……）描述成一个job对象，最后将该job提交给集群中运行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 相当于一个yarn集群的客户端</span><br><span class="line"> * 需要在此封装我们的mr程序的相关运行参数，指定jar包</span><br><span class="line"> * 最后提交给yarn</span><br><span class="line"> */</span><br><span class="line">public class WordCountDriver &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		if(args == null || args.length == 0)&#123;  //运行的时候不指定参数就采用默认位置</span><br><span class="line">			args = new String[2];</span><br><span class="line">			args[0] = &quot;/wordcount/input&quot;;</span><br><span class="line">			args[1] = &quot;/wordcount/output&quot;;</span><br><span class="line">		&#125;	</span><br><span class="line">		Configuration conf = new Configuration();</span><br><span class="line">		Job job = Job.getInstance(conf);</span><br><span class="line">		//指定本程序的jar包所在的本地路径</span><br><span class="line">		job.setJarByClass(WordCountDriver.class);	</span><br><span class="line">		//指定本业务job要使用的mapper/Reducer业务类</span><br><span class="line">		job.setMapperClass(WordCountMapper.class);</span><br><span class="line">		job.setReducerClass(WordCountReducer.class);	</span><br><span class="line">		//指定mapper输出数据的kv类型</span><br><span class="line">		job.setMapOutputKeyClass(Text.class);</span><br><span class="line">		job.setMapOutputValueClass(IntWritable.class);</span><br><span class="line">		//指定最终输出的数据的kv类型</span><br><span class="line">		job.setOutputKeyClass(Text.class);</span><br><span class="line">		job.setOutputValueClass(IntWritable.class);	</span><br><span class="line">		//指定job的输入原始文件所在目录</span><br><span class="line">		FileInputFormat.setInputPaths(job, new Path(args[0]));</span><br><span class="line">		//指定job的输出结果所在目录</span><br><span class="line">		FileOutputFormat.setOutputPath(job, new Path(args[1]));</span><br><span class="line">		//将job中配置的相关参数，以及job所用的java类所在的jar包，提交给yarn去运行</span><br><span class="line">		boolean res = job.waitForCompletion(true);</span><br><span class="line">		System.exit(res ? 0 : 1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * 相当于一个yarn集群的客户端</span><br><span class="line"> * 需要在此封装我们的mr程序的相关运行参数，指定jar包</span><br><span class="line"> * 最后提交给yarn</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class WordCountDriver &#123;</span><br><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">		if(args &#x3D;&#x3D; null || args.length &#x3D;&#x3D; 0)&#123;  &#x2F;&#x2F;运行的时候不指定参数就采用默认位置</span><br><span class="line">			args &#x3D; new String[2];</span><br><span class="line">			args[0] &#x3D; &quot;&#x2F;wordcount&#x2F;input&quot;;</span><br><span class="line">			args[1] &#x3D; &quot;&#x2F;wordcount&#x2F;output&quot;;</span><br><span class="line">		&#125;	</span><br><span class="line">		Configuration conf &#x3D; new Configuration();</span><br><span class="line">		Job job &#x3D; Job.getInstance(conf);</span><br><span class="line">		&#x2F;&#x2F;指定本程序的jar包所在的本地路径</span><br><span class="line">		job.setJarByClass(WordCountDriver.class);	</span><br><span class="line">		&#x2F;&#x2F;指定本业务job要使用的mapper&#x2F;Reducer业务类</span><br><span class="line">		job.setMapperClass(WordCountMapper.class);</span><br><span class="line">		job.setReducerClass(WordCountReducer.class);	</span><br><span class="line">		&#x2F;&#x2F;指定mapper输出数据的kv类型</span><br><span class="line">		job.setMapOutputKeyClass(Text.class);</span><br><span class="line">		job.setMapOutputValueClass(IntWritable.class);</span><br><span class="line">		&#x2F;&#x2F;指定最终输出的数据的kv类型</span><br><span class="line">		job.setOutputKeyClass(Text.class);</span><br><span class="line">		job.setOutputValueClass(IntWritable.class);	</span><br><span class="line">		&#x2F;&#x2F;指定job的输入原始文件所在目录</span><br><span class="line">		FileInputFormat.setInputPaths(job, new Path(args[0]));</span><br><span class="line">		&#x2F;&#x2F;指定job的输出结果所在目录</span><br><span class="line">		FileOutputFormat.setOutputPath(job, new Path(args[1]));</span><br><span class="line">		&#x2F;&#x2F;将job中配置的相关参数，以及job所用的java类所在的jar包，提交给yarn去运行</span><br><span class="line">		boolean res &#x3D; job.waitForCompletion(true);</span><br><span class="line">		System.exit(res ? 0 : 1);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="编译打包以及运行程序"><a href="#编译打包以及运行程序" class="headerlink" title="编译打包以及运行程序"></a>编译打包以及运行程序</h4><p>Eclipse中选择Export导出项目，选择jar file继续按提示操作，获取到jar包。将该jar包上传到任意一个节点上，启动Hadoop之后，运行WordCount程序：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar wordcount.jar top.littlerich.wc.WordCountDriver /wordcount/input /wordcount/output</span><br><span class="line">hadoop fs -cat /wordcount/output/*    #查看运行结果</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hadoop jar wordcount.jar top.littlerich.wc.WordCountDriver &#x2F;wordcount&#x2F;input &#x2F;wordcount&#x2F;output</span><br><span class="line">hadoop fs -cat &#x2F;wordcount&#x2F;output&#x2F;*    #查看运行结果</span><br></pre></td></tr></table></figure>
 <p>注意：如果再次运行WordCount程序，必须把/wordcount/output目录删除，否者会报错。<br><img src="https://raw.githubusercontent.com/littleRich/littleRich.github.io/master/images/20180423/wordcount.png" alt="单词统计"></p>
 <h3 id="0X03"><a href="#0X03" class="headerlink" title="0X03"></a>0X03</h3>
       
@@ -355,7 +353,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://littleRich.github.io/2018/04/23/大数据/MapReduce并行编程模型的执行过程和开发技巧/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://littlerich.github.io/2018/04/23/%E5%A4%A7%E6%95%B0%E6%8D%AE/MapReduce%E5%B9%B6%E8%A1%8C%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E5%92%8C%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -369,7 +367,7 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/05/02/J2EE/JVM性能调优——读《深入理解Java虚拟机》有感/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/02/J2EE/JVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E2%80%94%E2%80%94%E8%AF%BB%E3%80%8A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E3%80%8B%E6%9C%89%E6%84%9F/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
@@ -379,7 +377,7 @@
     </a>
   
   
-    <a href="/2018/04/10/dubbo架构/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/10/dubbo%E6%9E%B6%E6%9E%84/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">dubbo：从单一应用到流动计算的架构演变</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -439,7 +437,7 @@ gitment.render('gitment-ctn')
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 littleRich
+    		&copy; 2020 littleRich
     	</div>
       	<div class="footer-right">
       		<!-- <a href="http://hexo.io/" target="_blank">原创文章，转载请注明出处</a>  Theme <a href="https://github.com/littleRich" target="_blank">xuqingfu</a> by 许庆富 -->
@@ -523,7 +521,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Nginx网关</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,22 +550,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">dubbo框架</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">跨平台应用</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">文件结构</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">常用命令</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">装机配置</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -583,6 +581,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">自动化开源库</a>
               </li>
              
@@ -600,18 +610,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">CURD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">octopress</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -643,15 +641,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
+                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -664,6 +654,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">去信任</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -687,19 +689,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Git之旅</a>
+                <a href="javascript:void(0)" class="js-tag color5">爬虫原理</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">HDFS总体架构</a>
+                <a href="javascript:void(0)" class="js-tag color5">requests + BeautifulSoup</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">读写流程</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">RPC机制</a>
+                <a href="javascript:void(0)" class="js-tag color5">异步加载</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -723,6 +721,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">框架集成</a>
               </li>
              
@@ -736,10 +738,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">值栈</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Android源码编译</a>
               </li>
              
               <li class="article-tag-list-item">
