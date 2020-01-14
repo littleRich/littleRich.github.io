@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://littleRich.github.io">
   <title>使用Git管理自己的项目 | 奔跑吧，小代码！</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。">
+  <meta name="description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。总的来说，Git的使用原则是：Add –&gt; Commit –&gt; Pull –&gt; Push">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Git管理自己的项目">
 <meta property="og:url" content="http:&#x2F;&#x2F;littlerich.github.io&#x2F;2016&#x2F;10&#x2F;24&#x2F;%E4%BD%BF%E7%94%A8Git%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1%E7%9A%84%E9%A1%B9%E7%9B%AE&#x2F;index.html">
 <meta property="og:site_name" content="奔跑吧，小代码！">
-<meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。">
+<meta property="og:description" content="摘要:&amp;emsp;&amp;emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。总的来说，Git的使用原则是：Add –&gt; Commit –&gt; Pull –&gt; Push">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_hash.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_working.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_work_way.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;littleRich&#x2F;littleRich.github.io&#x2F;images&#x2F;20161024&#x2F;git_struct.png">
 <meta property="article:published_time" content="2016-10-24T08:45:24.000Z">
-<meta property="article:modified_time" content="2020-01-02T11:46:41.058Z">
+<meta property="article:modified_time" content="2020-01-08T03:18:05.018Z">
 <meta property="article:author" content="littleRich">
 <meta property="article:tag" content="Git之旅">
 <meta name="twitter:card" content="summary">
@@ -207,10 +207,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>摘要:<br>&emsp;&emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。</p>
+        <p>摘要:<br>&emsp;&emsp;很多人都觉得学习Git需要花费很高的学习成本，我也查了很多Git的相关资料，普遍认为要学好Git，那么就要先理解Git的设计思想和基本工作原理，之后用起来就会知其所以然，游刃有余。那么本篇文章就带你一步步深刻理解Git的强大魅力。总的来说，Git的使用原则是：<strong>Add –&gt; Commit –&gt; Pull –&gt; Push</strong></p>
 <a id="more"></a>
 
-<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;&emsp;其实我开始接触Git有三大原因，并不是碰到其它版本控制工具的短板而跳到Git来的。第一，由于我毕业之后就一直从事Android研发相关工作，大家都知道Android都是采用Git进行源码管理的，而我要深入研究Android源码这个大坑，就必然需要Git这个强大工具；第二，个人一直热衷于开源精神，GitHub是每个程序员的绝对干货，我也常在上面开源一些好玩的小程序；第三，就冲着Git是Linux之父的第二大作品，那么就有必要去了解了解。  </p>
+<h3 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h3><p>&emsp;&emsp;由于我一直从事Android研发相关工作，大家都知道Android都是采用Git进行源码管理的，而我要深入研究Android源码这个大坑，就必然需要Git这个强大工具；第二，个人一直热衷于开源精神，GitHub是每个程序员的绝对干货，我也常在上面开源一些好玩的小程序；第三，就冲着Git是Linux之父的第二大作品，那么就有必要去了解了解。  </p>
 <h4 id="0X01Git相关工具"><a href="#0X01Git相关工具" class="headerlink" title="0X01Git相关工具"></a>0X01Git相关工具</h4><p>Linux上安装Git命令：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install git-core</span><br></pre></td></tr></table></figure>
 <p>或者Linux上源码编译安装Git命令  </p>
@@ -231,11 +231,25 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add -am &quot;提交日志&quot;</span><br></pre></td></tr></table></figure>
 
 <p><strong>※</strong> 创建仓库分支，初始化仓库后默认创建了master主分支，如果我们要新建一个分支来修改bug后再合并到主分支去，此时就需要新分支啦。Git新建分支的实质是向.git\refs\heads目录中写入41个字节的文件（外加一个换行符）。Git默认在新建分支后还是处于当前分支中，需要执行切换分支命令；  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch hotfix   //新建分支名  </span><br><span class="line">$ git checkout hotfix //切换到新分支中去</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git branch hotfix   //新建分支名  </span><br><span class="line">$ git checkout hotfix //切换到新分支中去</span><br><span class="line">$ git push --<span class="built_in">set</span>-upstream origin dev_fragment   //将新分支同步到服务端</span><br></pre></td></tr></table></figure>
 <p>当然也可以同时执行上面两个指令：  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b hotfix &#x2F;&#x2F;新建分支并切换到新分支中</span><br></pre></td></tr></table></figure>
 
-<p>【注：在.git目录中有个HEAD文件，其实就是一个指向你所处分支的指针，这个指针就是记录文件存储的一个文件快照，即一个Hash值。如果听不懂，那就好好研究上面说的原理吧】<br><strong>※</strong> 合并分支，当修复完bug后，就要先返回到master主分支，再将hotfix分支合并到主分支中去；  </p>
+<p>【注：在.git目录中有个HEAD文件，其实就是一个指向你所处分支的指针，这个指针就是记录文件存储的一个文件快照，即一个Hash值。如果听不懂，那就好好研究上面说的原理吧】</p>
+<hr>
+<ul>
+<li><em>拉取远程其它分支</em></li>
+</ul>
+<p>git clone只能clone远程库的master分支，无法clone所有分支，所以需要其它分支的做法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -a     //列出所有分支名称</span><br><span class="line">* master</span><br><span class="line"> remotes/origin/dev</span><br><span class="line"> remotes/origin/release</span><br><span class="line">$ git checkout -b dev origin/dev //checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><em>记住账号密码</em><br>每次更新代码都会要输入账号密码，可以配置一下让 GIT 记住密码账号：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global credential.helper store   //在Git Bash输入这个命令就可以了</span><br></pre></td></tr></table></figure>
+
+
+<p>※** 合并分支，当修复完bug后，就要先返回到master主分支，再将hotfix分支合并到主分支中去；  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge hotfix</span><br></pre></td></tr></table></figure>
 
 <p>当然这里只创建一个了一个次分支，不会出现合并冲突，如果有多个分支需要合并就容易出现冲突。有如下两种冲突场景：<br>&emsp;&emsp;（1）修改同一个文件的不同位置 –&gt; Git会自动合并<br>&emsp;&emsp;（2）修改同一个文件的相同位置 –&gt; 需要手动解决冲突 –&gt; 标记冲突已解决（git add 冲突文件）–&gt; 再次commit。<br><strong>※</strong> 删除分支，合并完hotfix，就要把没用的hotfix分支删除，记得要先退出待删除分支才行：  </p>
@@ -949,7 +963,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;h3&gt;&amp;nbsp&amp;nbsp&lt;/h3&gt;Hey，我是LittleRich&lt;br/&gt;目前就职于浦发银行总行架构管理处&lt;br/&gt;&lt;br/&gt;每有所得，都喜欢写成博客&lt;br/&gt;一来供大家学习参考&lt;br/&gt;二来做一个积累、防止日后遗忘&lt;br/&gt;&lt;br/&gt;工作学习之余，除了打游戏没有别的爱好&lt;br/&gt;谢谢支持！&lt;br/&gt;...</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;h3&gt;&amp;nbsp&amp;nbsp&lt;/h3&gt;Hey，我是LittleRich&lt;br/&gt;&lt;br/&gt;每有所得，都喜欢写成博客&lt;br/&gt;一来供大家学习参考，分享是一种乐趣&lt;br/&gt;二来做一个积累、防止日后遗忘&lt;br/&gt;&lt;br/&gt;工作学习之余，除了打游戏没有别的爱好&lt;br/&gt;谢谢支持！&lt;br/&gt;...</div>
   	  	
     	</section>
     
